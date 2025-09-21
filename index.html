@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LunarAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #FFFFFF;
+            --primary: #0A84FF;
+            --secondary: #1C1C1E;
+            --accent: #FFD700;
+            --shadow: 0 4px 20px rgba(10, 132, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+            max-width: 430px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiMwQTg0RkYiLz4KPGNpcmNsZSBjeD0iMjQiIGN5PSI2NCIgcj0iMTYiIGZpbGw9IiMxQzFDMUUiLz4KPC9zdmc+') center/cover no-repeat;
+            margin-right: 12px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .lang-btn:hover {
+            opacity: 1;
+        }
+
+        .market-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .market-btn {
+            padding: 16px;
+            background: var(--secondary);
+            border: none;
+            border-radius: 16px;
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow);
+            touch-action: manipulation;
+        }
+
+        .market-btn:active {
+            transform: scale(0.98);
+        }
+
+        .market-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .market-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .submarket-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .submarket-btn {
+            flex: 1;
+            padding: 12px;
+            background: var(--secondary);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .submarket-btn.active {
+            background: var(--primary);
+        }
+
+        .pair-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            overflow-y: auto;
+            max-height: 50vh;
+            padding-bottom: 20px;
+        }
+
+        .pair-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: var(--secondary);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow);
+            touch-action: manipulation;
+        }
+
+        .pair-item:active {
+            transform: scale(0.98);
+        }
+
+        .pair-icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .pair-name {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .popular-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            border: none;
+            border-radius: 16px;
+            color: var(--text-color);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: transform 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .popular-btn:active {
+            transform: scale(0.98);
+        }
+
+        .popular-dropdown {
+            display: none;
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 8px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .popular-dropdown.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .popular-pair {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .fire-emoji {
+            font-size: 20px;
+            margin-left: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">
+                <div class="logo"></div>
+                LunarAI
+            </div>
+            <button class="lang-btn">RU</button>
+        </div>
+
+        <div class="market-buttons">
+            <button class="market-btn" data-market="currencies">Валюты</button>
+            <button class="market-btn" data-market="crypto">Криптовалюты</button>
+            <button class="market-btn" data-market="stocks">Акции</button>
+        </div>
+
+        <div id="market-content" class="market-content"></div>
+
+        <button class="popular-btn">Популярные пары</button>
+        <div id="popular-dropdown" class="popular-dropdown"></div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Apply theme
+        const theme = tg.themeParams;
+        document.documentElement.style.setProperty('--bg-color', theme.bg_color || '#000000');
+        document.documentElement.style.setProperty('--text-color', theme.text_color || '#FFFFFF');
+        document.documentElement.style.setProperty('--primary', theme.button_color || '#0A84FF');
+        document.documentElement.style.setProperty('--secondary', theme.secondary_bg_color || '#1C1C1E');
+
+        const markets = {
+            currencies: {
+                otc: Array.from({length: 20}, (_, i) => ({name: `EUR/USD OTC ${i+1}`, icon: '🇪🇺'})),
+                stock: Array.from({length: 20}, (_, i) => ({name: `USD/JPY ${i+1}`, icon: '🇺🇸'}))
+            },
+            crypto: {
+                otc: Array.from({length: 20}, (_, i) => ({name: `BTC/USD OTC ${i+1}`, icon: '₿'})),
+                stock: Array.from({length: 20}, (_, i) => ({name: `ETH/USD ${i+1}`, icon: 'Ξ'}))
+            },
+            stocks: {
+                otc: Array.from({length: 20}, (_, i) => ({name: `AAPL OTC ${i+1}`, icon: '🍏'})),
+                stock: Array.from({length: 20}, (_, i) => ({name: `GOOGL ${i+1}`, icon: '🔍'}))
+            }
+        };
+
+        const icons = ['🇺🇸', '🇪🇺', '🇯🇵', '🇬🇧', '🇦🇺', '🇨🇦', '🇨🇭', '🇳🇿', '₿', 'Ξ'];
+
+        const popularPairs = Array.from({length: 5}, (_, i) => ({
+            name: `Popular ${i+1}`,
+            icon: icons[Math.floor(Math.random() * icons.length)]
+        }));
+
+        const marketButtons = document.querySelectorAll('.market-btn');
+        const marketContent = document.getElementById('market-content');
+        const popularBtn = document.querySelector('.popular-btn');
+        const popularDropdown = document.getElementById('popular-dropdown');
+
+        marketButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const market = btn.dataset.market;
+                marketContent.innerHTML = `
+                    <div class="submarket-buttons">
+                        <button class="submarket-btn active" data-sub="otc">OTC</button>
+                        <button class="submarket-btn" data-sub="stock">STOCK</button>
+                    </div>
+                    <div class="pair-list" id="pair-list"></div>
+                `;
+                marketContent.classList.add('show');
+                updatePairs(market, 'otc');
+
+                const subBtns = marketContent.querySelectorAll('.submarket-btn');
+                subBtns.forEach(sbtn => {
+                    sbtn.addEventListener('click', () => {
+                        subBtns.forEach(b => b.classList.remove('active'));
+                        sbtn.classList.add('active');
+                        updatePairs(market, sbtn.dataset.sub);
+                    });
+                });
+            });
+        });
+
+        function updatePairs(market, sub) {
+            const pairList = document.getElementById('pair-list');
+            pairList.innerHTML = '';
+            const pairs = markets[market][sub];
+            pairs.forEach(pair => {
+                const item = document.createElement('div');
+                item.classList.add('pair-item');
+                item.innerHTML = `
+                    <span class="pair-icon">${pair.icon}</span>
+                    <span class="pair-name">${pair.name}</span>
+                `;
+                pairList.appendChild(item);
+            });
+        }
+
+        popularBtn.addEventListener('click', () => {
+            if (popularDropdown.classList.contains('show')) {
+                popularDropdown.classList.remove('show');
+            } else {
+                popularDropdown.innerHTML = '';
+                popularPairs.forEach(pair => {
+                    const p = document.createElement('div');
+                    p.classList.add('popular-pair');
+                    p.innerHTML = `
+                        <span class="pair-icon">${pair.icon}</span>
+                        <span class="pair-name">${pair.name}</span>
+                        <span class="fire-emoji">🔥</span>
+                    `;
+                    popularDropdown.appendChild(p);
+                });
+                popularDropdown.classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>
