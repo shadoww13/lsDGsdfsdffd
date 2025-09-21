@@ -1,49 +1,47 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LunarAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Signal Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div id="main-page" class="page active">
-            <div class="header">
-                <div class="title">
-                    <div class="logo"></div>
-                    LunarAI
-                </div>
-                <div class="lang-container">
-                    <button class="lang-btn">🇷🇺 RU</button>
-                    <div class="lang-dropdown">
-                        <div class="lang-option">🇷🇺 Русский</div>
-                    </div>
-                </div>
+        <div class="input-group">
+            <label id="pair-label">Pair</label>
+            <div class="instrument-container">
+                <button id="prev-page" class="page-btn">←</button>
+                <div id="instrument-buttons" class="button-group"></div>
+                <button id="next-page" class="page-btn">→</button>
             </div>
-            <div class="market-buttons">
-                <button class="market-btn" data-market="currencies">Валюты</button>
-                <button class="market-btn" data-market="crypto">Криптовалюты</button>
-                <button class="market-btn" data-market="stocks">Акции</button>
-            </div>
-            <button class="popular-btn">Популярные пары</button>
-            <div id="popular-dropdown" class="popular-dropdown"></div>
         </div>
 
-        <div id="market-page" class="page">
-            <div class="header">
-                <div class="title" id="market-title"></div>
+        <div class="input-group">
+            <label>Expiration Time</label>
+            <div id="expiration-buttons" class="button-group">
+                <button class="option-btn" data-value="15">15 sec</button>
+                <button class="option-btn" data-value="30">30 sec</button>
+                <button class="option-btn" data-value="60">1 min</button>
+                <button class="option-btn" data-value="180">3 min</button>
+                <button class="option-btn" data-value="300">5 min</button>
+                <button class="option-btn" data-value="600">10 min</button>
             </div>
-            <div class="submarket-buttons">
-                <button class="submarket-btn active" data-sub="otc">OTC</button>
-                <button class="submarket-btn" data-sub="stock">STOCK</button>
-            </div>
-            <div class="pair-list" id="pair-list"></div>
-            <button class="back-btn">← Назад</button>
         </div>
+
+        <button id="analyze-btn">Analyze</button>
+
+        <div id="loading" class="loading">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div id="loading-text">Connecting to TradingView...</div>
+        </div>
+
+        <div id="signal" class="signal"></div>
     </div>
     <script src="script.js"></script>
 </body>
