@@ -1,93 +1,77 @@
-<!DOCTYPE html>
+<!-- index.html -->
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LunarAI</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trading Mini App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div id="main-page" class="page active">
-            <div class="header">
-                <div class="title">
-                    <div class="logo"></div>
-                    LunarAI
-                </div>
-                <div class="lang-container">
-                    <button class="lang-btn">
-                        🇷🇺 RU
-                        ▼
-                    </button>
-                    <div class="lang-dropdown">
-                        <div class="lang-option">
-                            🇷🇺 Русский
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="market-buttons">
-                <button class="market-btn" data-market="currencies">Валюты</button>
-                <button class="market-btn" data-market="crypto">Криптовалюты</button>
-                <button class="market-btn" data-market="stocks">Акции</button>
-            </div>
-            <button class="popular-btn">Популярные пары</button>
-            <div id="popular-dropdown" class="popular-dropdown"></div>
+  <div class="page-bg">
+    <header class="top-bar">
+      <div class="menu-label" id="pageTitle">Menu</div>
+      <div class="lang-select">
+        <button class="lang-btn">ru ▾</button>
+      </div>
+    </header>
+    <div class="progress hidden" id="progress">1/3</div>
+
+    <main class="center-stage">
+      <!-- PAGE 1: MENU -->
+      <div class="panel page" id="page1">
+        <div class="panel-inner">
+          <div class="controls vertical">
+            <button class="tab-btn main-btn" data-category="fx">Валюты</button>
+            <button class="tab-btn main-btn" data-category="stocks">Акции</button>
+            <button class="tab-btn main-btn" data-category="crypto">Криптовалюты</button>
+          </div>
+
+          <section class="popular">
+            <h3 class="popular-title">Популярные пары</h3>
+            <ul id="pairsList" class="pairs-list"></ul>
+          </section>
+        </div>
+      </div>
+
+      <!-- PAGE 2: SELECT PAIR -->
+      <div class="panel page hidden" id="page2">
+        <h2 class="sub-title">Выберите пару</h2>
+
+        <div class="filter-row">
+          <div class="filter-buttons">
+            <button id="filterOTC" class="filter-btn active">OTC</button>
+            <button id="filterSTOCK" class="filter-btn">STOCK</button>
+          </div>
+          <div class="pagination" id="pagination"></div>
         </div>
 
-        <div id="market-page" class="page">
-            <div class="market-header">
-                <span id="market-title"></span>
-                <div class="progress-indicator">
-                    <div class="progress-bar active"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                </div>
-            </div>
-            <div class="submarket-buttons">
-                <button class="submarket-btn active" data-sub="otc">OTC</button>
-                <button class="submarket-btn" data-sub="stock">STOCK</button>
-            </div>
-            <div id="pair-list" class="pair-list"></div>
-            <button class="back-btn">← Назад</button>
-        </div>
+        <div id="pairsGrid" class="pairs-grid"></div>
+      </div>
 
-        <div id="expiration-page" class="page">
-            <div class="market-header">
-                <span id="exp-title"></span>
-                <div class="progress-indicator">
-                    <div class="progress-bar active"></div>
-                    <div class="progress-bar active"></div>
-                    <div class="progress-bar"></div>
-                </div>
-            </div>
-            <div id="exp-list" class="exp-list"></div>
-            <button class="exp-back-btn">← Назад</button>
-        </div>
+      <!-- PAGE 3: TIME -->
+      <div class="panel page hidden" id="page3">
+        <h2 class="sub-title" id="timeTitle">Time</h2>
 
-        <div id="signal-page" class="page">
-            <div class="market-header">
-                <span id="signal-title"></span>
-                <div class="progress-indicator">
-                    <div class="progress-bar active"></div>
-                    <div class="progress-bar active"></div>
-                    <div class="progress-bar active"></div>
-                </div>
-            </div>
-            <div id="loading" class="loading">
-                <div class="loading-step">Connecting to TradingView</div>
-                <div class="loading-step">Fetching data</div>
-                <div class="loading-step">Analyzing</div>
-            </div>
-            <div class="signal-content">
-                <div id="signal-direction"></div>
-                <div id="signal-pair"></div>
-                <ul id="signal-indicators"></ul>
-            </div>
-            <button class="signal-back-btn">← Назад</button>
-            <button id="new-signal-btn">Получить новый сигнал</button>
+        <div class="time-grid" id="timeGrid">
+          <!-- time buttons inserted here -->
         </div>
-    </div>
+      </div>
+
+      <!-- PAGE 4: SIGNAL -->
+      <div class="panel page hidden" id="page4">
+        <h2 class="sub-title">Signal</h2>
+        <div class="empty" id="signalArea">Страница Signal (пока пустая)</div>
+      </div>
+    </main>
+
+    <footer class="bottom-bar">
+      <button class="back-btn" id="backBtn">← Назад</button>
+    </footer>
+  </div>
+
+  <audio id="clickSound" src="click-sound.mp3" preload="auto"></audio>
+  <script src="script.js"></script>
 </body>
 </html>

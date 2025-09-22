@@ -1,355 +1,235 @@
 // script.js
-const clickSound = new Audio('click-sound.mp3');
-clickSound.onerror = () => console.error("Error loading click-sound.mp3");
+const clickSound = document.getElementById('clickSound');
+function playClick(){ if(clickSound && clickSound.play) { try{ clickSound.currentTime = 0; clickSound.play(); }catch(e){} } }
 
-if (window.Telegram && window.Telegram.WebApp) {
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
-    const theme = tg.themeParams;
-    document.documentElement.style.setProperty('--bg-color', theme.bg_color || '#0A0A0C');
-    document.documentElement.style.setProperty('--text-color', theme.text_color || '#E6E6E6');
-    document.documentElement.style.setProperty('--primary', theme.button_color || '#007AFF');
-    document.documentElement.style.setProperty('--secondary', theme.secondary_bg_color || '#1F2227');
-} else {
-    document.documentElement.style.setProperty('--bg-color', '#0A0A0C');
-    document.documentElement.style.setProperty('--text-color', '#E6E6E6');
-    document.documentElement.style.setProperty('--primary', '#007AFF');
-    document.documentElement.style.setProperty('--secondary', '#1F2227');
-}
+// pages
+const pages = [...document.querySelectorAll('.page')];
+const backBtn = document.getElementById('backBtn');
+const pageTitle = document.getElementById('pageTitle');
+const progress = document.getElementById('progress');
 
-const markets = {
-    currencies: {
-        otc: [
-            {name: 'EUR/USD', icon: '🇪🇺'},
-            {name: 'USD/JPY', icon: '🇺🇸'},
-            {name: 'GBP/USD', icon: '🇬🇧'},
-            {name: 'AUD/USD', icon: '🇦🇺'},
-            {name: 'USD/CAD', icon: '🇨🇦'},
-            {name: 'NZD/USD', icon: '🇳🇿'},
-            {name: 'USD/CHF', icon: '🇨🇭'},
-            {name: 'EUR/GBP', icon: '🇪🇺'},
-            {name: 'EUR/JPY', icon: '🇪🇺'},
-            {name: 'GBP/JPY', icon: '🇬🇧'},
-            {name: 'AUD/JPY', icon: '🇦🇺'},
-            {name: 'CHF/JPY', icon: '🇨🇭'},
-            {name: 'EUR/AUD', icon: '🇪🇺'},
-            {name: 'EUR/CAD', icon: '🇪🇺'},
-            {name: 'GBP/AUD', icon: '🇬🇧'},
-            {name: 'GBP/CAD', icon: '🇬🇧'},
-            {name: 'AUD/CHF', icon: '🇦🇺'},
-            {name: 'NZD/JPY', icon: '🇳🇿'},
-            {name: 'NZD/CHF', icon: '🇳🇿'},
-            {name: 'XAU/USD', icon: '🏅'}
-        ],
-        stock: [
-            {name: 'EUR/USD', icon: '🇪🇺'},
-            {name: 'USD/JPY', icon: '🇺🇸'},
-            {name: 'GBP/USD', icon: '🇬🇧'},
-            {name: 'AUD/USD', icon: '🇦🇺'},
-            {name: 'USD/CAD', icon: '🇨🇦'},
-            {name: 'NZD/USD', icon: '🇳🇿'},
-            {name: 'USD/CHF', icon: '🇨🇭'},
-            {name: 'EUR/GBP', icon: '🇪🇺'},
-            {name: 'EUR/JPY', icon: '🇪🇺'},
-            {name: 'GBP/JPY', icon: '🇬🇧'},
-            {name: 'AUD/JPY', icon: '🇦🇺'},
-            {name: 'CHF/JPY', icon: '🇨🇭'},
-            {name: 'EUR/AUD', icon: '🇪🇺'},
-            {name: 'EUR/CAD', icon: '🇪🇺'},
-            {name: 'GBP/AUD', icon: '🇬🇧'},
-            {name: 'GBP/CAD', icon: '🇬🇧'},
-            {name: 'AUD/CHF', icon: '🇦🇺'},
-            {name: 'NZD/JPY', icon: '🇳🇿'},
-            {name: 'NZD/CHF', icon: '🇳🇿'},
-            {name: 'XAU/USD', icon: '🏅'}
-        ]
-    },
-    crypto: {
-        otc: [
-            {name: 'BTC/USD', icon: '₿'},
-            {name: 'ETH/USD', icon: 'Ξ'},
-            {name: 'XRP/USD', icon: '💧'},
-            {name: 'LTC/USD', icon: 'Ł'},
-            {name: 'BCH/USD', icon: '₿'},
-            {name: 'ADA/USD', icon: '₳'},
-            {name: 'DOT/USD', icon: '⚫'},
-            {name: 'LINK/USD', icon: '🔗'},
-            {name: 'BNB/USD', icon: '⛓'},
-            {name: 'XLM/USD', icon: '🌟'},
-            {name: 'DOGE/USD', icon: '🐶'},
-            {name: 'SOL/USD', icon: '☀️'},
-            {name: 'MATIC/USD', icon: '🔳'},
-            {name: 'AVAX/USD', icon: '🏔'},
-            {name: 'SHIB/USD', icon: '🐕'},
-            {name: 'TRX/USD', icon: '🔱'},
-            {name: 'UNI/USD', icon: '🦄'},
-            {name: 'ALGO/USD', icon: '⚙️'},
-            {name: 'VET/USD', icon: '🔘'},
-            {name: 'ICP/USD', icon: '🌐'}
-        ],
-        stock: [
-            {name: 'BTC/USD', icon: '₿'},
-            {name: 'ETH/USD', icon: 'Ξ'},
-            {name: 'XRP/USD', icon: '💧'},
-            {name: 'LTC/USD', icon: 'Ł'},
-            {name: 'BCH/USD', icon: '₿'},
-            {name: 'ADA/USD', icon: '₳'},
-            {name: 'DOT/USD', icon: '⚫'},
-            {name: 'LINK/USD', icon: '🔗'},
-            {name: 'BNB/USD', icon: '⛓'},
-            {name: 'XLM/USD', icon: '🌟'},
-            {name: 'DOGE/USD', icon: '🐶'},
-            {name: 'SOL/USD', icon: '☀️'},
-            {name: 'MATIC/USD', icon: '🔳'},
-            {name: 'AVAX/USD', icon: '🏔'},
-            {name: 'SHIB/USD', icon: '🐕'},
-            {name: 'TRX/USD', icon: '🔱'},
-            {name: 'UNI/USD', icon: '🦄'},
-            {name: 'ALGO/USD', icon: '⚙️'},
-            {name: 'VET/USD', icon: '🔘'},
-            {name: 'ICP/USD', icon: '🌐'}
-        ]
-    },
-    stocks: {
-        otc: [
-            {name: 'AAPL', icon: ''},
-            {name: 'GOOGL', icon: ''},
-            {name: 'MSFT', icon: ''},
-            {name: 'AMZN', icon: ''},
-            {name: 'TSLA', icon: ''},
-            {name: 'NVDA', icon: ''},
-            {name: 'META', icon: ''},
-            {name: 'NFLX', icon: ''},
-            {name: 'INTC', icon: ''},
-            {name: 'AMD', icon: ''},
-            {name: 'JPM', icon: ''},
-            {name: 'V', icon: ''},
-            {name: 'MA', icon: ''},
-            {name: 'DIS', icon: ''},
-            {name: 'PYPL', icon: ''},
-            {name: 'ADBE', icon: ''},
-            {name: 'CRM', icon: ''},
-            {name: 'CSCO', icon: ''},
-            {name: 'IBM', icon: ''},
-            {name: 'ORCL', icon: ''}
-        ],
-        stock: [
-            {name: 'AAPL', icon: ''},
-            {name: 'GOOGL', icon: ''},
-            {name: 'MSFT', icon: ''},
-            {name: 'AMZN', icon: ''},
-            {name: 'TSLA', icon: ''},
-            {name: 'NVDA', icon: ''},
-            {name: 'META', icon: ''},
-            {name: 'NFLX', icon: ''},
-            {name: 'INTC', icon: ''},
-            {name: 'AMD', icon: ''},
-            {name: 'JPM', icon: ''},
-            {name: 'V', icon: ''},
-            {name: 'MA', icon: ''},
-            {name: 'DIS', icon: ''},
-            {name: 'PYPL', icon: ''},
-            {name: 'ADBE', icon: ''},
-            {name: 'CRM', icon: ''},
-            {name: 'CSCO', icon: ''},
-            {name: 'IBM', icon: ''},
-            {name: 'ORCL', icon: ''}
-        ]
-    }
+let currentPage = 1;
+
+// state
+let selectedCategory = 'fx'; // fx / stocks / crypto
+let selectedFilter = 'OTC'; // OTC / STOCK
+let selectedPair = null;
+let selectedTime = null;
+let selectPageIndex = 0;
+const PAGE_SIZE = 4;
+
+// sample data per category
+const data = {
+  fx: [
+    'EUR/USD','USD/JPY','GBP/USD','AUD/USD','USD/CAD','NZD/USD','USD/CHF','EUR/GBP'
+  ],
+  stocks: [
+    'AAPL','TSLA','MSFT','AMZN','GOOGL','NVDA','META','NFLX'
+  ],
+  crypto: [
+    'BTC/USDT','ETH/USDT','BNB/USDT','ADA/USDT','SOL/USDT','XRP/USDT','DOGE/USDT','LTC/USDT'
+  ]
 };
 
-const popularPairs = [
-    {name: 'EUR/USD', icon: '🇪🇺', type: 'OTC'},
-    {name: 'BTC/USD', icon: '₿', type: 'OTC'},
-    {name: 'AAPL', icon: '', type: 'STOCK'},
-    {name: 'USD/JPY', icon: '🇺🇸', type: 'STOCK'},
-    {name: 'ETH/USD', icon: 'Ξ', type: 'OTC'}
+// popular pairs pool
+const popularPool = [
+  'BTC/USDT','EUR/USD','AAPL','TSLA','USD/JPY','ETH/USDT','GBP/USD','MSFT'
 ];
 
-const indicatorsList = [
-    'RSI', 'MACD', 'Moving Average', 'Bollinger Bands', 'Stochastic',
-    'Fibonacci', 'Ichimoku', 'Parabolic SAR', 'ADX', 'CCI'
-];
-
-const mainPage = document.getElementById('main-page');
-const marketPage = document.getElementById('market-page');
-const expirationPage = document.getElementById('expiration-page');
-const signalPage = document.getElementById('signal-page');
-const marketButtons = document.querySelectorAll('.market-btn');
-const submarketButtons = document.querySelectorAll('.submarket-btn');
-const backBtn = document.querySelector('.back-btn');
-const expBackBtn = document.querySelector('.exp-back-btn');
-const signalBackBtn = document.querySelector('.signal-back-btn');
-const popularBtn = document.querySelector('.popular-btn');
-const popularDropdown = document.getElementById('popular-dropdown');
-const langBtn = document.querySelector('.lang-btn');
-const langDropdown = document.querySelector('.lang-dropdown');
-const marketTitle = document.getElementById('market-title');
-const pairList = document.getElementById('pair-list');
-const expTitle = document.getElementById('exp-title');
-const expList = document.getElementById('exp-list');
-const signalTitle = document.getElementById('signal-title');
-const signalDirection = document.getElementById('signal-direction');
-const signalPair = document.getElementById('signal-pair');
-const signalIndicators = document.getElementById('signal-indicators');
-const newSignalBtn = document.getElementById('new-signal-btn');
-const loading = document.getElementById('loading');
-const signalContent = document.querySelector('.signal-content');
-
-let currentMarket = '';
-let currentSub = '';
-let currentPair = '';
-
-function playClickSound() {
-    clickSound.currentTime = 0;
-    clickSound.play().catch(err => console.error("Sound playback error:", err));
+// persistent popular pairs
+let popularPairs;
+if(localStorage.getItem('popularPairs')){
+  popularPairs = JSON.parse(localStorage.getItem('popularPairs'));
+} else {
+  popularPairs = popularPool.map(name => {
+    const isOTC = Math.random() < 0.7;
+    return { name, type: isOTC ? 'OTC' : 'STOCK' };
+  });
+  localStorage.setItem('popularPairs', JSON.stringify(popularPairs));
 }
 
-function setActivePage(page) {
-    [mainPage, marketPage, expirationPage, signalPage].forEach(p => p.classList.remove('active'));
-    page.classList.add('active');
+// helpers show/hide pages
+function showPage(n){
+  pages.forEach((p,i)=>p.classList.toggle('hidden', i !== n-1));
+  currentPage = n;
+
+  if(n===1){
+    pageTitle.textContent = 'Menu';
+    progress.classList.add('hidden');
+  } else if(n===2){
+    pageTitle.textContent = 'Select Pair';
+    progress.classList.remove('hidden');
+    progress.textContent = `${selectPageIndex+1}/${Math.ceil(getCurrentPairs().length / PAGE_SIZE) || 1}`;
+  } else if(n===3){
+    pageTitle.textContent = 'Time';
+    progress.classList.remove('hidden');
+    progress.textContent = '2/3';
+  } else if(n===4){
+    pageTitle.textContent = 'Signal';
+    progress.classList.remove('hidden');
+    progress.textContent = '3/3';
+  }
 }
 
-marketButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        playClickSound();
-        setActivePage(marketPage);
-        marketTitle.textContent = btn.textContent;
-        currentMarket = btn.dataset.market;
-        updatePairs(currentMarket, 'otc');
-        submarketButtons.forEach(b => b.classList.remove('active'));
-        submarketButtons[0].classList.add('active');
-        currentSub = 'otc';
+// back button
+backBtn.addEventListener('click', () => { playClick(); // go back
+  if(currentPage === 2) { showPage(1); }
+  else if(currentPage === 3) { showPage(2); }
+  else if(currentPage === 4) { showPage(3); }
+  else showPage(1);
+});
+
+// main menu buttons -> Select Pair (with category)
+document.querySelectorAll('.main-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    playClick();
+    selectedCategory = btn.dataset.category || 'fx';
+    selectedFilter = 'OTC';
+    selectPageIndex = 0;
+    renderSelectPairs();
+    showPage(2);
+  });
+});
+
+// render popular on main menu
+const pairsList = document.getElementById('pairsList');
+function renderPopular(){
+  pairsList.innerHTML = '';
+  popularPairs.forEach(p=>{
+    const li = document.createElement('li');
+    li.className = 'pair';
+    li.dataset.pair = p.name;
+    li.dataset.type = p.type;
+    li.innerHTML = `<div style="display:flex;gap:8px;align-items:center"><div class="name">${p.name}</div><div class="type">${p.type}</div></div><div class="arrow">›</div>`;
+    pairsList.appendChild(li);
+  });
+}
+pairsList.addEventListener('click', e=>{
+  const li = e.target.closest('.pair');
+  if(!li) return;
+  playClick();
+  selectedPair = { name: li.dataset.pair, type: li.dataset.type };
+  renderTimePage();
+  showPage(3);
+});
+
+// SELECT PAIR page logic
+const filterOTC = document.getElementById('filterOTC');
+const filterSTOCK = document.getElementById('filterSTOCK');
+const pairsGrid = document.getElementById('pairsGrid');
+const pagination = document.getElementById('pagination');
+
+filterOTC.addEventListener('click', () => { playClick(); selectedFilter='OTC'; filterOTC.classList.add('active'); filterSTOCK.classList.remove('active'); selectPageIndex=0; renderSelectPairs(); });
+filterSTOCK.addEventListener('click', () => { playClick(); selectedFilter='STOCK'; filterSTOCK.classList.add('active'); filterOTC.classList.remove('active'); selectPageIndex=0; renderSelectPairs(); });
+
+// persistent pairs per category
+function getStoredPairs(category){
+  const key = `pairs_${category}`;
+  if(localStorage.getItem(key)){
+    return JSON.parse(localStorage.getItem(key));
+  } else {
+    const raw = data[category] || [];
+    const arr = raw.map(name=>{
+      let type;
+      if(category === 'stocks') type = Math.random() < 0.2 ? 'OTC' : 'STOCK';
+      else type = Math.random() < 0.8 ? 'OTC' : 'STOCK';
+      return { name, type };
     });
-});
-
-submarketButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        playClickSound();
-        submarketButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentSub = btn.dataset.sub;
-        updatePairs(currentMarket, currentSub);
-    });
-});
-
-backBtn.addEventListener('click', () => {
-    playClickSound();
-    setActivePage(mainPage);
-});
-
-function updatePairs(market, sub) {
-    pairList.innerHTML = '';
-    const pairs = markets[market][sub].slice(0, 20);
-    pairs.forEach(pair => {
-        const item = document.createElement('div');
-        item.classList.add('pair-item');
-        item.innerHTML = `
-            <span class="pair-icon">${pair.icon}</span>
-            <span class="pair-name">${pair.name}</span>
-            <span class="pair-arrow">➜</span>
-            <span class="pair-type">${sub.toUpperCase()}</span>
-        `;
-        item.addEventListener('click', () => {
-            playClickSound();
-            currentPair = pair.name;
-            setActivePage(expirationPage);
-            expTitle.textContent = `Выберите время экспирации для ${currentPair}`;
-        });
-        pairList.appendChild(item);
-    });
+    localStorage.setItem(key, JSON.stringify(arr));
+    return arr;
+  }
 }
 
-const expirations = ['15 sec', '30 sec', '1 min', '3 min', '5 min', '10 min'];
-
-function updateExpirations() {
-    expList.innerHTML = '';
-    expirations.forEach(exp => {
-        const item = document.createElement('div');
-        item.classList.add('exp-item');
-        item.textContent = exp;
-        item.addEventListener('click', () => {
-            playClickSound();
-            setActivePage(signalPage);
-            signalTitle.textContent = `Сигнал для ${currentPair}`;
-            startLoading();
-        });
-        expList.appendChild(item);
-    });
+function getCurrentPairs(){
+  const all = getStoredPairs(selectedCategory);
+  return all.filter(p=>p.type === selectedFilter);
 }
 
-updateExpirations();
+function renderSelectPairs(){
+  const all = getCurrentPairs();
+  const pagesCount = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  if(selectPageIndex >= pagesCount) selectPageIndex = 0;
+  pagination.textContent = `${selectPageIndex+1}/${pagesCount}`;
 
-expBackBtn.addEventListener('click', () => {
-    playClickSound();
-    setActivePage(marketPage);
-});
+  const start = selectPageIndex * PAGE_SIZE;
+  const slice = all.slice(start, start + PAGE_SIZE);
 
-signalBackBtn.addEventListener('click', () => {
-    playClickSound();
-    setActivePage(expirationPage);
-});
+  pairsGrid.innerHTML = '';
+  slice.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'pair-card';
+    card.dataset.pair = p.name;
+    card.dataset.type = p.type;
+    card.innerHTML = `<div class="pair-name">${p.name}</div><div class="pair-type">${p.type}</div>`;
+    pairsGrid.appendChild(card);
+  });
 
-newSignalBtn.addEventListener('click', () => {
-    playClickSound();
-    startLoading();
-});
+  const blanks = PAGE_SIZE - slice.length;
+  for(let i=0;i<blanks;i++){
+    const blank = document.createElement('div');
+    blank.className = 'pair-card';
+    blank.style.opacity = '0.04';
+    blank.style.pointerEvents = 'none';
+    blank.innerHTML = `<div style="height:28px"></div>`;
+    pairsGrid.appendChild(blank);
+  }
 
-function startLoading() {
-    loading.style.display = 'flex';
-    signalContent.style.display = 'none';
-    const steps = document.querySelectorAll('.loading-step');
-    steps.forEach(step => step.classList.remove('completed'));
-
-    setTimeout(() => {
-        steps[0].classList.add('completed');
-        setTimeout(() => {
-            steps[1].classList.add('completed');
-            setTimeout(() => {
-                steps[2].classList.add('completed');
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                    signalContent.style.display = 'block';
-                    generateSignal();
-                }, 1000);
-            }, 1333);
-        }, 1333);
-    }, 1333);
-}
-
-function generateSignal() {
-    const direction = Math.random() > 0.5 ? 'BUY' : 'SELL';
-    signalDirection.textContent = direction;
-    signalPair.textContent = currentPair;
-
-    const shuffled = indicatorsList.sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 3);
-    signalIndicators.innerHTML = selected.map(ind => `<li>${ind}</li>`).join('');
-}
-
-popularBtn.addEventListener('click', () => {
-    playClickSound();
-    if (popularDropdown.classList.contains('show')) {
-        popularDropdown.classList.remove('show');
-    } else {
-        popularDropdown.innerHTML = '';
-        popularPairs.forEach(pair => {
-            const p = document.createElement('div');
-            p.classList.add('popular-pair');
-            p.innerHTML = `
-                <span class="pair-icon">${pair.icon}</span>
-                <span class="pair-name">${pair.name}</span>
-                <span class="pair-type">${pair.type}</span>
-                <span class="fire-emoji">🔥</span>
-            `;
-            popularDropdown.appendChild(p);
-        });
-        popularDropdown.classList.add('show');
+  pairsGrid.querySelectorAll('.pair-card').forEach(card=>{
+    if(card.dataset.pair){
+      card.addEventListener('click', ()=>{
+        playClick();
+        selectedPair = { name: card.dataset.pair, type: card.dataset.type };
+        renderTimePage();
+        showPage(3);
+      });
     }
+  });
+}
+
+pagination.addEventListener('click', (e)=>{
+  playClick();
+  const rect = pagination.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  if(x < rect.width/2){
+    selectPageIndex = Math.max(0, selectPageIndex - 1);
+  } else {
+    const all = getCurrentPairs();
+    const pagesCount = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+    selectPageIndex = Math.min(pagesCount - 1, selectPageIndex + 1);
+  }
+  renderSelectPairs();
+  showPage(2);
 });
 
-langBtn.addEventListener('click', () => {
-    playClickSound();
-    langDropdown.classList.toggle('show');
-});
+// TIME page
+const timeTitle = document.getElementById('timeTitle');
+const timeGrid = document.getElementById('timeGrid');
+const timeButtons = ['15 sec','30 sec','1 min','2 min','5 min','15 min'];
+
+function renderTimePage(){
+  timeGrid.innerHTML = '';
+  timeTitle.textContent = selectedPair ? `${selectedPair.name}` : 'Time';
+  timeButtons.forEach(t=>{
+    const b = document.createElement('button');
+    b.className = 'time-btn';
+    b.textContent = t;
+    b.addEventListener('click', ()=>{
+      playClick();
+      selectedTime = t;
+      renderSignalPage();
+      showPage(4);
+    });
+    timeGrid.appendChild(b);
+  });
+}
+
+// SIGNAL page
+const signalArea = document.getElementById('signalArea');
+function renderSignalPage(){
+  signalArea.textContent = `Пара: ${selectedPair ? selectedPair.name : '-'} · Тип: ${selectedPair ? selectedPair.type : '-'} · Таймфрейм: ${selectedTime || '-'}. Сигналы пока отсутствуют.`;
+}
+
+// init
+renderPopular();
+renderSelectPairs();
+showPage(1);
