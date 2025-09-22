@@ -45,12 +45,6 @@ body {
 
 .page.active {
     display: block;
-    animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 .header {
@@ -93,7 +87,6 @@ body {
     align-items: center;
     gap: 6px;
     opacity: 0.8;
-    transition: opacity 0.3s;
 }
 
 .lang-btn:hover {
@@ -110,7 +103,6 @@ body {
     padding: 8px;
     box-shadow: var(--shadow);
     z-index: 10;
-    animation: dropdownIn 0.3s ease-out;
 }
 
 .lang-dropdown.show {
@@ -124,7 +116,6 @@ body {
     gap: 8px;
     cursor: pointer;
     border-radius: 8px;
-    transition: background 0.2s;
 }
 
 .lang-option:hover {
@@ -147,14 +138,9 @@ body {
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     touch-action: manipulation;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.market-btn:hover {
-    box-shadow: 0 6px 12px rgba(0,122,255,0.3);
 }
 
 .market-btn:active {
@@ -187,7 +173,6 @@ body {
     height: 4px;
     background: var(--border);
     border-radius: 2px;
-    transition: background 0.3s;
 }
 
 .progress-bar.active {
@@ -210,7 +195,6 @@ body {
     color: var(--text-color);
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
@@ -237,13 +221,8 @@ body {
     background: var(--secondary);
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.pair-item:hover {
-    box-shadow: 0 4px 8px rgba(0,122,255,0.2);
 }
 
 .pair-item:active {
@@ -288,14 +267,9 @@ body {
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     touch-action: manipulation;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.exp-item:hover {
-    box-shadow: 0 4px 8px rgba(0,122,255,0.2);
 }
 
 .exp-item:active {
@@ -305,7 +279,6 @@ body {
 .signal-content {
     text-align: center;
     margin: 32px 0;
-    animation: fadeIn 0.5s ease-in;
     padding: 20px;
     background: rgba(0,0,0,0.2);
     border-radius: 16px;
@@ -345,13 +318,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-top: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     touch-action: manipulation;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.back-btn:hover, .exp-back-btn:hover, .signal-back-btn:hover, #new-signal-btn:hover {
-    box-shadow: 0 4px 8px rgba(0,122,255,0.2);
 }
 
 .back-btn:active, .exp-back-btn:active, .signal-back-btn:active, #new-signal-btn:active {
@@ -370,16 +338,11 @@ body {
     cursor: pointer;
     margin-top: auto;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     touch-action: manipulation;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.popular-btn:hover {
-    box-shadow: 0 4px 8px rgba(0,122,255,0.2);
 }
 
 .popular-btn:active {
@@ -401,7 +364,6 @@ body {
     margin-top: 8px;
     box-shadow: var(--shadow);
     opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .popular-dropdown.show {
@@ -416,7 +378,6 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     margin-bottom: 8px;
-    transition: background 0.2s;
 }
 
 .popular-pair:hover {
@@ -434,7 +395,6 @@ body {
     align-items: center;
     justify-content: center;
     margin: 32px 0;
-    animation: fadeIn 0.5s ease-in;
     padding: 20px;
     background: rgba(0,0,0,0.2);
     border-radius: 16px;
@@ -445,7 +405,6 @@ body {
     font-size: 18px;
     margin: 8px 0;
     opacity: 0.5;
-    transition: opacity 0.5s ease, color 0.5s ease;
 }
 
 .loading-step.completed {
