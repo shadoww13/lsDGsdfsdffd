@@ -17,7 +17,7 @@ html, body {
   color: var(--text-color);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .app {
@@ -26,23 +26,23 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 20px;
   box-sizing: border-box;
+  overflow-y: auto; /* ✅ контент скроллится при нехватке места */
 }
 
 .app-title {
   text-align: center;
   font-size: 28px;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 20px;
 }
 
 .menu-buttons {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 20px;
+  margin-bottom: 24px;
 }
 
 .menu-btn {
@@ -61,7 +61,7 @@ html, body {
 }
 
 .popular {
-  margin-top: auto;
+  margin-top: 0; 
 }
 
 .popular-title {
@@ -69,6 +69,7 @@ html, body {
   font-weight: 600;
   margin-bottom: 10px;
   color: var(--muted);
+  text-align: center;
 }
 
 .pairs-list {
