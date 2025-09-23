@@ -1,77 +1,59 @@
 <!-- index.html -->
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Trading Mini App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page-bg">
-    <header class="top-bar">
-      <div class="menu-label" id="pageTitle">Menu</div>
-      <div class="lang-select">
-        <button class="lang-btn">ru ▾</button>
-      </div>
-    </header>
-    <div class="progress hidden" id="progress">1/3</div>
-
-    <main class="center-stage">
-      <!-- PAGE 1: MENU -->
-      <div class="panel page" id="page1">
-        <div class="panel-inner">
-          <div class="controls vertical">
-            <button class="tab-btn main-btn" data-category="fx">Валюты</button>
-            <button class="tab-btn main-btn" data-category="stocks">Акции</button>
-            <button class="tab-btn main-btn" data-category="crypto">Криптовалюты</button>
-          </div>
-
-          <section class="popular">
-            <h3 class="popular-title">Популярные пары</h3>
-            <ul id="pairsList" class="pairs-list"></ul>
-          </section>
+  <div class="top-bar">
+    <div class="menu-label"></div>
+  </div>
+  <div class="progress hidden" id="progress">1/3</div>
+  <div class="center-stage">
+    <div class="page">
+      <div class="panel">
+        <div class="controls vertical">
+          <button class="tab-btn main-btn" data-category="fx">Currencies</button>
+          <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
+          <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
         </div>
+        <div class="popular-title">Popular pairs</div>
+        <ul class="pairs-list" id="pairsList"></ul>
       </div>
-
-      <!-- PAGE 2: SELECT PAIR -->
-      <div class="panel page hidden" id="page2">
-        <h2 class="sub-title">Выберите пару</h2>
-
+    </div>
+    <div class="page hidden">
+      <div class="panel">
+        <div class="sub-title" id="pageTitle">Select pair</div>
         <div class="filter-row">
           <div class="filter-buttons">
-            <button id="filterOTC" class="filter-btn active">OTC</button>
-            <button id="filterSTOCK" class="filter-btn">STOCK</button>
+            <button class="filter-btn active" id="filterOTC">OTC</button>
+            <button class="filter-btn" id="filterSTOCK">STOCK</button>
           </div>
           <div class="pagination" id="pagination"></div>
         </div>
-
-        <div id="pairsGrid" class="pairs-grid"></div>
+        <div class="pairs-grid" id="pairsGrid"></div>
       </div>
-
-      <!-- PAGE 3: TIME -->
-      <div class="panel page hidden" id="page3">
-        <h2 class="sub-title" id="timeTitle">Time</h2>
-
-        <div class="time-grid" id="timeGrid">
-          <!-- time buttons inserted here -->
-        </div>
+    </div>
+    <div class="page hidden">
+      <div class="panel">
+        <div class="sub-title" id="timeTitle">Time</div>
+        <div class="time-grid" id="timeGrid"></div>
       </div>
-
-      <!-- PAGE 4: SIGNAL -->
-      <div class="panel page hidden" id="page4">
-        <h2 class="sub-title">Signal</h2>
-        <div class="empty" id="signalArea">Страница Signal (пока пустая)</div>
+    </div>
+    <div class="page hidden">
+      <div class="panel">
+        <div class="sub-title">Signal</div>
+        <div class="empty" id="signalArea"></div>
       </div>
-    </main>
-
-    <footer class="bottom-bar">
-      <button class="back-btn" id="backBtn">← Назад</button>
-    </footer>
+    </div>
   </div>
-
-  <audio id="clickSound" src="click-sound.mp3" preload="auto"></audio>
+  <div class="bottom-bar hidden">
+    <button class="back-btn" id="backBtn">← Back</button>
+  </div>
+  <audio id="clickSound" src="click.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>
