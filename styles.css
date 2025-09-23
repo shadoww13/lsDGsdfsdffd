@@ -20,15 +20,17 @@ body {
   align-items: center;
 }
 
-/* Фиксированный контейнер */
+/* Фиксированная «рамка» */
 .app-wrapper {
   width: 100%;
   height: 100%;
-  max-width: 480px;    /* фикс ширина */
-  max-height: 100vh;   /* фикс высота */
+  max-width: 480px;   /* фикс ширина */
+  max-height: 680px;  /* фикс высота */
   background: var(--bg);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 button { outline: none; user-select: none; }
@@ -164,7 +166,3 @@ button { outline: none; user-select: none; }
 .note { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 8px; }
 .note-title { font-weight: 700; margin-bottom: 2px; }
 .note-line { font-size: 12px; }
-
-@media (max-width: 420px) {
-  .back-btn, .new-signal-btn { width: 100%; }
-}
