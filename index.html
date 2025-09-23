@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,33 +12,29 @@
   <div class="center-stage">
     <!-- Главная -->
     <div class="page" id="page-menu">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="controls vertical">
-            <button class="tab-btn main-btn" data-category="fx">Currencies</button>
-            <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
-            <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
-          </div>
-          <div class="popular-title">Popular pairs</div>
-          <ul class="pairs-list" id="pairsList"></ul>
+      <div class="page-content">
+        <div class="controls vertical">
+          <button class="tab-btn main-btn" data-category="fx">Currencies</button>
+          <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
+          <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
         </div>
+        <div class="popular-title">Popular pairs</div>
+        <ul class="pairs-list" id="pairsList"></ul>
       </div>
     </div>
 
     <!-- Выбор пары -->
     <div class="page hidden" id="page-pairs">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="sub-title">Выберите актив</div>
-          <div class="filter-row centered">
-            <div class="filter-buttons">
-              <button class="filter-btn active" id="filterOTC">OTC</button>
-              <button class="filter-btn" id="filterSTOCK">STOCK</button>
-            </div>
+      <div class="page-content">
+        <div class="sub-title">Выберите актив</div>
+        <div class="filter-row centered">
+          <div class="filter-buttons">
+            <button class="filter-btn active" id="filterOTC">OTC</button>
+            <button class="filter-btn" id="filterSTOCK">STOCK</button>
           </div>
-          <div class="pairs-grid" id="pairsGrid"></div>
         </div>
-        <div class="panel-bottom">
+        <div class="pairs-grid" id="pairsGrid"></div>
+        <div class="page-bottom">
           <button class="back-btn" id="backBtn2">← Back</button>
         </div>
       </div>
@@ -47,12 +42,10 @@
 
     <!-- Выбор времени -->
     <div class="page hidden" id="page-time">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="sub-title">Выберите время экспирации</div>
-          <div class="time-grid" id="timeGrid"></div>
-        </div>
-        <div class="panel-bottom">
+      <div class="page-content">
+        <div class="sub-title">Выберите время экспирации</div>
+        <div class="time-grid" id="timeGrid"></div>
+        <div class="page-bottom">
           <button class="back-btn" id="backBtn3">← Back</button>
         </div>
       </div>
@@ -60,12 +53,10 @@
 
     <!-- Сигналы -->
     <div class="page hidden" id="page-signal">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="sub-title">Ваш сигнал</div>
-          <div class="empty" id="signalArea"></div>
-        </div>
-        <div class="panel-bottom">
+      <div class="page-content">
+        <div class="sub-title">Ваш сигнал</div>
+        <div class="empty" id="signalArea"></div>
+        <div class="page-bottom">
           <button class="back-btn" id="backBtn4">← Back</button>
         </div>
       </div>
