@@ -8,26 +8,63 @@ function playClick() {
   }
 }
 
-const pages = [...document.querySelectorAll('.page')];
-const backBtn = document.getElementById('backBtn');
-const backBtn2 = document.getElementById('backBtn2');
-const backBtn3 = document.getElementById('backBtn3');
-const backBtn4 = document.getElementById('backBtn4');
-const pageTitle = document.getElementById('pageTitle');
+const pages = {
+  menu: document.getElementById('page-menu'),
+  pairs: document.getElementById('page-pairs'),
+  time: document.getElementById('page-time'),
+  signal: document.getElementById('page-signal'),
+};
 
-// прогресс внутри панелей
-const progress1 = document.getElementById('progress1');
-const progress2 = document.getElementById('progress2');
-const progress3 = document.getElementById('progress3');
+const stepEls = {
+  1: document.getElementById('step1'),
+  2: document.getElementById('step2'),
+  3: document.getElementById('step3'),
+};
 
-let currentPage = 1;
-let selectedCategory = 'fx';
+function updateSteps(n) {
+  Object.entries(stepEls).forEach(([i, el]) => {
+    if (parseInt(i) <= n) el.classList.add('active');
+    else el.classList.remove('active');
+  });
+}
+
+function showPage(name) {
+  Object.entries(pages).forEach(([k, el]) => {
+    el.classList.toggle('hidden', k !== name);
+  });
+  currentPage = name;
+
+  if (name === 'menu') updateSteps(0);
+  if (name === 'pairs') updateSteps(1);
+  if (name === 'time') updateSteps(2);
+  if (name === 'signal') updateSteps(3);
+}
+
+let currentPage = 'menu';
 let selectedPair = null;
 let selectedTime = null;
-let selectPageIndex = 0;
-const PAGE_SIZE = 4;
+let currentFilter = 'OTC';
 
-// популярные пары (6 штук, OTC)
+function goBack() {
+  playClick();
+  if (currentPage === 'pairs') showPage('menu');
+  else if (currentPage === 'time') showPage('pairs');
+  else if (currentPage === 'signal') showPage('time');
+}
+
+document.getElementById('backBtn2').addEventListener('click', goBack);
+document.getElementById('backBtn3').addEventListener('click', goBack);
+document.getElementById('backBtn4').addEventListener('click', goBack);
+
+document.querySelectorAll('.main-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    playClick();
+    showPage('pairs');
+    renderPairs();
+  });
+});
+
+const pairsList = document.getElementById('pairsList');
 const popularPairs = [
   { name: 'BTC/USDT', type: 'OTC' },
   { name: 'EUR/USD', type: 'OTC' },
@@ -36,57 +73,13 @@ const popularPairs = [
   { name: 'ETH/USDT', type: 'OTC' },
   { name: 'USD/JPY', type: 'OTC' }
 ];
-
-// тестовые пары (12 шт.)
-const pairs = Array.from({ length: 12 }, (_, i) => ({ name: `Пара ${i+1}`, type: 'OTC' }));
-
-function showPage(n) {
-  pages.forEach((p, i) => p.classList.toggle('hidden', i !== n - 1));
-
-  // Скрыть все прогресс-блоки
-  [progress1, progress2, progress3].forEach(el => el.classList.add('hidden'));
-
-  currentPage = n;
-  if (n === 1) {
-    // главная — без прогресса
-  } else if (n === 2) {
-    progress1.classList.remove('hidden');
-    progress1.textContent = `${selectPageIndex + 1}/${Math.ceil(pairs.length / PAGE_SIZE)}`;
-  } else if (n === 3) {
-    progress2.classList.remove('hidden');
-    progress2.textContent = '2/3';
-  } else if (n === 4) {
-    progress3.classList.remove('hidden');
-    progress3.textContent = '3/3';
-  }
-}
-
-function goBack() {
-  playClick();
-  if (currentPage === 2) showPage(1);
-  else if (currentPage === 3) showPage(2);
-  else if (currentPage === 4) showPage(3);
-}
-[backBtn, backBtn2, backBtn3, backBtn4].forEach(b => b.addEventListener('click', goBack));
-
-document.querySelectorAll('.main-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    playClick();
-    selectedCategory = btn.dataset.category || 'fx';
-    selectPageIndex = 0;
-    renderSelectPairs();
-    showPage(2);
-  });
-});
-
-const pairsList = document.getElementById('pairsList');
 function renderPopular() {
   pairsList.innerHTML = '';
   popularPairs.forEach(p => {
     const li = document.createElement('li');
     li.className = 'pair';
     li.dataset.pair = p.name;
-    li.innerHTML = `<div class="name">${p.name}</div><div class="type">${p.type}</div>`;
+    li.innerHTML = `<div class="name">${p.name}</div>`;
     pairsList.appendChild(li);
   });
 }
@@ -94,48 +87,41 @@ pairsList.addEventListener('click', e => {
   const li = e.target.closest('.pair');
   if (!li) return;
   playClick();
-  selectedPair = { name: li.dataset.pair, type: 'OTC' };
+  selectedPair = li.dataset.pair;
   renderTimePage();
-  showPage(3);
+  showPage('time');
 });
 
 const pairsGrid = document.getElementById('pairsGrid');
-const pagination = document.getElementById('pagination');
-
-function renderSelectPairs() {
-  const pagesCount = Math.ceil(pairs.length / PAGE_SIZE);
-  pagination.textContent = `${selectPageIndex + 1}/${pagesCount}`;
-
-  const start = selectPageIndex * PAGE_SIZE;
-  const slice = pairs.slice(start, start + PAGE_SIZE);
-
+const allPairs = Array.from({ length: 12 }, (_, i) => ({ name: `Pair ${i+1}`, type: i % 2 ? 'STOCK' : 'OTC' }));
+function renderPairs() {
   pairsGrid.innerHTML = '';
-  slice.forEach(p => {
+  allPairs.filter(p => p.type === currentFilter).forEach(p => {
     const card = document.createElement('div');
     card.className = 'pair-card';
-    card.dataset.pair = p.name;
-    card.innerHTML = `<div class="pair-name">${p.name}</div><div class="pair-type">${p.type}</div>`;
+    card.textContent = p.name;
     card.addEventListener('click', () => {
       playClick();
-      selectedPair = { name: card.dataset.pair, type: 'OTC' };
+      selectedPair = p.name;
       renderTimePage();
-      showPage(3);
+      showPage('time');
     });
     pairsGrid.appendChild(card);
   });
 }
-
-pagination.addEventListener('click', (e) => {
+document.getElementById('filterOTC').addEventListener('click', () => {
   playClick();
-  const rect = pagination.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const pagesCount = Math.ceil(pairs.length / PAGE_SIZE);
-  if (x < rect.width / 2) {
-    selectPageIndex = Math.max(0, selectPageIndex - 1);
-  } else {
-    selectPageIndex = Math.min(pagesCount - 1, selectPageIndex + 1);
-  }
-  renderSelectPairs();
+  currentFilter = 'OTC';
+  document.getElementById('filterOTC').classList.add('active');
+  document.getElementById('filterSTOCK').classList.remove('active');
+  renderPairs();
+});
+document.getElementById('filterSTOCK').addEventListener('click', () => {
+  playClick();
+  currentFilter = 'STOCK';
+  document.getElementById('filterSTOCK').classList.add('active');
+  document.getElementById('filterOTC').classList.remove('active');
+  renderPairs();
 });
 
 const timeGrid = document.getElementById('timeGrid');
@@ -150,7 +136,7 @@ function renderTimePage() {
       playClick();
       selectedTime = t;
       renderSignalPage();
-      showPage(4);
+      showPage('signal');
     });
     timeGrid.appendChild(b);
   });
@@ -158,9 +144,9 @@ function renderTimePage() {
 
 const signalArea = document.getElementById('signalArea');
 function renderSignalPage() {
-  signalArea.textContent = `Pair: ${selectedPair?.name || '-'} · Timeframe: ${selectedTime || '-'}`;
+  signalArea.textContent = `Pair: ${selectedPair || '-'} · Time: ${selectedTime || '-'}`;
 }
 
 renderPopular();
-renderSelectPairs();
-showPage(1);
+renderPairs();
+showPage('menu');
