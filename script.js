@@ -106,18 +106,20 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderPairs() {
     if (!pairsGrid) return;
     pairsGrid.innerHTML = '';
-    allPairs.filter(p => p.type === currentFilter).forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'pair-card';
-      card.textContent = p.name;
-      card.addEventListener('click', () => {
-        playClick();
-        selectedPair = p.name;
-        fromPopular = false;
-        renderTimePage();
-        showPage('time');
-      });
-      pairsGrid.appendChild(card);
+    allPairs.forEach(p => {
+      if (p.type === currentFilter) {
+        const card = document.createElement('div');
+        card.className = 'pair-card';
+        card.textContent = p.name;
+        card.addEventListener('click', () => {
+          playClick();
+          selectedPair = p.name;
+          fromPopular = false;
+          renderTimePage();
+          showPage('time');
+        });
+        pairsGrid.appendChild(card);
+      }
     });
   }
 
