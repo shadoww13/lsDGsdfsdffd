@@ -1,4 +1,3 @@
-// script.js
 const clickSound = document.getElementById('clickSound');
 function playClick() {
   if (clickSound) {
@@ -16,13 +15,20 @@ const pages = {
   signal: document.getElementById('page-signal'),
 };
 
-const stepIndicator = document.getElementById('globalSteps');
-const stepEls = stepIndicator ? Array.from(stepIndicator.querySelectorAll('.step')) : [];
+// Собираем все step-индикаторы
+const stepGroups = [
+  [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3')],
+  [document.getElementById('step1t'), document.getElementById('step2t'), document.getElementById('step3t')],
+  [document.getElementById('step1s'), document.getElementById('step2s'), document.getElementById('step3s')],
+];
 
 function updateSteps(n) {
-  stepEls.forEach((el, idx) => {
-    if (idx < n) el.classList.add('active');
-    else el.classList.remove('active');
+  stepGroups.forEach(group => {
+    if (!group[0]) return; // меню без индикатора
+    group.forEach((el, i) => {
+      if (i < n) el.classList.add('active');
+      else el.classList.remove('active');
+    });
   });
 }
 
@@ -31,11 +37,6 @@ function showPage(name) {
     el.classList.toggle('hidden', k !== name);
   });
   currentPage = name;
-
-  if (stepIndicator) {
-    if (name === 'menu') stepIndicator.classList.add('hidden');
-    else stepIndicator.classList.remove('hidden');
-  }
 
   if (name === 'menu') updateSteps(0);
   if (name === 'pairs') updateSteps(1);
@@ -107,7 +108,7 @@ function renderPairs() {
       playClick();
       selectedPair = p.name;
       renderTimePage();
-      showPage('signal');
+      showPage('time');
     });
     pairsGrid.appendChild(card);
   });
