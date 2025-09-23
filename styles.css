@@ -38,8 +38,8 @@ body {
 .page-title {
   font-size: 20px;
   font-weight: 700;
-  margin-top: 8px;
-  margin-bottom: 6px;
+  margin-top: 8px;   /* чуть выше */
+  margin-bottom: 6px; /* чуть меньше */
   text-align: center;
   color: #e7eaec;
   user-select: none;
@@ -52,7 +52,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 4px;
+  padding-top: 4px; /* поднимаем интерфейс чуть выше */
   width: 100%;
 }
 
@@ -66,7 +66,7 @@ body {
 
 .panel {
   width: 100%;
-  max-width: 340px;
+  max-width: 340px; /* немного уже */
   height: 520px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius: 24px;
@@ -75,7 +75,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0 auto; /* снизу отступа нет */
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -86,7 +86,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 16px 18px;
+  padding: 16px 18px; /* боковые отступы чуть больше */
   overflow-y: auto;
 }
 
@@ -103,8 +103,8 @@ body {
 .back-btn {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  font-size: 15px;     /* уменьшено */
-  padding: 10px;       /* уменьшено */
+  font-size: 16px;
+  padding: 12px;
   width: 100%;
   border-radius: 14px;
   color: var(--muted);
@@ -122,11 +122,11 @@ body {
   background: var(--glass);
   border: 1px solid rgba(255,255,255,0.03);
   color: var(--muted);
-  padding: 10px;       /* уменьшено */
+  padding: 12px;
   border-radius: 14px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 14px;     /* уменьшено */
+  font-size: 15px;
   text-align: center;
 }
 .tab-btn:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 6px 20px rgba(125,211,252,0.08) }
@@ -193,14 +193,13 @@ body {
 
 .time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px }
 .time-btn {
-  padding: 12px;       /* уменьшено */
+  padding: 14px;
   border-radius: 12px;
   background: #1c1d20;
   border: none;
   font-weight: 700;
   color: var(--muted);
   cursor: pointer;
-  font-size: 14px;     /* уменьшено */
 }
 .time-btn:hover { background: rgba(125,211,252,0.08); color: var(--accent) }
 
