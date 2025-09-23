@@ -3,86 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-  <title>Signals App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <title>Menu</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-wrapper">
-    <div class="center-stage">
-      <!-- Главная -->
-      <div class="page" id="page-menu">
-        <h1 class="page-title">Menu</h1>
-        <div class="page-content menu-offset">
-          <div class="controls vertical">
-            <button class="tab-btn main-btn" data-category="fx">Currencies</button>
-            <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
-            <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
-          </div>
-          <div class="popular-title">Popular pairs</div>
-          <ul class="pairs-list" id="pairsList"></ul>
-        </div>
-      </div>
+  <div class="app">
+    <h1 class="app-title">Menu</h1>
 
-      <!-- Выбор пары -->
-      <div class="page hidden" id="page-pairs">
-        <h1 class="page-title">Pairs</h1>
-        <div class="page-content pairs-offset">
-          <div class="sub-title center">Выберите актив</div>
-          <div class="filter-row centered">
-            <div class="filter-buttons">
-              <button class="filter-btn active" id="filterOTC">OTC</button>
-              <button class="filter-btn" id="filterSTOCK">STOCK</button>
-            </div>
-          </div>
-          <div class="pairs-grid" id="pairsGrid"></div>
-        </div>
-        <div class="page-bottom">
-          <button class="back-btn" id="backBtn2">← Back</button>
-        </div>
-      </div>
+    <div class="menu-buttons">
+      <button class="menu-btn" id="btn1">Currencies</button>
+      <button class="menu-btn" id="btn2">Stocks</button>
+      <button class="menu-btn" id="btn3">Cryptocurrencies</button>
+    </div>
 
-      <!-- Выбор времени -->
-      <div class="page hidden" id="page-time">
-        <h1 class="page-title">Time</h1>
-        <div class="page-content">
-          <div class="sub-title center">Выберите время экспирации</div>
-          <div class="pairs-grid" id="timeGrid"></div>
-        </div>
-        <div class="page-bottom">
-          <div class="note">
-            <div class="note-title">Recommended</div>
-            <div class="note-line">1 minute for beginners</div>
-            <div class="note-line">2 minutes for advanced users</div>
-          </div>
-          <button class="back-btn" id="backBtn3">← Back</button>
-        </div>
-      </div>
-
-      <!-- Сигналы -->
-      <div class="page hidden" id="page-signal">
-        <h1 class="page-title">Signal</h1>
-        <div class="page-content">
-          <div class="sub-title center">Ваш сигнал</div>
-          <div class="empty" id="signalArea"></div>
-        </div>
-        <div class="page-bottom">
-          <button class="new-signal-btn" id="newSignalBtn">+ Новый сигнал</button>
-          <button class="back-btn" id="backBtn4">← Back</button>
-        </div>
-      </div>
+    <div class="popular">
+      <h2 class="popular-title">Popular Pairs</h2>
+      <ul class="pairs-list" id="pairsList"></ul>
     </div>
   </div>
 
   <audio id="clickSound" src="click-sound.mp3"></audio>
   <script src="script.js"></script>
-  <script>
-    // ✅ JS фикс высоты для мобильного webview
-    function setVH() {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    setVH();
-    window.addEventListener('resize', setVH);
-  </script>
 </body>
 </html>
