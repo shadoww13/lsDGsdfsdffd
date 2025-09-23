@@ -23,9 +23,8 @@ body {
 /* Фиксированная «рамка» */
 .app-wrapper {
   width: 100%;
-  height: 100%;
-  max-width: 480px;   /* фикс ширина */
-  max-height: 680px;  /* фикс высота */
+  max-width: 480px;
+  height: 680px;      /* фиксированная высота */
   background: var(--bg);
   display: flex;
   flex-direction: column;
