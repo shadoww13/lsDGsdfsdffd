@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-  <title>Menu</title>
+  <title>Signals App</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1 class="page-title">Menu</h1>
-
   <div class="center-stage">
     <!-- Главная -->
     <div class="page" id="page-menu">
+      <h1 class="page-title">Menu</h1>
       <div class="page-content">
         <div class="controls vertical">
           <button class="tab-btn main-btn" data-category="fx">Currencies</button>
@@ -25,6 +24,7 @@
 
     <!-- Выбор пары -->
     <div class="page hidden" id="page-pairs">
+      <h1 class="page-title">Pairs</h1>
       <div class="page-content">
         <div class="sub-title">Выберите актив</div>
         <div class="filter-row centered">
@@ -42,6 +42,7 @@
 
     <!-- Выбор времени -->
     <div class="page hidden" id="page-time">
+      <h1 class="page-title">Time</h1>
       <div class="page-content">
         <div class="sub-title">Выберите время экспирации</div>
         <div class="time-grid" id="timeGrid"></div>
@@ -53,6 +54,7 @@
 
     <!-- Сигналы -->
     <div class="page hidden" id="page-signal">
+      <h1 class="page-title">Signal</h1>
       <div class="page-content">
         <div class="sub-title">Ваш сигнал</div>
         <div class="empty" id="signalArea"></div>
