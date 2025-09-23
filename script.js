@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.main-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       playClick();
-      document.querySelectorAll('.main-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
       showPage('pairs');
       renderPairs();
     });
@@ -98,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const pairsGrid = document.getElementById('pairsGrid');
-  const allPairs = Array.from({ length: 12 }, (_, i) => ({
+  const allPairs = Array.from({ length: 24 }, (_, i) => ({
     name: `Pair ${i + 1}`,
     type: i % 2 ? 'STOCK' : 'OTC'
   }));
@@ -106,20 +104,18 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderPairs() {
     if (!pairsGrid) return;
     pairsGrid.innerHTML = '';
-    allPairs.forEach(p => {
-      if (p.type === currentFilter) {
-        const card = document.createElement('div');
-        card.className = 'pair-card';
-        card.textContent = p.name;
-        card.addEventListener('click', () => {
-          playClick();
-          selectedPair = p.name;
-          fromPopular = false;
-          renderTimePage();
-          showPage('time');
-        });
-        pairsGrid.appendChild(card);
-      }
+    allPairs.filter(p => p.type === currentFilter).forEach(p => {
+      const card = document.createElement('button');
+      card.className = 'pair-card';
+      card.textContent = p.name;
+      card.addEventListener('click', () => {
+        playClick();
+        selectedPair = p.name;
+        fromPopular = false;
+        renderTimePage();
+        showPage('time');
+      });
+      pairsGrid.appendChild(card);
     });
   }
 
@@ -130,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
     playClick();
     currentFilter = 'OTC';
     filterOTC.classList.add('active');
-    if (filterSTOCK) filterSTOCK.classList.remove('active');
+    filterSTOCK.classList.remove('active');
     renderPairs();
   });
 
@@ -138,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
     playClick();
     currentFilter = 'STOCK';
     filterSTOCK.classList.add('active');
-    if (filterOTC) filterOTC.classList.remove('active');
+    filterOTC.classList.remove('active');
     renderPairs();
   });
 
