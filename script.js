@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function () {
   const clickSound = document.getElementById('clickSound');
   function playClick() {
@@ -17,34 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
     signal: document.getElementById('page-signal'),
   };
 
-  const stepGroups = [
-    [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3')],
-    [document.getElementById('step1t'), document.getElementById('step2t'), document.getElementById('step3t')],
-    [document.getElementById('step1s'), document.getElementById('step2s'), document.getElementById('step3s')],
-  ];
-
-  function updateSteps(n) {
-    stepGroups.forEach(group => {
-      if (!group[0]) return;
-      group.forEach((el, i) => {
-        if (!el) return;
-        if (i < n) el.classList.add('active');
-        else el.classList.remove('active');
-      });
-    });
-  }
-
   function showPage(name) {
     Object.entries(pages).forEach(([k, el]) => {
       if (!el) return;
       el.classList.toggle('hidden', k !== name);
     });
     currentPage = name;
-
-    if (name === 'menu') updateSteps(0);
-    if (name === 'pairs') updateSteps(1);
-    if (name === 'time') updateSteps(2);
-    if (name === 'signal') updateSteps(3);
   }
 
   let currentPage = 'menu';
@@ -106,7 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const pairsGrid = document.getElementById('pairsGrid');
-  const allPairs = Array.from({ length: 12 }, (_, i) => ({ name: `Pair ${i + 1}`, type: i % 2 ? 'STOCK' : 'OTC' }));
+  const allPairs = Array.from({ length: 12 }, (_, i) => ({
+    name: `Pair ${i + 1}`,
+    type: i % 2 ? 'STOCK' : 'OTC'
+  }));
 
   function renderPairs() {
     if (!pairsGrid) return;
@@ -168,6 +148,14 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderSignalPage() {
     if (!signalArea) return;
     signalArea.textContent = `Pair: ${selectedPair || '-'} · Time: ${selectedTime || '-'}`;
+  }
+
+  const newSignalBtn = document.getElementById('newSignalBtn');
+  if (newSignalBtn) {
+    newSignalBtn.addEventListener('click', () => {
+      playClick();
+      renderSignalPage();
+    });
   }
 
   renderPopular();
