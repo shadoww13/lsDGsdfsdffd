@@ -38,7 +38,16 @@ button { outline: none; user-select: none; }
 .center-stage { flex: 1; display: flex; width: 100%; }
 .page { flex: 1; display: flex; flex-direction: column; width: 100%; height: 100%; }
 .page-content { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow-y: auto; }
-.page-bottom { display: flex; flex-direction: column; gap: 8px; justify-content: flex-end; padding: 12px; margin-top: auto; }
+
+.page-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom)); /* ✅ одинаково на ПК и телефоне */
+  margin-top: auto;
+}
 
 /* Смещения */
 .menu-offset { padding-top: 2px; }
