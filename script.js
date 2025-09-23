@@ -1,3 +1,4 @@
+// script.js
 const clickSound = document.getElementById('clickSound');
 function playClick() {
   if (clickSound) {
@@ -15,15 +16,12 @@ const pages = {
   signal: document.getElementById('page-signal'),
 };
 
-const stepEls = {
-  1: document.getElementById('step1'),
-  2: document.getElementById('step2'),
-  3: document.getElementById('step3'),
-};
+const stepIndicator = document.getElementById('globalSteps');
+const stepEls = stepIndicator ? Array.from(stepIndicator.querySelectorAll('.step')) : [];
 
 function updateSteps(n) {
-  Object.entries(stepEls).forEach(([i, el]) => {
-    if (parseInt(i) <= n) el.classList.add('active');
+  stepEls.forEach((el, idx) => {
+    if (idx < n) el.classList.add('active');
     else el.classList.remove('active');
   });
 }
@@ -33,6 +31,11 @@ function showPage(name) {
     el.classList.toggle('hidden', k !== name);
   });
   currentPage = name;
+
+  if (stepIndicator) {
+    if (name === 'menu') stepIndicator.classList.add('hidden');
+    else stepIndicator.classList.remove('hidden');
+  }
 
   if (name === 'menu') updateSteps(0);
   if (name === 'pairs') updateSteps(1);
@@ -104,7 +107,7 @@ function renderPairs() {
       playClick();
       selectedPair = p.name;
       renderTimePage();
-      showPage('time');
+      showPage('signal');
     });
     pairsGrid.appendChild(card);
   });

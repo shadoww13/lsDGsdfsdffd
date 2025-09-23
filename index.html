@@ -1,5 +1,6 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
@@ -7,8 +8,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <div class="center-stage">
+    <!-- Общий индикатор шагов (один экземпляр) -->
+    <div class="step-indicator global hidden" id="globalSteps">
+      <div class="step"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+    </div>
+
     <!-- Главная -->
     <div class="page" id="page-menu">
       <div class="panel">
@@ -26,12 +33,6 @@
 
     <!-- Выбор пары -->
     <div class="page hidden" id="page-pairs">
-      <!-- Индикатор шагов -->
-      <div class="step-indicator global">
-        <div class="step" id="step1"></div>
-        <div class="step" id="step2"></div>
-        <div class="step" id="step3"></div>
-      </div>
       <div class="panel">
         <div class="panel-content">
           <div class="sub-title">Выберите актив</div>
@@ -51,12 +52,6 @@
 
     <!-- Выбор времени -->
     <div class="page hidden" id="page-time">
-      <!-- Индикатор шагов -->
-      <div class="step-indicator global">
-        <div class="step" id="step1"></div>
-        <div class="step" id="step2"></div>
-        <div class="step" id="step3"></div>
-      </div>
       <div class="panel">
         <div class="panel-content">
           <div class="sub-title">Выберите время экспирации</div>
@@ -70,12 +65,6 @@
 
     <!-- Сигналы -->
     <div class="page hidden" id="page-signal">
-      <!-- Индикатор шагов -->
-      <div class="step-indicator global">
-        <div class="step" id="step1"></div>
-        <div class="step" id="step2"></div>
-        <div class="step" id="step3"></div>
-      </div>
       <div class="panel">
         <div class="panel-content">
           <div class="sub-title">Ваш сигнал</div>
