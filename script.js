@@ -28,11 +28,19 @@ document.addEventListener('DOMContentLoaded', function () {
   let selectedPair = null;
   let selectedTime = null;
   let currentFilter = 'OTC';
+  let fromPopular = false;
 
   function goBack() {
     playClick();
     if (currentPage === 'pairs') showPage('menu');
-    else if (currentPage === 'time') showPage('pairs');
+    else if (currentPage === 'time') {
+      if (fromPopular) {
+        showPage('menu');
+        fromPopular = false;
+      } else {
+        showPage('pairs');
+      }
+    }
     else if (currentPage === 'signal') showPage('time');
   }
 
@@ -44,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.main-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       playClick();
+      document.querySelectorAll('.main-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       showPage('pairs');
       renderPairs();
     });
@@ -51,12 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const pairsList = document.getElementById('pairsList');
   const popularPairs = [
-    { name: 'BTC/USDT', type: 'OTC' },
-    { name: 'EUR/USD', type: 'OTC' },
-    { name: 'AAPL', type: 'OTC' },
-    { name: 'TSLA', type: 'OTC' },
-    { name: 'ETH/USDT', type: 'OTC' },
-    { name: 'USD/JPY', type: 'OTC' }
+    { flag1: '🇺🇸', name1: 'USD', flag2: '🇪🇺', name2: 'EUR' },
+    { flag1: '🇯🇵', name1: 'JPY', flag2: '🇺🇸', name2: 'USD' },
+    { flag1: '🇺🇸', name1: 'AAPL', flag2: '', name2: '' },
+    { flag1: '🇺🇸', name1: 'TSLA', flag2: '', name2: '' },
+    { flag1: '🌐', name1: 'BTC', flag2: '🌐', name2: 'USDT' },
+    { flag1: '🌐', name1: 'ETH', flag2: '🌐', name2: 'USDT' }
   ];
 
   function renderPopular() {
@@ -65,8 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
     popularPairs.forEach(p => {
       const li = document.createElement('li');
       li.className = 'pair';
-      li.dataset.pair = p.name;
-      li.innerHTML = `<div class="name">${p.name}</div>`;
+      li.dataset.pair = `${p.name1}${p.name2 ? '/' + p.name2 : ''}`;
+      li.innerHTML = `
+        <span class="flag">${p.flag1}</span>
+        <span class="name">${p.name1}</span>
+        ${p.name2 ? `<span>→</span><span class="name">${p.name2}</span><span class="flag">${p.flag2}</span>` : ''}
+      `;
       pairsList.appendChild(li);
     });
   }
@@ -77,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!li) return;
       playClick();
       selectedPair = li.dataset.pair;
+      fromPopular = true;
       renderTimePage();
       showPage('time');
     });
@@ -98,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
       card.addEventListener('click', () => {
         playClick();
         selectedPair = p.name;
+        fromPopular = false;
         renderTimePage();
         showPage('time');
       });
