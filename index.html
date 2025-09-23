@@ -7,66 +7,68 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="center-stage">
-    <!-- Главная -->
-    <div class="page" id="page-menu">
-      <h1 class="page-title">Me4nu</h1>
-      <div class="page-content menu-offset">
-        <div class="controls vertical">
-          <button class="tab-btn main-btn" data-category="fx">Currencies</button>
-          <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
-          <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
-        </div>
-        <div class="popular-title">Popular pairs</div>
-        <ul class="pairs-list" id="pairsList"></ul>
-      </div>
-    </div>
-
-    <!-- Выбор пары -->
-    <div class="page hidden" id="page-pairs">
-      <h1 class="page-title">Pairs</h1>
-      <div class="page-content pairs-offset">
-        <div class="sub-title center">Выберите актив</div>
-        <div class="filter-row centered">
-          <div class="filter-buttons">
-            <button class="filter-btn active" id="filterOTC">OTC</button>
-            <button class="filter-btn" id="filterSTOCK">STOCK</button>
+  <div class="app-wrapper">
+    <div class="center-stage">
+      <!-- Главная -->
+      <div class="page" id="page-menu">
+        <h1 class="page-title">Menu</h1>
+        <div class="page-content menu-offset">
+          <div class="controls vertical">
+            <button class="tab-btn main-btn" data-category="fx">Currencies</button>
+            <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
+            <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
           </div>
+          <div class="popular-title">Popular pairs</div>
+          <ul class="pairs-list" id="pairsList"></ul>
         </div>
-        <div class="pairs-grid" id="pairsGrid"></div>
       </div>
-      <div class="page-bottom">
-        <button class="back-btn" id="backBtn2">← Back</button>
-      </div>
-    </div>
 
-    <!-- Выбор времени -->
-    <div class="page hidden" id="page-time">
-      <h1 class="page-title">Time</h1>
-      <div class="page-content">
-        <div class="sub-title center">Выберите время экспирации</div>
-        <div class="pairs-grid" id="timeGrid"></div>
-      </div>
-      <div class="page-bottom">
-        <div class="note">
-          <div class="note-title">Recommended</div>
-          <div class="note-line">1 minute for beginners</div>
-          <div class="note-line">2 minutes for advanced users</div>
+      <!-- Выбор пары -->
+      <div class="page hidden" id="page-pairs">
+        <h1 class="page-title">Pairs</h1>
+        <div class="page-content pairs-offset">
+          <div class="sub-title center">Выберите актив</div>
+          <div class="filter-row centered">
+            <div class="filter-buttons">
+              <button class="filter-btn active" id="filterOTC">OTC</button>
+              <button class="filter-btn" id="filterSTOCK">STOCK</button>
+            </div>
+          </div>
+          <div class="pairs-grid" id="pairsGrid"></div>
         </div>
-        <button class="back-btn" id="backBtn3">← Back</button>
+        <div class="page-bottom">
+          <button class="back-btn" id="backBtn2">← Back</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Сигналы -->
-    <div class="page hidden" id="page-signal">
-      <h1 class="page-title">Signal</h1>
-      <div class="page-content">
-        <div class="sub-title center">Ваш сигнал</div>
-        <div class="empty" id="signalArea"></div>
+      <!-- Выбор времени -->
+      <div class="page hidden" id="page-time">
+        <h1 class="page-title">Time</h1>
+        <div class="page-content">
+          <div class="sub-title center">Выберите время экспирации</div>
+          <div class="pairs-grid" id="timeGrid"></div>
+        </div>
+        <div class="page-bottom">
+          <div class="note">
+            <div class="note-title">Recommended</div>
+            <div class="note-line">1 minute for beginners</div>
+            <div class="note-line">2 minutes for advanced users</div>
+          </div>
+          <button class="back-btn" id="backBtn3">← Back</button>
+        </div>
       </div>
-      <div class="page-bottom">
-        <button class="new-signal-btn" id="newSignalBtn">+ Новый сигнал</button>
-        <button class="back-btn" id="backBtn4">← Back</button>
+
+      <!-- Сигналы -->
+      <div class="page hidden" id="page-signal">
+        <h1 class="page-title">Signal</h1>
+        <div class="page-content">
+          <div class="sub-title center">Ваш сигнал</div>
+          <div class="empty" id="signalArea"></div>
+        </div>
+        <div class="page-bottom">
+          <button class="new-signal-btn" id="newSignalBtn">+ Новый сигнал</button>
+          <button class="back-btn" id="backBtn4">← Back</button>
+        </div>
       </div>
     </div>
   </div>
