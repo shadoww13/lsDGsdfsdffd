@@ -9,6 +9,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  const pages = {
+    home: document.getElementById("homePage"),
+    pair: document.getElementById("pairPage"),
+    time: document.getElementById("timePage"),
+    signal: document.getElementById("signalPage"),
+  };
+
+  let historyStack = ["home"];
+
+  function showPage(id) {
+    Object.values(pages).forEach(p => p.classList.add("hidden"));
+    pages[id].classList.remove("hidden");
+    historyStack.push(id);
+  }
+
+  function goBack() {
+    playClick();
+    if (historyStack.length > 1) {
+      historyStack.pop();
+      const prev = historyStack.pop();
+      showPage(prev);
+    } else {
+      showPage("home");
+    }
+  }
+
+  ["btn1", "btn2", "btn3"].forEach(id => {
+    document.getElementById(id).addEventListener("click", () => {
+      playClick();
+      showPage("pair");
+    });
+  });
+
+  document.querySelectorAll(".back-btn").forEach(btn => {
+    btn.addEventListener("click", goBack);
+  });
+
+  const newSignalBtn = document.querySelector(".new-signal-btn");
+  if (newSignalBtn) {
+    newSignalBtn.addEventListener("click", () => {
+      playClick();
+      showPage("signal");
+    });
+  }
+
   const pairs = [
     { flag1: "us", code1: "USD", code2: "EUR", flag2: "eu" },
     { flag1: "gb", code1: "GBP", code2: "USD", flag2: "us" },
@@ -24,49 +69,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = document.createElement("li");
     li.className = "pair";
 
-    let flag1, flag2;
-    if (pair.flag1 === "btc") {
-      flag1 = `<span style="font-size:18px;">₿</span>`;
-    } else {
-      flag1 = `<span class="flag fi fi-${pair.flag1}"></span>`;
-    }
-    if (pair.flag2 === "btc") {
-      flag2 = `<span style="font-size:18px;">₿</span>`;
-    } else {
-      flag2 = `<span class="flag fi fi-${pair.flag2}"></span>`;
-    }
+    let flag1 = pair.flag1 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag1}"></span>`;
+    let flag2 = pair.flag2 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag2}"></span>`;
 
     li.innerHTML = `
       ${flag1}
       <span>${pair.code1} → ${pair.code2}</span>
       ${flag2}
-      <span class="fire">🔥</span>
+      <span class="fire">🔥 OTC</span>
     `;
     li.addEventListener("click", () => {
       playClick();
-      showPage("pair");
+      showPage("time");
     });
     pairsList.appendChild(li);
-  });
-
-  const pages = {
-    home: document.getElementById("homePage"),
-    pair: document.getElementById("pairPage"),
-    time: document.getElementById("timePage"),
-    signal: document.getElementById("signalPage"),
-  };
-
-  function showPage(id) {
-    Object.values(pages).forEach(p => p.classList.add("hidden"));
-    pages[id].classList.remove("hidden");
-  }
-
-  document.getElementById("btn1").addEventListener("click", () => { playClick(); showPage("pair"); });
-  document.getElementById("btn2").addEventListener("click", () => { playClick(); showPage("pair"); });
-  document.getElementById("btn3").addEventListener("click", () => { playClick(); showPage("pair"); });
-
-  document.querySelectorAll(".back-btn").forEach(btn => {
-    btn.addEventListener("click", () => { playClick(); showPage("home"); });
   });
 
   const pairGrid = document.getElementById("pairGrid");
