@@ -22,34 +22,34 @@ html, body {
 
 .app {
   width: 100%;
-  max-width: 900px; /* расширим на ПК */
+  max-width: 900px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5vw; /* вместо фиксированных px */
+  padding: clamp(12px, 4vw, 40px);
   box-sizing: border-box;
 }
 
 .app-title {
   text-align: center;
-  font-size: clamp(22px, 4vw, 36px); /* масштабируемый заголовок */
+  font-size: clamp(22px, 4vw, 36px);
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 clamp(10px, 3vh, 30px) 0;
 }
 
 .menu-buttons {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 20px;
+  gap: clamp(10px, 2vh, 20px);
+  margin-bottom: clamp(20px, 5vh, 60px);
 }
 
 .menu-btn {
   background-color: var(--card-bg);
   border: none;
   border-radius: 12px;
-  padding: 1rem;
+  padding: clamp(10px, 2vh, 18px);
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 600;
   color: var(--text-color);
@@ -60,15 +60,12 @@ html, body {
   background-color: var(--hover-color);
 }
 
-.popular {
-  margin-top: auto;
-}
-
 .popular-title {
   font-size: clamp(14px, 1.5vw, 18px);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin: 0 0 clamp(8px, 2vh, 20px) 0;
   color: var(--muted);
+  text-align: center;
 }
 
 .pairs-list {
@@ -77,17 +74,17 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: clamp(6px, 1.5vh, 14px);
 }
 
 .pair {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: clamp(4px, 1vw, 10px);
   background: var(--card-bg);
   border-radius: 10px;
-  padding: 0.8rem;
+  padding: clamp(8px, 2vh, 16px);
   font-weight: 500;
   font-size: clamp(14px, 1.5vw, 18px);
   color: var(--text-color);
@@ -99,24 +96,4 @@ html, body {
 }
 .pair .flag {
   font-size: clamp(16px, 2vw, 22px);
-}
-
-/* --- медиазапросы --- */
-@media (min-width: 768px) {
-  .menu-buttons {
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-  }
-  .popular {
-    margin-top: 40px;
-  }
-  .pairs-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .pair {
-    min-width: 120px;
-  }
 }
