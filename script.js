@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* --- Популярные пары --- */
   const pairs = [
     { flag1: "us", code1: "USD", code2: "EUR", flag2: "eu" },
     { flag1: "gb", code1: "GBP", code2: "USD", flag2: "us" },
@@ -45,12 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     li.addEventListener("click", () => {
       playClick();
-      navigate("pair");
+      showPage("pair");
     });
     pairsList.appendChild(li);
   });
 
-  /* --- Навигация --- */
   const pages = {
     home: document.getElementById("homePage"),
     pair: document.getElementById("pairPage"),
@@ -58,40 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
     signal: document.getElementById("signalPage"),
   };
 
-  let historyStack = [];
-
   function showPage(id) {
     Object.values(pages).forEach(p => p.classList.add("hidden"));
     pages[id].classList.remove("hidden");
   }
 
-  function currentPage() {
-    return Object.keys(pages).find(key => !pages[key].classList.contains("hidden"));
-  }
-
-  function navigate(to) {
-    historyStack.push(currentPage());
-    showPage(to);
-  }
-
-  function goBack() {
-    if (historyStack.length > 0) {
-      const prev = historyStack.pop();
-      showPage(prev);
-    } else {
-      showPage("home");
-    }
-  }
-
-  document.getElementById("btn1").addEventListener("click", () => { playClick(); navigate("pair"); });
-  document.getElementById("btn2").addEventListener("click", () => { playClick(); navigate("pair"); });
-  document.getElementById("btn3").addEventListener("click", () => { playClick(); navigate("pair"); });
+  document.getElementById("btn1").addEventListener("click", () => { playClick(); showPage("pair"); });
+  document.getElementById("btn2").addEventListener("click", () => { playClick(); showPage("pair"); });
+  document.getElementById("btn3").addEventListener("click", () => { playClick(); showPage("pair"); });
 
   document.querySelectorAll(".back-btn").forEach(btn => {
-    btn.addEventListener("click", () => { playClick(); goBack(); });
+    btn.addEventListener("click", () => { playClick(); showPage("home"); });
   });
 
-  /* --- OTC/STOCK переключатель --- */
   const pairGrid = document.getElementById("pairGrid");
   const otcBtn = document.getElementById("otcBtn");
   const stockBtn = document.getElementById("stockBtn");
@@ -108,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.textContent = p;
       div.addEventListener("click", () => {
         playClick();
-        navigate("time");
+        showPage("time");
       });
       pairGrid.appendChild(div);
     });
@@ -125,22 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderPairs("stock");
   });
 
-  renderPairs("otc"); // стартуем с OTC
+  renderPairs("otc");
 
-  /* --- Выбор времени --- */
   document.querySelectorAll(".time-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       playClick();
-      navigate("signal");
-    });
-  });
-
-  /* --- Новый сигнал --- */
-  const newSignalBtn = document.getElementById("newSignalBtn");
-  if (newSignalBtn) {
-    newSignalBtn.addEventListener("click", () => {
-      playClick();
       showPage("signal");
     });
-  }
+  });
 });
