@@ -61,7 +61,7 @@ html, body {
   width: 100%;
 }
 
-/* Основные кнопки - яркие */
+/* Основные кнопки */
 .menu-btn.primary {
   background: var(--accent-gradient);
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
@@ -98,7 +98,7 @@ html, body {
 
 .pair {
   display: flex;
-  justify-content: flex-start; /* левее */
+  justify-content: flex-start;
   align-items: center;
   gap: clamp(6px, 1vw, 12px);
   background: var(--card-bg);
@@ -114,9 +114,14 @@ html, body {
   background: var(--hover-color);
   transform: translateY(-1px);
 }
-.pair .flag {
-  font-size: clamp(16px, 2vw, 22px);
+
+.flag {
+  width: 22px;
+  height: 16px;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
+
 .pair .otc {
   background: var(--danger);
   color: #fff;
