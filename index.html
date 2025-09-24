@@ -1,34 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <title>Menu</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunarAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="app">
-    <h1 class="app-title">Menu</h1>
+    <div class="container">
+        <div id="main-page" class="page active">
+            <div class="header">
+                <div class="title">
+                    <div class="logo"></div>
+                    LunarAI
+                </div>
+                <div class="lang-container">
+                    <button class="lang-btn">
+                        🇷🇺 RU
+                        ▼
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option">
+                            🇷🇺 Русский
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="market-buttons">
+                <button class="market-btn" data-market="currencies">Валюты</button>
+                <button class="market-btn" data-market="crypto">Криптовалюты</button>
+                <button class="market-btn" data-market="stocks">Акции</button>
+            </div>
+            <button class="popular-btn">Популярные пары</button>
+            <div id="popular-dropdown" class="popular-dropdown"></div>
+        </div>
 
-    <div class="menu-buttons">
-      <button class="menu-btn" id="btn1">Currencies</button>
-      <button class="menu-btn" id="btn2">Stocks</button>
-      <button class="menu-btn" id="btn3">Cryptocurrencies</button>
+        <div id="market-page" class="page">
+            <div class="header">
+                <div id="market-title" class="title">Выберите рынок</div>
+            </div>
+            <div class="submarket-buttons">
+                <button class="submarket-btn active" data-sub="otc">OTC</button>
+                <button class="submarket-btn" data-sub="stock">STOCK</button>
+            </div>
+            <div id="pair-list" class="pair-list"></div>
+            <button class="back-btn">← Назад</button>
+        </div>
+
+        <div id="expiration-page" class="page">
+            <div class="header">
+                <div id="exp-title" class="title">Выберите время экспирации</div>
+            </div>
+            <div id="exp-list" class="exp-list"></div>
+            <button class="exp-back-btn">← Назад</button>
+        </div>
+
+        <div id="signal-page" class="page">
+            <div class="header">
+                <div id="signal-title" class="title">Сигнал</div>
+            </div>
+            <div id="loading" class="loading">
+                <div class="loading-step">Connecting to TradingView</div>
+                <div class="loading-step">Fetching data</div>
+                <div class="loading-step">Analyzing</div>
+            </div>
+            <div class="signal-content">
+                <div id="signal-direction"></div>
+                <div id="signal-pair"></div>
+                <ul id="signal-indicators"></ul>
+            </div>
+            <button id="new-signal-btn">Получить новый сигнал</button>
+            <button class="signal-back-btn">← Назад</button>
+        </div>
     </div>
-
-    <div class="popular">
-      <h2 class="popular-title">Popular Pairs</h2>
-      <ul class="pairs-list" id="pairsList"></ul>
-    </div>
-
-    <!-- подпись -->
-    <div class="footer">
-      Powered by <strong>StocksLabs</strong>
-    </div>
-  </div>
-
-  <audio id="clickSound" src="click-sound.mp3"></audio>
-  <script src="script.js"></script>
 </body>
 </html>
