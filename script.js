@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { flag1: "🇨🇭", code1: "CHF", code2: "USD", flag2: "🇺🇸" },
     { flag1: "🇨🇦", code1: "CAD", code2: "USD", flag2: "🇺🇸" },
     { flag1: "🇦🇺", code1: "AUD", code2: "USD", flag2: "🇺🇸" },
+    { flag1: "₿", code1: "BTC", code2: "USD", flag2: "🇺🇸" }, // новая пара
   ];
 
   const pairsList = document.getElementById("pairsList");
@@ -24,12 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
     li.className = "pair";
     li.innerHTML = `
       <span class="flag">${pair.flag1}</span>
-      ${pair.code1} → ${pair.code2}
+      <span>${pair.code1} → ${pair.code2}</span>
       <span class="flag">${pair.flag2}</span>
+      <span class="otc">OTC</span>
     `;
     li.addEventListener("click", () => {
       playClick();
-      Telegram.WebApp.alert(`${pair.code1}/${pair.code2} clicked`);
+      Telegram.WebApp.alert(`🔥 ${pair.code1}/${pair.code2} clicked`);
     });
     pairsList.appendChild(li);
   });

@@ -2,9 +2,11 @@
   --bg-color: #1b1f33;
   --card-bg: #262b45;
   --accent-color: #6c63ff;
+  --accent-gradient: linear-gradient(135deg, #6c63ff, #8f87ff);
   --hover-color: #837dff;
   --text-color: #f0f0ff;
   --muted: #b0b3c9;
+  --danger: #ff4d6d;
 }
 
 html, body {
@@ -17,13 +19,13 @@ html, body {
   color: var(--text-color);
   display: flex;
   justify-content: center;
-  align-items: stretch; /* вместо center, чтобы растягивалось */
+  align-items: stretch;
 }
 
 .app {
   width: 100%;
   max-width: 900px;
-  flex: 1; /* занимает всё доступное место */
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -33,44 +35,53 @@ html, body {
 
 .app-title {
   text-align: center;
-  font-size: clamp(22px, 4vw, 36px);
-  font-weight: 700;
-  margin: 0 0 clamp(8px, 2vh, 20px) 0;
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 800;
+  margin: 0 0 clamp(12px, 2vh, 24px) 0;
+  letter-spacing: 1px;
 }
 
 .menu-buttons {
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1.5vh, 16px);
-  margin-bottom: clamp(12px, 3vh, 24px);
+  gap: clamp(10px, 1.5vh, 18px);
+  margin-bottom: clamp(16px, 3vh, 32px);
 }
 
 .menu-btn {
   background-color: var(--card-bg);
   border: none;
-  border-radius: 12px;
-  padding: clamp(10px, 2vh, 16px);
+  border-radius: 14px;
+  padding: clamp(12px, 2vh, 18px);
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 600;
   color: var(--text-color);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.25s ease;
   width: 100%;
 }
-.menu-btn:hover {
-  background-color: var(--hover-color);
+
+/* Основные кнопки - яркие */
+.menu-btn.primary {
+  background: var(--accent-gradient);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+  color: #fff;
+}
+.menu-btn.primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
 }
 
 .popular {
-  flex: 1; /* растягивается вместе с окном */
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .popular-title {
-  font-size: clamp(14px, 1.5vw, 18px);
-  font-weight: 600;
-  margin: clamp(10px, 2vh, 16px) 0;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  margin: clamp(12px, 2vh, 20px) 0;
   color: var(--muted);
   text-align: center;
 }
@@ -81,39 +92,60 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1vh, 12px);
+  gap: clamp(8px, 1vh, 14px);
   flex: 1;
 }
 
 .pair {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* левее */
   align-items: center;
-  gap: clamp(4px, 1vw, 10px);
+  gap: clamp(6px, 1vw, 12px);
   background: var(--card-bg);
   border-radius: 10px;
-  padding: clamp(8px, 1.5vh, 14px);
+  padding: clamp(10px, 1.5vh, 16px);
   font-weight: 500;
   font-size: clamp(14px, 1.5vw, 18px);
   color: var(--text-color);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
 .pair:hover {
   background: var(--hover-color);
+  transform: translateY(-1px);
 }
 .pair .flag {
   font-size: clamp(16px, 2vw, 22px);
 }
+.pair .otc {
+  background: var(--danger);
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: auto;
+}
 
-/* 📱 На маленьких экранах */
+.footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  padding-top: 20px;
+}
+.footer span {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* 📱 Маленькие экраны */
 @media (max-width: 480px) {
   .menu-buttons {
     flex-direction: column;
   }
 }
 
-/* 💻 На больших экранах */
+/* 💻 Большие экраны */
 @media (min-width: 768px) {
   .menu-buttons {
     flex-direction: row;
