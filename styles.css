@@ -1,3 +1,4 @@
+/* styles.css */
 :root {
   --bg-color: #1b1f33;
   --card-bg: #262b45;
@@ -233,12 +234,18 @@ html, body {
   border-radius: 8px;
   color: var(--muted);
   font-weight: 700;
-  transition: background 0.18s, color 0.18s;
+  transition: background 0.18s, color 0.18s, transform 0.2s;
 }
 .loader-step.active {
   background: var(--accent-gradient);
   color: #fff;
   box-shadow: 0 6px 18px rgba(108,99,255,0.12);
+  transform: translateY(-4px);
+}
+.loader-step.done {
+  background: #2b804f;
+  color: #fff;
+  transform: translateY(0);
 }
 .spinner {
   width: 40px;
@@ -316,6 +323,30 @@ html, body {
   font-size: 14px;
 }
 .footer span { color: var(--accent-color); font-weight: 600; }
+
+/* Back button style fix (applies to all .back-btn buttons across pages) */
+.back-btn {
+  display: inline-block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent-gradient);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.back-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+/* Signal-specific */
+.signal-card { width: 100%; box-sizing: border-box; }
+.signal-value { font-size: 16px; }
+#signalAction { font-size: 20px; padding: 6px 12px; border-radius: 8px; background: rgba(255,255,255,0.03); }
+#signalArrow { font-size: 22px; padding: 8px 10px; border-radius: 10px; }
+
+/* centered footer for signal page */
+.centered-footer { text-align: center; margin-top: 14px; width: 100%; display: block; }
 
 /* hide bottom bar elements by class 'hidden' already exists */
 @media (max-width: 480px) {

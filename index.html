@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,10 +84,43 @@
         <span class="active">3. Signal</span>
       </div>
 
-      <h2 class="signal-title">📡 Waiting for signal...</h2>
+      <h2 class="signal-title" id="signalTitle">📡 Waiting for signal...</h2>
+
+      <div class="card signal-card" id="signalArea">
+        <div class="loader-area" id="loaderArea">
+          <div class="loader-step active" data-step="1">Подключение к TradingView...</div>
+          <div class="loader-step" data-step="2">Получение индикаторов...</div>
+          <div class="loader-step" data-step="3">Анализ...</div>
+          <div class="spinner" id="spinner" aria-hidden="true"></div>
+        </div>
+
+        <div class="signal-result hidden" id="signalResult">
+          <div class="signal-row" style="justify-content:center; gap:12px; align-items:center;">
+            <div id="signalArrow" class="arrow up">▲</div>
+            <div style="text-align:center;">
+              <div class="signal-value" id="signalPair">BTC → USD</div>
+              <div class="signal-label" id="signalTime">60 sec</div>
+            </div>
+            <div id="signalAction" class="action-text">BUY</div>
+          </div>
+
+          <div style="padding-top:12px;">
+            <div class="signal-label">Основано на:</div>
+            <ul id="indicatorsList" style="margin:8px 0 12px 18px; color:var(--muted);">
+              <!-- indicators injected here -->
+            </ul>
+
+            <div class="signal-row" style="border-bottom:none; padding-top:8px; flex-direction:column; align-items:flex-start;">
+              <div class="signal-label">Краткое описание:</div>
+              <div id="signalDesc" style="margin-top:8px; color:var(--text-color); font-weight:600;">Описание сигнала...</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <button class="back-btn">← Back</button>
-      <footer class="footer">Powered by <span>StocksLabs</span></footer>
+
+      <footer class="footer centered-footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
   </div>
