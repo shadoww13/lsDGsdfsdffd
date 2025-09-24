@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
@@ -25,13 +25,9 @@
         <h2 class="popular-title">Popular Pairs</h2>
         <ul class="pairs-list" id="pairsList"></ul>
       </div>
-
-      <footer class="footer">
-        Powered by <span>StocksLabs</span>
-      </footer>
     </div>
 
-    <!-- Страница выбора пары -->
+    <!-- Страница выбора пары (Pair) -->
     <div class="page hidden" id="pairPage">
       <div class="progress">
         <span class="active">1. Pair</span>
@@ -45,12 +41,9 @@
       </div>
 
       <div class="pairs-grid" id="pairGrid"></div>
-
-      <button class="back-btn">← Back</button>
-      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
-    <!-- Страница выбора времени -->
+    <!-- Страница выбора времени (Time) -->
     <div class="page hidden" id="timePage">
       <div class="progress">
         <span class="done">1. Pair</span>
@@ -58,24 +51,21 @@
         <span>3. Signal</span>
       </div>
 
-      <div class="time-buttons">
-        <button class="time-btn">15 sec</button>
-        <button class="time-btn">30 sec</button>
-        <button class="time-btn">1 min</button>
-        <button class="time-btn">5 min</button>
-        <button class="time-btn">15 min</button>
-        <button class="time-btn">60 min</button>
+      <div class="time-buttons" id="timeButtons">
+        <button class="time-btn" data-time="15s">15 sec</button>
+        <button class="time-btn" data-time="30s">30 sec</button>
+        <button class="time-btn" data-time="1m">1 min</button>
+        <button class="time-btn" data-time="5m">5 min</button>
+        <button class="time-btn" data-time="15m">15 min</button>
+        <button class="time-btn" data-time="60s">60 sec</button>
       </div>
 
       <div class="recommend">
         Recommended: <b>60 seconds</b> for balanced trading.
       </div>
-
-      <button class="back-btn">← Back</button>
-      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
-    <!-- Страница сигнала -->
+    <!-- Страница сигнала (Signal) -->
     <div class="page hidden" id="signalPage">
       <div class="progress">
         <span class="done">1. Pair</span>
@@ -83,10 +73,42 @@
         <span class="active">3. Signal</span>
       </div>
 
-      <h2 class="signal-title">📡 Waiting for signal...</h2>
+      <div class="signal-area">
+        <!-- Loader + steps -->
+        <div id="loaderArea" class="loader-area">
+          <div class="loader-step" data-step="Connecting">Connecting to TradingView</div>
+          <div class="loader-step" data-step="Fetching">Fetching indicators</div>
+          <div class="loader-step" data-step="Analyzing">Analyzing</div>
+          <div id="spinner" class="spinner" aria-hidden="true"></div>
+        </div>
 
-      <button class="back-btn">← Back</button>
-      <footer class="footer">Powered by <span>StocksLabs</span></footer>
+        <!-- Result (hidden until ready) -->
+        <div id="signalResult" class="signal-result hidden" aria-live="polite">
+          <div class="signal-card">
+            <div class="signal-row">
+              <div class="signal-label">Pair</div>
+              <div class="signal-value" id="resultPair">—</div>
+            </div>
+            <div class="signal-row">
+              <div class="signal-label">Timeframe</div>
+              <div class="signal-value" id="resultTime">—</div>
+            </div>
+            <div class="signal-row action">
+              <div class="signal-action" id="resultAction">
+                <div class="arrow" id="arrow">▲</div>
+                <div class="action-text" id="actionText">BUY</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unified bottom area: New Signal (shown only on signal page), Back (same place), footer Powered by -->
+    <div class="bottom-bar">
+      <button id="newSignalBtn" class="new-signal hidden">New Signal</button>
+      <button id="globalBack" class="global-back">← Back</button>
+      <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
 
   </div>
