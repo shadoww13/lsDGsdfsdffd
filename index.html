@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <title>Menu</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="center-stage">
-    <div class="panel">
-      <div class="menu-header">Menu</div>
-      <div class="controls vertical">
-        <button class="tab-btn main-btn">Currencies</button>
-        <button class="tab-btn main-btn">Stocks</button>
-        <button class="tab-btn main-btn">Cryptocurrencies</button>
-      </div>
-      <div class="popular-title">Popular pairs</div>
+  <div class="app">
+    <h1 class="app-title">Menu</h1>
+
+    <div class="menu-buttons">
+      <button class="menu-btn" id="btn1">Currencies</button>
+      <button class="menu-btn" id="btn2">Stocks</button>
+      <button class="menu-btn" id="btn3">Cryptocurrencies</button>
+    </div>
+
+    <div class="popular">
+      <h2 class="popular-title">Popular Pairs</h2>
       <ul class="pairs-list" id="pairsList"></ul>
     </div>
   </div>

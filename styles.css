@@ -1,102 +1,83 @@
 :root {
-  --bg: #0b0c0d;
-  --muted: #9aa0a6;
-  --accent: #7dd3fc;
-  --glass: rgba(255,255,255,0.03);
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --bg-color: #1b1f33;
+  --card-bg: #262b45;
+  --accent-color: #6c63ff;
+  --hover-color: #837dff;
+  --text-color: #f0f0ff;
+  --muted: #b0b3c9;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
-
-body {
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(125,211,252,0.03), transparent 8%),
-              radial-gradient(900px 400px at 90% 90%, rgba(255,255,255,0.015), transparent 6%),
-              var(--bg);
-  color: #e7eaec;
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-color);
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
-.center-stage {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.app {
   width: 100%;
-}
-
-.panel {
-  width: 100%;
-  max-width: 420px;
-  height: 680px; /* фиксированная высота для консистентного отображения */
-  padding: 20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius: 24px;
-  box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.03);
+  max-width: 900px; /* расширим на ПК */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  justify-content: space-between;
+  padding: 5vw; /* вместо фиксированных px */
+  box-sizing: border-box;
 }
 
-.menu-header {
+.app-title {
   text-align: center;
-  font-size: 22px;
+  font-size: clamp(22px, 4vw, 36px); /* масштабируемый заголовок */
   font-weight: 700;
-  margin-bottom: 16px;
+  margin: 0;
 }
 
-.controls.vertical {
+.menu-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-top: 20px;
 }
 
-.tab-btn {
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.03);
-  color: var(--muted);
-  padding: 14px;
-  border-radius: 14px;
+.menu-btn {
+  background-color: var(--card-bg);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: clamp(16px, 2vw, 20px);
   font-weight: 600;
+  color: var(--text-color);
   cursor: pointer;
-  font-size: 15px;
-  text-align: center;
-  transition: transform 0.18s, box-shadow 0.18s;
+  transition: background 0.2s;
 }
-.tab-btn:hover {
-  transform: translateY(-3px) scale(1.01);
-  box-shadow: 0 6px 20px rgba(125,211,252,0.06);
+.menu-btn:hover {
+  background-color: var(--hover-color);
 }
-.tab-btn:active {
-  background: rgba(125,211,252,0.08);
-  color: var(--accent);
-  border: 1px solid rgba(125,211,252,0.18);
+
+.popular {
+  margin-top: auto;
 }
 
 .popular-title {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: clamp(14px, 1.5vw, 18px);
   font-weight: 600;
-  margin: 12px 0;
+  margin-bottom: 10px;
+  color: var(--muted);
 }
 
 .pairs-list {
   list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
-  padding-right: 6px;
-}
-
-.pairs-list::-webkit-scrollbar { width: 6px; }
-.pairs-list::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.05);
-  border-radius: 6px;
+  gap: 8px;
 }
 
 .pair {
@@ -104,17 +85,38 @@ body {
   justify-content: center;
   align-items: center;
   gap: 6px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.015);
-  border: 1px solid rgba(255,255,255,0.02);
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-weight: 500;
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: var(--text-color);
   cursor: pointer;
-  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms;
+  transition: background 0.2s;
 }
 .pair:hover {
-  transform: translateY(-3px);
-  background: rgba(125,211,252,0.02);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+  background: var(--hover-color);
 }
-.pair .flag { font-size: 18px; }
-.pair .name { font-weight: 700; }
+.pair .flag {
+  font-size: clamp(16px, 2vw, 22px);
+}
+
+/* --- медиазапросы --- */
+@media (min-width: 768px) {
+  .menu-buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+  .popular {
+    margin-top: 40px;
+  }
+  .pairs-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pair {
+    min-width: 120px;
+  }
+}
