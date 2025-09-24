@@ -17,13 +17,13 @@ html, body {
   color: var(--text-color);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch; /* вместо center, чтобы растягивалось */
 }
 
 .app {
   width: 100%;
   max-width: 900px;
-  min-height: auto; /* убираем жесткое 100vh */
+  flex: 1; /* занимает всё доступное место */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -55,9 +55,16 @@ html, body {
   color: var(--text-color);
   cursor: pointer;
   transition: background 0.2s;
+  width: 100%;
 }
 .menu-btn:hover {
   background-color: var(--hover-color);
+}
+
+.popular {
+  flex: 1; /* растягивается вместе с окном */
+  display: flex;
+  flex-direction: column;
 }
 
 .popular-title {
@@ -75,6 +82,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: clamp(6px, 1vh, 12px);
+  flex: 1;
 }
 
 .pair {
@@ -96,4 +104,21 @@ html, body {
 }
 .pair .flag {
   font-size: clamp(16px, 2vw, 22px);
+}
+
+/* 📱 На маленьких экранах */
+@media (max-width: 480px) {
+  .menu-buttons {
+    flex-direction: column;
+  }
+}
+
+/* 💻 На больших экранах */
+@media (min-width: 768px) {
+  .menu-buttons {
+    flex-direction: row;
+  }
+  .menu-btn {
+    flex: 1;
+  }
 }
