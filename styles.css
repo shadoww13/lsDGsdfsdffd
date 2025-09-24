@@ -196,8 +196,15 @@ html, body {
   color: var(--text-color);
   font-weight: 600;
   cursor: pointer;
+  text-align: center;
 }
 .time-btn:hover { background: var(--hover-color); }
+.time-btn small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
 
 .recommend {
   margin: 20px 0;
@@ -217,9 +224,8 @@ html, body {
   color: var(--text-color);
 }
 
-/* Back */
+/* Back и футерные кнопки */
 .back-btn {
-  margin-top: 20px;
   padding: 12px;
   border: none;
   border-radius: 10px;
@@ -230,6 +236,17 @@ html, body {
   cursor: pointer;
 }
 .back-btn:hover { filter: brightness(1.1); }
+
+.footer-buttons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-buttons .back-btn,
+.footer-buttons .menu-btn {
+  width: 100%;
+}
 
 .footer {
   margin-top: auto;

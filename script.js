@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     li.addEventListener("click", () => {
       playClick();
-      showPage("pair");
+      navigate("pair");
     });
     pairsList.appendChild(li);
   });
@@ -58,17 +58,37 @@ document.addEventListener("DOMContentLoaded", () => {
     signal: document.getElementById("signalPage"),
   };
 
+  let historyStack = [];
+
   function showPage(id) {
     Object.values(pages).forEach(p => p.classList.add("hidden"));
     pages[id].classList.remove("hidden");
   }
 
-  document.getElementById("btn1").addEventListener("click", () => { playClick(); showPage("pair"); });
-  document.getElementById("btn2").addEventListener("click", () => { playClick(); showPage("pair"); });
-  document.getElementById("btn3").addEventListener("click", () => { playClick(); showPage("pair"); });
+  function currentPage() {
+    return Object.keys(pages).find(key => !pages[key].classList.contains("hidden"));
+  }
+
+  function navigate(to) {
+    historyStack.push(currentPage());
+    showPage(to);
+  }
+
+  function goBack() {
+    if (historyStack.length > 0) {
+      const prev = historyStack.pop();
+      showPage(prev);
+    } else {
+      showPage("home");
+    }
+  }
+
+  document.getElementById("btn1").addEventListener("click", () => { playClick(); navigate("pair"); });
+  document.getElementById("btn2").addEventListener("click", () => { playClick(); navigate("pair"); });
+  document.getElementById("btn3").addEventListener("click", () => { playClick(); navigate("pair"); });
 
   document.querySelectorAll(".back-btn").forEach(btn => {
-    btn.addEventListener("click", () => { playClick(); showPage("home"); });
+    btn.addEventListener("click", () => { playClick(); goBack(); });
   });
 
   /* --- OTC/STOCK переключатель --- */
@@ -88,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.textContent = p;
       div.addEventListener("click", () => {
         playClick();
-        showPage("time");
+        navigate("time");
       });
       pairGrid.appendChild(div);
     });
@@ -111,7 +131,16 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".time-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       playClick();
-      showPage("signal");
+      navigate("signal");
     });
   });
+
+  /* --- Новый сигнал --- */
+  const newSignalBtn = document.getElementById("newSignalBtn");
+  if (newSignalBtn) {
+    newSignalBtn.addEventListener("click", () => {
+      playClick();
+      showPage("signal");
+    });
+  }
 });
