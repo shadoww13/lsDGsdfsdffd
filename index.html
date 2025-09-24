@@ -6,13 +6,12 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <title>Menu</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- библиотека флагов -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
 </head>
 <body>
   <div class="app">
 
-    <!-- Главная страница -->
+    <!-- Главная -->
     <div class="page" id="homePage">
       <h1 class="app-title">Бегемотиk</h1>
 
@@ -32,74 +31,62 @@
       </footer>
     </div>
 
-    <!-- Страницы для категорий -->
-    <div class="page hidden" id="currenciesPage">
-      <h1 class="app-title">Currencies</h1>
+    <!-- Страница выбора пары -->
+    <div class="page hidden" id="pairPage">
+      <div class="progress">
+        <span class="active">1. Pair</span>
+        <span>2. Time</span>
+        <span>3. Signal</span>
+      </div>
 
       <div class="top-buttons">
-        <button class="sub-btn">OTC</button>
-        <button class="sub-btn">STOCK</button>
+        <button class="sub-btn active" id="otcBtn">OTC</button>
+        <button class="sub-btn" id="stockBtn">STOCK</button>
       </div>
 
-      <div class="pairs-grid">
-        <div class="pair-card">Пара 1</div>
-        <div class="pair-card">Пара 2</div>
-        <div class="pair-card">Пара 3</div>
-        <div class="pair-card">Пара 4</div>
-        <div class="pair-card">Пара 5</div>
-        <div class="pair-card">Пара 6</div>
-        <div class="pair-card">Пара 7</div>
-        <div class="pair-card">Пара 8</div>
-        <div class="pair-card">Пара 9</div>
-        <div class="pair-card">Пара 10</div>
-        <div class="pair-card">Пара 11</div>
-        <div class="pair-card">Пара 12</div>
-      </div>
+      <div class="pairs-grid" id="pairGrid"></div>
 
       <button class="back-btn">← Back</button>
-      <footer class="footer">
-        Powered by <span>StocksLabs</span>
-      </footer>
+      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
-    <div class="page hidden" id="stocksPage">
-      <h1 class="app-title">Stocks</h1>
-      <div class="top-buttons">
-        <button class="sub-btn">OTC</button>
-        <button class="sub-btn">STOCK</button>
+    <!-- Страница выбора времени -->
+    <div class="page hidden" id="timePage">
+      <div class="progress">
+        <span class="done">1. Pair</span>
+        <span class="active">2. Time</span>
+        <span>3. Signal</span>
       </div>
-      <div class="pairs-grid">
-        <div class="pair-card">Пара 1</div><div class="pair-card">Пара 2</div>
-        <div class="pair-card">Пара 3</div><div class="pair-card">Пара 4</div>
-        <div class="pair-card">Пара 5</div><div class="pair-card">Пара 6</div>
-        <div class="pair-card">Пара 7</div><div class="pair-card">Пара 8</div>
-        <div class="pair-card">Пара 9</div><div class="pair-card">Пара 10</div>
-        <div class="pair-card">Пара 11</div><div class="pair-card">Пара 12</div>
+
+      <div class="time-buttons">
+        <button class="time-btn">15 sec</button>
+        <button class="time-btn">30 sec</button>
+        <button class="time-btn">1 min</button>
+        <button class="time-btn">5 min</button>
+        <button class="time-btn">15 min</button>
+        <button class="time-btn">60 min</button>
       </div>
+
+      <div class="recommend">
+        Recommended: <b>60 seconds</b> for balanced trading.
+      </div>
+
       <button class="back-btn">← Back</button>
-      <footer class="footer">
-        Powered by <span>StocksLabs</span>
-      </footer>
+      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
-    <div class="page hidden" id="cryptoPage">
-      <h1 class="app-title">Cryptocurrencies</h1>
-      <div class="top-buttons">
-        <button class="sub-btn">OTC</button>
-        <button class="sub-btn">STOCK</button>
+    <!-- Страница сигнала -->
+    <div class="page hidden" id="signalPage">
+      <div class="progress">
+        <span class="done">1. Pair</span>
+        <span class="done">2. Time</span>
+        <span class="active">3. Signal</span>
       </div>
-      <div class="pairs-grid">
-        <div class="pair-card">Пара 1</div><div class="pair-card">Пара 2</div>
-        <div class="pair-card">Пара 3</div><div class="pair-card">Пара 4</div>
-        <div class="pair-card">Пара 5</div><div class="pair-card">Пара 6</div>
-        <div class="pair-card">Пара 7</div><div class="pair-card">Пара 8</div>
-        <div class="pair-card">Пара 9</div><div class="pair-card">Пара 10</div>
-        <div class="pair-card">Пара 11</div><div class="pair-card">Пара 12</div>
-      </div>
+
+      <h2 class="signal-title">📡 Waiting for signal...</h2>
+
       <button class="back-btn">← Back</button>
-      <footer class="footer">
-        Powered by <span>StocksLabs</span>
-      </footer>
+      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
   </div>

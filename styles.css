@@ -38,9 +38,7 @@ html, body {
   flex-direction: column;
   flex: 1;
 }
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .app-title {
   text-align: center;
@@ -49,13 +47,36 @@ html, body {
   margin: 0 0 clamp(12px, 2vh, 24px) 0;
 }
 
+/* Индикатор */
+.progress {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.progress span {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--muted);
+}
+.progress span.active {
+  background: var(--accent-gradient);
+  color: #fff;
+}
+.progress span.done {
+  background: #2b804f;
+  color: #fff;
+}
+
+/* Главные кнопки */
 .menu-buttons {
   display: flex;
   flex-direction: column;
   gap: clamp(10px, 1.5vh, 18px);
   margin-bottom: clamp(16px, 3vh, 32px);
 }
-
 .menu-btn {
   background-color: var(--card-bg);
   border: none;
@@ -68,7 +89,6 @@ html, body {
   transition: all 0.25s ease;
   width: 100%;
 }
-
 .menu-btn.primary {
   background: var(--accent-gradient);
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
@@ -86,7 +106,6 @@ html, body {
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
-
 .popular-title {
   font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 700;
@@ -94,7 +113,6 @@ html, body {
   color: var(--muted);
   text-align: center;
 }
-
 .pairs-list {
   list-style: none;
   padding: 0;
@@ -103,7 +121,6 @@ html, body {
   flex-direction: column;
   gap: clamp(8px, 1vh, 14px);
 }
-
 .pair {
   display: flex;
   justify-content: flex-start;
@@ -116,25 +133,14 @@ html, body {
   font-size: clamp(14px, 1.5vw, 18px);
   color: var(--text-color);
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
 }
 .pair:hover {
   background: var(--hover-color);
-  transform: translateY(-1px);
 }
+.flag { width: 22px; height: 16px; border-radius: 3px; }
+.pair .fire { color: var(--danger); margin-left: auto; }
 
-.flag {
-  width: 22px;
-  height: 16px;
-  border-radius: 3px;
-}
-
-.pair .fire {
-  color: var(--danger);
-  margin-left: auto;
-}
-
-/* Подстраницы */
+/* OTC/STOCK кнопки */
 .top-buttons {
   display: flex;
   justify-content: space-between;
@@ -143,7 +149,7 @@ html, body {
 }
 .sub-btn {
   flex: 1;
-  padding: 10px;
+  padding: 14px;
   border: none;
   border-radius: 10px;
   background: var(--card-bg);
@@ -151,10 +157,13 @@ html, body {
   font-weight: 600;
   cursor: pointer;
 }
-.sub-btn:hover {
-  background: var(--hover-color);
+.sub-btn.active {
+  background: var(--accent-gradient);
+  color: #fff;
 }
+.sub-btn:hover { background: var(--hover-color); }
 
+/* Сетка пар */
 .pairs-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -164,16 +173,51 @@ html, body {
 .pair-card {
   background: #2f3555;
   border-radius: 10px;
-  padding: 20px;
+  padding: 16px;
   text-align: center;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  font-size: 14px;
 }
-.pair-card:hover {
-  background: var(--hover-color);
+.pair-card:hover { background: var(--hover-color); }
+
+/* Выбор времени */
+.time-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.time-btn {
+  background: #2f3555;
+  border: none;
+  border-radius: 10px;
+  padding: 16px;
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+.time-btn:hover { background: var(--hover-color); }
+
+.recommend {
+  margin: 20px 0;
+  padding: 12px;
+  text-align: center;
+  background: #2f3555;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
+/* Сигнал */
+.signal-title {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 20px;
+  color: var(--text-color);
+}
+
+/* Back */
 .back-btn {
   margin-top: 20px;
   padding: 12px;
@@ -185,9 +229,7 @@ html, body {
   font-weight: 600;
   cursor: pointer;
 }
-.back-btn:hover {
-  filter: brightness(1.1);
-}
+.back-btn:hover { filter: brightness(1.1); }
 
 .footer {
   margin-top: auto;
@@ -196,7 +238,4 @@ html, body {
   color: var(--muted);
   padding-top: 20px;
 }
-.footer span {
-  color: var(--accent-color);
-  font-weight: 600;
-}
+.footer span { color: var(--accent-color); font-weight: 600; }

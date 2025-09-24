@@ -45,41 +45,73 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     li.addEventListener("click", () => {
       playClick();
-      Telegram.WebApp.alert(`🔥 ${pair.code1}/${pair.code2} clicked`);
+      showPage("pair");
     });
     pairsList.appendChild(li);
   });
 
-  /* --- Навигация между страницами --- */
+  /* --- Навигация --- */
   const pages = {
     home: document.getElementById("homePage"),
-    currencies: document.getElementById("currenciesPage"),
-    stocks: document.getElementById("stocksPage"),
-    crypto: document.getElementById("cryptoPage"),
+    pair: document.getElementById("pairPage"),
+    time: document.getElementById("timePage"),
+    signal: document.getElementById("signalPage"),
   };
 
-  function showPage(pageId) {
+  function showPage(id) {
     Object.values(pages).forEach(p => p.classList.add("hidden"));
-    pages[pageId].classList.remove("hidden");
+    pages[id].classList.remove("hidden");
   }
 
-  document.getElementById("btn1").addEventListener("click", () => {
-    playClick();
-    showPage("currencies");
-  });
-  document.getElementById("btn2").addEventListener("click", () => {
-    playClick();
-    showPage("stocks");
-  });
-  document.getElementById("btn3").addEventListener("click", () => {
-    playClick();
-    showPage("crypto");
-  });
+  document.getElementById("btn1").addEventListener("click", () => { playClick(); showPage("pair"); });
+  document.getElementById("btn2").addEventListener("click", () => { playClick(); showPage("pair"); });
+  document.getElementById("btn3").addEventListener("click", () => { playClick(); showPage("pair"); });
 
   document.querySelectorAll(".back-btn").forEach(btn => {
+    btn.addEventListener("click", () => { playClick(); showPage("home"); });
+  });
+
+  /* --- OTC/STOCK переключатель --- */
+  const pairGrid = document.getElementById("pairGrid");
+  const otcBtn = document.getElementById("otcBtn");
+  const stockBtn = document.getElementById("stockBtn");
+
+  const otcPairs = Array.from({ length: 12 }, (_, i) => `OTC Pair ${i+1}`);
+  const stockPairs = Array.from({ length: 12 }, (_, i) => `STOCK Pair ${i+1}`);
+
+  function renderPairs(mode) {
+    pairGrid.innerHTML = "";
+    const list = mode === "otc" ? otcPairs : stockPairs;
+    list.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "pair-card";
+      div.textContent = p;
+      div.addEventListener("click", () => {
+        playClick();
+        showPage("time");
+      });
+      pairGrid.appendChild(div);
+    });
+  }
+
+  otcBtn.addEventListener("click", () => {
+    otcBtn.classList.add("active");
+    stockBtn.classList.remove("active");
+    renderPairs("otc");
+  });
+  stockBtn.addEventListener("click", () => {
+    stockBtn.classList.add("active");
+    otcBtn.classList.remove("active");
+    renderPairs("stock");
+  });
+
+  renderPairs("otc"); // стартуем с OTC
+
+  /* --- Выбор времени --- */
+  document.querySelectorAll(".time-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       playClick();
-      showPage("home");
+      showPage("signal");
     });
   });
 });
