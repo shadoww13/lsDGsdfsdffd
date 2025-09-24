@@ -23,11 +23,11 @@ html, body {
 .app {
   width: 100%;
   max-width: 900px;
-  min-height: 100vh;
+  min-height: auto; /* убираем жесткое 100vh */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(12px, 4vw, 40px);
+  justify-content: flex-start;
+  padding: clamp(12px, 4vw, 32px);
   box-sizing: border-box;
 }
 
@@ -35,21 +35,21 @@ html, body {
   text-align: center;
   font-size: clamp(22px, 4vw, 36px);
   font-weight: 700;
-  margin: 0 0 clamp(10px, 3vh, 30px) 0;
+  margin: 0 0 clamp(8px, 2vh, 20px) 0;
 }
 
 .menu-buttons {
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 2vh, 20px);
-  margin-bottom: clamp(20px, 5vh, 60px);
+  gap: clamp(8px, 1.5vh, 16px);
+  margin-bottom: clamp(12px, 3vh, 24px);
 }
 
 .menu-btn {
   background-color: var(--card-bg);
   border: none;
   border-radius: 12px;
-  padding: clamp(10px, 2vh, 18px);
+  padding: clamp(10px, 2vh, 16px);
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 600;
   color: var(--text-color);
@@ -63,7 +63,7 @@ html, body {
 .popular-title {
   font-size: clamp(14px, 1.5vw, 18px);
   font-weight: 600;
-  margin: 0 0 clamp(8px, 2vh, 20px) 0;
+  margin: clamp(10px, 2vh, 16px) 0;
   color: var(--muted);
   text-align: center;
 }
@@ -74,7 +74,7 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1.5vh, 14px);
+  gap: clamp(6px, 1vh, 12px);
 }
 
 .pair {
@@ -84,7 +84,7 @@ html, body {
   gap: clamp(4px, 1vw, 10px);
   background: var(--card-bg);
   border-radius: 10px;
-  padding: clamp(8px, 2vh, 16px);
+  padding: clamp(8px, 1.5vh, 14px);
   font-weight: 500;
   font-size: clamp(14px, 1.5vw, 18px);
   color: var(--text-color);
