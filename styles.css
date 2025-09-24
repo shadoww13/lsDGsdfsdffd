@@ -28,17 +28,25 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   padding: clamp(12px, 4vw, 32px);
   box-sizing: border-box;
 }
 
+/* Страницы */
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.hidden {
+  display: none;
+}
+
 .app-title {
   text-align: center;
-  font-size: clamp(24px, 4vw, 38px);
+  font-size: clamp(24px, 4vw, 36px);
   font-weight: 800;
   margin: 0 0 clamp(12px, 2vh, 24px) 0;
-  letter-spacing: 1px;
 }
 
 .menu-buttons {
@@ -61,7 +69,6 @@ html, body {
   width: 100%;
 }
 
-/* Основные кнопки */
 .menu-btn.primary {
   background: var(--accent-gradient);
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
@@ -72,16 +79,18 @@ html, body {
   transform: translateY(-2px);
 }
 
-.popular {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+/* Популярные пары */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .popular-title {
   font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 700;
-  margin: clamp(12px, 2vh, 20px) 0;
+  margin-bottom: 12px;
   color: var(--muted);
   text-align: center;
 }
@@ -93,7 +102,6 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: clamp(8px, 1vh, 14px);
-  flex: 1;
 }
 
 .pair {
@@ -101,7 +109,7 @@ html, body {
   justify-content: flex-start;
   align-items: center;
   gap: clamp(6px, 1vw, 12px);
-  background: var(--card-bg);
+  background: #2f3555;
   border-radius: 10px;
   padding: clamp(10px, 1.5vh, 16px);
   font-weight: 500;
@@ -119,16 +127,66 @@ html, body {
   width: 22px;
   height: 16px;
   border-radius: 3px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 
-.pair .otc {
-  background: var(--danger);
-  color: #fff;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 6px;
+.pair .fire {
+  color: var(--danger);
   margin-left: auto;
+}
+
+/* Подстраницы */
+.top-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.sub-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+.sub-btn:hover {
+  background: var(--hover-color);
+}
+
+.pairs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+.pair-card {
+  background: #2f3555;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pair-card:hover {
+  background: var(--hover-color);
+}
+
+.back-btn {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent-gradient);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.back-btn:hover {
+  filter: brightness(1.1);
 }
 
 .footer {
@@ -141,21 +199,4 @@ html, body {
 .footer span {
   color: var(--accent-color);
   font-weight: 600;
-}
-
-/* 📱 Маленькие экраны */
-@media (max-width: 480px) {
-  .menu-buttons {
-    flex-direction: column;
-  }
-}
-
-/* 💻 Большие экраны */
-@media (min-width: 768px) {
-  .menu-buttons {
-    flex-direction: row;
-  }
-  .menu-btn {
-    flex: 1;
-  }
 }

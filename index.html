@@ -11,22 +11,97 @@
 </head>
 <body>
   <div class="app">
-    <h1 class="app-title">Бегемотиk</h1>
 
-    <div class="menu-buttons">
-      <button class="menu-btn primary" id="btn1">💱 Currencies</button>
-      <button class="menu-btn primary" id="btn2">📊 Stocks</button>
-      <button class="menu-btn primary" id="btn3">💹 Cryptocurrencies</button>
+    <!-- Главная страница -->
+    <div class="page" id="homePage">
+      <h1 class="app-title">Бегемотиk</h1>
+
+      <div class="menu-buttons">
+        <button class="menu-btn primary" id="btn1">Currencies</button>
+        <button class="menu-btn primary" id="btn2">Stocks</button>
+        <button class="menu-btn primary" id="btn3">Cryptocurrencies</button>
+      </div>
+
+      <div class="popular card">
+        <h2 class="popular-title">Popular Pairs</h2>
+        <ul class="pairs-list" id="pairsList"></ul>
+      </div>
+
+      <footer class="footer">
+        Powered by <span>StocksLabs</span>
+      </footer>
     </div>
 
-    <div class="popular">
-      <h2 class="popular-title">🔥 Popular Pairs</h2>
-      <ul class="pairs-list" id="pairsList"></ul>
+    <!-- Страницы для категорий -->
+    <div class="page hidden" id="currenciesPage">
+      <h1 class="app-title">Currencies</h1>
+
+      <div class="top-buttons">
+        <button class="sub-btn">OTC</button>
+        <button class="sub-btn">STOCK</button>
+      </div>
+
+      <div class="pairs-grid">
+        <div class="pair-card">Пара 1</div>
+        <div class="pair-card">Пара 2</div>
+        <div class="pair-card">Пара 3</div>
+        <div class="pair-card">Пара 4</div>
+        <div class="pair-card">Пара 5</div>
+        <div class="pair-card">Пара 6</div>
+        <div class="pair-card">Пара 7</div>
+        <div class="pair-card">Пара 8</div>
+        <div class="pair-card">Пара 9</div>
+        <div class="pair-card">Пара 10</div>
+        <div class="pair-card">Пара 11</div>
+        <div class="pair-card">Пара 12</div>
+      </div>
+
+      <button class="back-btn">← Back</button>
+      <footer class="footer">
+        Powered by <span>StocksLabs</span>
+      </footer>
     </div>
 
-    <footer class="footer">
-      Powered by <span>StocksLabs</span>
-    </footer>
+    <div class="page hidden" id="stocksPage">
+      <h1 class="app-title">Stocks</h1>
+      <div class="top-buttons">
+        <button class="sub-btn">OTC</button>
+        <button class="sub-btn">STOCK</button>
+      </div>
+      <div class="pairs-grid">
+        <div class="pair-card">Пара 1</div><div class="pair-card">Пара 2</div>
+        <div class="pair-card">Пара 3</div><div class="pair-card">Пара 4</div>
+        <div class="pair-card">Пара 5</div><div class="pair-card">Пара 6</div>
+        <div class="pair-card">Пара 7</div><div class="pair-card">Пара 8</div>
+        <div class="pair-card">Пара 9</div><div class="pair-card">Пара 10</div>
+        <div class="pair-card">Пара 11</div><div class="pair-card">Пара 12</div>
+      </div>
+      <button class="back-btn">← Back</button>
+      <footer class="footer">
+        Powered by <span>StocksLabs</span>
+      </footer>
+    </div>
+
+    <div class="page hidden" id="cryptoPage">
+      <h1 class="app-title">Cryptocurrencies</h1>
+      <div class="top-buttons">
+        <button class="sub-btn">OTC</button>
+        <button class="sub-btn">STOCK</button>
+      </div>
+      <div class="pairs-grid">
+        <div class="pair-card">Пара 1</div><div class="pair-card">Пара 2</div>
+        <div class="pair-card">Пара 3</div><div class="pair-card">Пара 4</div>
+        <div class="pair-card">Пара 5</div><div class="pair-card">Пара 6</div>
+        <div class="pair-card">Пара 7</div><div class="pair-card">Пара 8</div>
+        <div class="pair-card">Пара 9</div><div class="pair-card">Пара 10</div>
+        <div class="pair-card">Пара 11</div><div class="pair-card">Пара 12</div>
+      </div>
+      <button class="back-btn">← Back</button>
+      <footer class="footer">
+        Powered by <span>StocksLabs</span>
+      </footer>
+    </div>
+
   </div>
 
   <audio id="clickSound" src="click-sound.mp3"></audio>
