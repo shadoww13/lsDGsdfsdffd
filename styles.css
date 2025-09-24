@@ -41,6 +41,8 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-grow: 1; /* кнопки будут занимать свободное место */
+  justify-content: center; /* выравниваем кнопки по вертикали */
   margin-bottom: 16px;
 }
 
@@ -54,9 +56,17 @@ html, body {
   color: var(--text-color);
   cursor: pointer;
   transition: background 0.2s;
+  flex: 1; /* растягиваем кнопки по высоте */
+  min-height: 50px;
 }
 .menu-btn:hover {
   background-color: var(--hover-color);
+}
+
+.popular {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* секция растягивается */
 }
 
 .popular-title {
@@ -74,6 +84,8 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex-grow: 1; /* список растягивается */
+  justify-content: center;
 }
 
 .pair {
@@ -89,10 +101,20 @@ html, body {
   color: var(--text-color);
   cursor: pointer;
   transition: background 0.2s;
+  flex: 1; /* растягиваем каждую пару */
+  min-height: 50px;
 }
 .pair:hover {
   background: var(--hover-color);
 }
 .pair .flag {
   font-size: 18px;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 8px 0;
 }
