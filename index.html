@@ -2,77 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <title>Menu</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="center-stage">
-    <!-- Главная -->
-    <div class="page">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="controls vertical">
-            <button class="tab-btn main-btn" data-category="fx">Currencies</button>
-            <button class="tab-btn main-btn" data-category="stocks">Stocks</button>
-            <button class="tab-btn main-btn" data-category="crypto">Cryptocurrencies</button>
-          </div>
-          <div class="popular-title">Popular pairs</div>
-          <ul class="pairs-list" id="pairsList"></ul>
-        </div>
-        <div class="panel-bottom">
-          <button class="back-btn hidden" id="backBtn">← Back</button>
-        </div>
-      </div>
+  <div class="app">
+    <h1 class="app-title">Menu</h1>
+
+    <div class="menu-buttons">
+      <button class="menu-btn" id="btn1">Currencies</button>
+      <button class="menu-btn" id="btn2">Stocks</button>
+      <button class="menu-btn" id="btn3">Cryptocurrencies</button>
     </div>
 
-    <!-- Выбор пары -->
-    <div class="page hidden">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="sub-title" id="pageTitle">Select pair</div>
-          <div class="progress hidden" id="progress1"></div>
-          <div class="filter-row">
-            <div class="filter-buttons">
-              <button class="filter-btn active" id="filterOTC">OTC</button>
-              <button class="filter-btn" id="filterSTOCK">STOCK</button>
-            </div>
-            <div class="pagination" id="pagination"></div>
-          </div>
-          <div class="pairs-grid" id="pairsGrid"></div>
-        </div>
-        <div class="panel-bottom">
-          <button class="back-btn" id="backBtn2">← Back</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Выбор времени -->
-    <div class="page hidden">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="sub-title" id="timeTitle">Time</div>
-          <div class="progress hidden" id="progress2"></div>
-          <div class="time-grid" id="timeGrid"></div>
-        </div>
-        <div class="panel-bottom">
-          <button class="back-btn" id="backBtn3">← Back</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Сигналы -->
-    <div class="page hidden">
-      <div class="panel">
-        <div class="panel-content">
-          <div class="sub-title">Signal</div>
-          <div class="progress hidden" id="progress3"></div>
-          <div class="empty" id="signalArea"></div>
-        </div>
-        <div class="panel-bottom">
-          <button class="back-btn" id="backBtn4">← Back</button>
-        </div>
-      </div>
+    <div class="popular">
+      <h2 class="popular-title">Popular Pairs</h2>
+      <ul class="pairs-list" id="pairsList"></ul>
     </div>
   </div>
 
