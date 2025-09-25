@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pairToShow = selectedPair || fallbackPairs[Math.floor(Math.random() * fallbackPairs.length)];
     const timeToShow = selectedTime || "1m";
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
-    const arrow = action === "BUY" ? "↑" : "↓";
+    const arrow = action === "BUY" ? "↗" : "↘";
 
     const signalPairEl = document.getElementById("signalPair");
     const signalTimeEl = document.getElementById("signalTime");
