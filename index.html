@@ -39,24 +39,28 @@
         <ul class="pairs-list" id="pairsList"></ul>
       </div>
 
-      <footer class="footer">
-        Powered by <span>StocksLabs</span>
-      </footer>
+      <div class="bottom-bar">
+        <footer class="footer">Powered by <span>StocksLabs</span></footer>
+      </div>
     </div>
 
     <div class="page hidden" id="pairPage">
       <div class="stepper">
-        <div class="labels">
-          <span>Pair</span>
-          <span>Time</span>
-          <span>Signal</span>
-        </div>
         <div class="progress-bar">
-          <div class="step active"></div>
-          <div class="step"></div>
-          <div class="step"></div>
+          <div class="step-item">
+            <span class="step-label">Pair</span>
+            <div class="step active"></div>
+          </div>
+          <div class="step-item">
+            <span class="step-label">Time</span>
+            <div class="step"></div>
+          </div>
+          <div class="step-item">
+            <span class="step-label">Signal</span>
+            <div class="step"></div>
+          </div>
         </div>
-        <div class="step-desc big">Choose Your Pair</div>
+        <div class="step-desc page-title">Choose Your Pair</div>
       </div>
 
       <div class="top-buttons">
@@ -74,17 +78,21 @@
 
     <div class="page hidden" id="timePage">
       <div class="stepper">
-        <div class="labels">
-          <span>Pair</span>
-          <span>Time</span>
-          <span>Signal</span>
-        </div>
         <div class="progress-bar">
-          <div class="step done"></div>
-          <div class="step active"></div>
-          <div class="step"></div>
+          <div class="step-item">
+            <span class="step-label">Pair</span>
+            <div class="step done"></div>
+          </div>
+          <div class="step-item">
+            <span class="step-label">Time</span>
+            <div class="step active"></div>
+          </div>
+          <div class="step-item">
+            <span class="step-label">Signal</span>
+            <div class="step"></div>
+          </div>
         </div>
-        <div class="step-desc big">Select Time Frame</div>
+        <div class="step-desc page-title">Select Time Frame</div>
       </div>
 
       <div class="time-grid">
@@ -132,17 +140,21 @@
 
     <div class="page hidden" id="signalPage">
       <div class="stepper">
-        <div class="labels">
-          <span>Pair</span>
-          <span>Time</span>
-          <span>Signal</span>
-        </div>
         <div class="progress-bar">
-          <div class="step done"></div>
-          <div class="step done"></div>
-          <div class="step active"></div>
+          <div class="step-item">
+            <span class="step-label">Pair</span>
+            <div class="step done"></div>
+          </div>
+          <div class="step-item">
+            <span class="step-label">Time</span>
+            <div class="step done"></div>
+          </div>
+          <div class="step-item">
+            <span class="step-label">Signal</span>
+            <div class="step active"></div>
+          </div>
         </div>
-        <div class="step-desc big">Trading Signal</div>
+        <div class="step-desc page-title">Trading Signal</div>
       </div>
 
       <h2 class="signal-title">📡 Waiting for signal...</h2>
