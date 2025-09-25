@@ -1,7 +1,6 @@
-/* styles.css */
 :root {
   --bg-color: #0b1221;
-  --card-bg: #162033;
+  --card-bg: #141c2c;
   --accent-color: #2e7bf6;
   --accent-gradient: linear-gradient(135deg, #2e7bf6, #0070ff);
   --hover-color: #1e3a8a;
@@ -91,7 +90,7 @@ html, body {
 .menu-btn {
   background-color: var(--card-bg);
   border: none;
-  border-radius: 14px;
+  border-radius: 8px;
   padding: clamp(12px, 2vh, 18px);
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 600;
@@ -112,15 +111,15 @@ html, body {
 
 .card {
   background: var(--card-bg);
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: 10px;
+  padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 .popular-title {
-  font-size: clamp(16px, 1.8vw, 20px);
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--muted);
+  margin: 0 0 16px 0;
+  color: var(--text-color);
   text-align: center;
 }
 .pairs-list {
@@ -129,27 +128,26 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1vh, 14px);
+  gap: 12px;
 }
 .pair {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: clamp(8px, 1vw, 16px);
-  background: #1a2340;
-  border-radius: 10px;
-  padding: clamp(12px, 1.8vh, 18px);
+  background: #1b2540;
+  border-radius: 8px;
+  padding: 14px 18px;
   font-weight: 500;
-  font-size: clamp(14px, 1.5vw, 18px);
+  font-size: 16px;
   color: var(--text-color);
   cursor: pointer;
+  border: 1px solid #222c45;
 }
 .pair:hover {
   background: var(--hover-color);
 }
 .flag { width: 22px; height: 16px; border-radius: 3px; }
-.pair .fire { color: var(--danger); }
-.pair .otc-label { font-size: 12px; color: var(--muted); }
+.pair .fire { color: var(--danger); font-size: 13px; font-weight: 600; }
 
 .top-buttons {
   display: flex;
@@ -161,7 +159,7 @@ html, body {
   flex: 1;
   padding: 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--card-bg);
   color: var(--text-color);
   font-weight: 600;
@@ -184,7 +182,7 @@ html, body {
 }
 .pair-card {
   background: #1f2747;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 16px;
   text-align: center;
   font-weight: 600;
@@ -202,7 +200,7 @@ html, body {
 .time-btn {
   background: #1f2747;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 28px;
   color: var(--text-color);
   font-weight: 600;
@@ -240,7 +238,7 @@ html, body {
 .new-signal-btn {
   padding: 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--accent-gradient);
   color: #fff;
   font-size: 16px;
