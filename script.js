@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  Telegram.WebApp.ready();
+  Telegram.WebApp && Telegram.WebApp.ready();
 
   const clickSound = document.getElementById("clickSound");
   function playClick() {
@@ -13,19 +13,33 @@ document.addEventListener("DOMContentLoaded", () => {
     home: document.getElementById("homePage"),
     pair: document.getElementById("pairPage"),
     time: document.getElementById("timePage"),
-    signal: document.getElementById("signalPage"),
+    signal: document.getElementById("signalPage")
   };
 
   let historyStack = ["home"];
+  let selectedPair = null;
+  let selectedTime = null;
+
+  let stepTimeouts = [];
+
+  function clearStepTimeouts() {
+    if (stepTimeouts && stepTimeouts.length) {
+      stepTimeouts.forEach(t => clearTimeout(t));
+    }
+    stepTimeouts = [];
+  }
 
   function showPage(id) {
+    clearStepTimeouts();
     Object.values(pages).forEach(p => p.classList.add("hidden"));
     pages[id].classList.remove("hidden");
     historyStack.push(id);
+    if (id === "signal") startSignalLoading();
   }
 
   function goBack() {
     playClick();
+    clearStepTimeouts();
     if (historyStack.length > 1) {
       historyStack.pop();
       const prev = historyStack.pop();
@@ -35,49 +49,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  ["btn1", "btn2", "btn3", "btn4"].forEach(id => {
-    document.getElementById(id).addEventListener("click", () => {
+  ["btn1","btn2","btn3","btn4"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", () => {
       playClick();
       showPage("pair");
     });
   });
 
-  document.querySelectorAll(".back-btn").forEach(btn => {
-    btn.addEventListener("click", goBack);
-  });
-
-  const newSignalBtn = document.querySelector(".new-signal-btn");
-  if (newSignalBtn) {
-    newSignalBtn.addEventListener("click", () => {
-      playClick();
-      showPage("signal");
-    });
-  }
+  document.querySelectorAll(".back-btn").forEach(btn => btn.addEventListener("click", goBack));
 
   const pairs = [
-    { flag1: "us", code1: "USD", code2: "EUR", flag2: "eu" },
-    { flag1: "gb", code1: "GBP", code2: "USD", flag2: "us" },
-    { flag1: "jp", code1: "JPY", code2: "USD", flag2: "us" },
-    { flag1: "ca", code1: "CAD", code2: "USD", flag2: "us" },
-    { flag1: "au", code1: "AUD", code2: "USD", flag2: "us" },
-    { flag1: "btc", code1: "BTC", code2: "USD", flag2: "us" },
+    { flag1: "us", flag2: "eu", label: "USD/EUR" },
+    { flag1: "gb", flag2: "us", label: "GBP/USD" },
+    { flag1: "jp", flag2: "us", label: "USD/JPY" },
+    { flag1: "ca", flag2: "us", label: "CAD/USD" },
+    { flag1: "au", flag2: "us", label: "AUD/USD" },
+    { flag1: "btc", flag2: "us", label: "BTC/USD" }
   ];
 
   const pairsList = document.getElementById("pairsList");
-  pairs.forEach(pair => {
-    const li = document.createElement("li");
-    li.className = "pair";
-
-    let flag1 = pair.flag1 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag1}"></span>`;
-    let flag2 = pair.flag2 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag2}"></span>`;
-
-    li.innerHTML = `${flag1}<span>${pair.code1} → ${pair.code2}</span>${flag2}<span class="fire">🔥 OTC</span>`;
-    li.addEventListener("click", () => {
-      playClick();
-      showPage("time");
+  function renderPopularPairs() {
+    pairsList.innerHTML = "";
+    pairs.forEach(pair => {
+      const li = document.createElement("li");
+      li.className = "pair";
+      const flag1 = pair.flag1 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag1}"></span>`;
+      const flag2 = pair.flag2 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag2}"></span>`;
+      li.innerHTML = `${flag1}<span>${pair.label}</span>${flag2}<span class="fire">🔥</span>`;
+      li.addEventListener("click", () => {
+        playClick();
+        selectedPair = pair.label;
+        showPage("time");
+      });
+      pairsList.appendChild(li);
     });
-    pairsList.appendChild(li);
-  });
+  }
+  renderPopularPairs();
 
   const pairGrid = document.getElementById("pairGrid");
   const otcBtn = document.getElementById("otcBtn");
@@ -95,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.textContent = p;
       div.addEventListener("click", () => {
         playClick();
+        selectedPair = p;
         showPage("time");
       });
       pairGrid.appendChild(div);
@@ -114,10 +123,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderPairs("otc");
 
+  // time buttons
   document.querySelectorAll(".time-card").forEach(btn => {
     btn.addEventListener("click", () => {
       playClick();
+      selectedTime = btn.getAttribute("data-time") || null;
       showPage("signal");
     });
   });
+
+  const newSignalBtn = document.getElementById("newSignalBtn");
+  if (newSignalBtn) {
+    newSignalBtn.addEventListener("click", () => {
+      playClick();
+      startSignalLoading();
+    });
+  }
+
+  function startSignalLoading() {
+    clearStepTimeouts();
+
+    const loadingSection = document.getElementById("loadingSection");
+    const signalResult = document.getElementById("signalResult");
+    const loadingText = document.querySelector(".loading-text");
+
+    if (!loadingSection || !loadingText || !signalResult) return;
+
+    loadingSection.classList.remove("hidden");
+    signalResult.classList.add("hidden");
+
+    const steps = [
+      "Подключение к TradingView...",
+      "Получение данных индикаторов...",
+      "Анализ..."
+    ];
+
+    steps.forEach((text, i) => {
+      const t = setTimeout(() => {
+        loadingText.textContent = text;
+        if (i === steps.length - 1) {
+          // небольшая пауза после последнего шага
+          const finishTimeout = setTimeout(() => {
+            showSignal();
+          }, 700);
+          stepTimeouts.push(finishTimeout);
+        }
+      }, i * 1400);
+      stepTimeouts.push(t);
+    });
+  }
+
+  function showSignal() {
+    clearStepTimeouts();
+
+    const loadingSection = document.getElementById("loadingSection");
+    const signalResult = document.getElementById("signalResult");
+
+    if (!loadingSection || !signalResult) return;
+
+    loadingSection.classList.add("hidden");
+    signalResult.classList.remove("hidden");
+
+    const fallbackPairs = ["EUR/USD", "GBP/USD", "USD/JPY", "BTC/USD"];
+    const pairToShow = selectedPair || fallbackPairs[Math.floor(Math.random() * fallbackPairs.length)];
+    const timeToShow = selectedTime || "1m";
+    const action = Math.random() > 0.5 ? "BUY" : "SELL";
+    const arrow = action === "BUY" ? "↑" : "↓";
+
+    const signalPairEl = document.getElementById("signalPair");
+    const signalTimeEl = document.getElementById("signalTime");
+    const signalArrowEl = document.getElementById("signalArrow");
+    const signalActionEl = document.getElementById("signalAction");
+    const signalInfoEl = document.getElementById("signalInfo");
+
+    if (signalPairEl) signalPairEl.textContent = pairToShow;
+    if (signalTimeEl) signalTimeEl.textContent = timeToShow;
+    if (signalArrowEl) {
+      signalArrowEl.textContent = arrow;
+      signalArrowEl.className = "signal-arrow " + (action === "BUY" ? "up" : "down");
+    }
+    if (signalActionEl) {
+      signalActionEl.textContent = action;
+      signalActionEl.className = "signal-action " + (action === "BUY" ? "buy" : "sell");
+    }
+
+    const indicators = [
+      "RSI показывает перепроданность",
+      "MACD подтверждает направление",
+      "Volume поддерживает тренд"
+    ];
+
+    if (signalInfoEl) {
+      signalInfoEl.innerHTML = "";
+      indicators.forEach(i => {
+        const d = document.createElement("div");
+        d.textContent = "• " + i;
+        signalInfoEl.appendChild(d);
+      });
+    }
+  }
+
+  showPage("home");
 });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <title>App</title>
@@ -11,28 +11,23 @@
 <body>
   <div class="app">
 
-    <!-- Home -->
     <div class="page" id="homePage">
       <h1 class="app-title">Menu</h1>
-
       <div class="menu-grid">
         <button class="menu-card" id="btn1"><div class="menu-title">Currencies</div><div class="menu-sub">Forex pairs</div></button>
         <button class="menu-card" id="btn2"><div class="menu-title">Stocks</div><div class="menu-sub">Company shares</div></button>
         <button class="menu-card" id="btn3"><div class="menu-title">Crypto</div><div class="menu-sub">Digital assets</div></button>
         <button class="menu-card" id="btn4"><div class="menu-title">Pairs</div><div class="menu-sub">More options</div></button>
       </div>
-
       <div class="popular">
         <h2 class="popular-title">Popular Pairs</h2>
         <ul class="pairs-list" id="pairsList"></ul>
       </div>
-
       <div class="bottom-bar">
         <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
     </div>
 
-    <!-- Pair -->
     <div class="page hidden" id="pairPage">
       <div class="stepper">
         <div class="progress-bar">
@@ -42,21 +37,17 @@
         </div>
         <div class="page-title">Choose Your Pair</div>
       </div>
-
       <div class="top-buttons">
         <button class="sub-btn active" id="otcBtn">OTC</button>
         <button class="sub-btn" id="stockBtn">STOCK</button>
       </div>
-
       <div class="pairs-grid" id="pairGrid"></div>
-
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
         <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
     </div>
 
-    <!-- Time -->
     <div class="page hidden" id="timePage">
       <div class="stepper">
         <div class="progress-bar">
@@ -66,34 +57,14 @@
         </div>
         <div class="page-title">Select Time Frame</div>
       </div>
-
-      <div class="time-grid">
-        <button class="time-card">
-          <div class="time-top"><span class="time-emoji">⚡</span><span>5s</span></div>
-          <div class="time-sub">Ultra</div>
-        </button>
-        <button class="time-card">
-          <div class="time-top"><span class="time-emoji">🔥</span><span>15s</span></div>
-          <div class="time-sub">Fast</div>
-        </button>
-        <button class="time-card">
-          <div class="time-top"><span class="time-emoji">🎯</span><span>30s</span></div>
-          <div class="time-sub">Stable</div>
-        </button>
-        <button class="time-card">
-          <div class="time-top"><span class="time-emoji">⭐</span><span>1m</span></div>
-          <div class="time-sub">Beginner</div>
-        </button>
-        <button class="time-card">
-          <div class="time-top"><span class="time-emoji">📊</span><span>3m</span></div>
-          <div class="time-sub">Analysis</div>
-        </button>
-        <button class="time-card">
-          <div class="time-top"><span class="time-emoji">⏳</span><span>5m</span></div>
-          <div class="time-sub">Long</div>
-        </button>
+      <div class="time-grid" id="timeGrid">
+        <button class="time-card" data-time="5s"><div class="time-top"><span class="time-emoji">⚡</span><span>5s</span></div><div class="time-sub">Ultra</div></button>
+        <button class="time-card" data-time="15s"><div class="time-top"><span class="time-emoji">🔥</span><span>15s</span></div><div class="time-sub">Fast</div></button>
+        <button class="time-card" data-time="30s"><div class="time-top"><span class="time-emoji">🎯</span><span>30s</span></div><div class="time-sub">Stable</div></button>
+        <button class="time-card" data-time="1m"><div class="time-top"><span class="time-emoji">⭐</span><span>1m</span></div><div class="time-sub">Beginner</div></button>
+        <button class="time-card" data-time="3m"><div class="time-top"><span class="time-emoji">📊</span><span>3m</span></div><div class="time-sub">Analysis</div></button>
+        <button class="time-card" data-time="5m"><div class="time-top"><span class="time-emoji">⏳</span><span>5m</span></div><div class="time-sub">Long</div></button>
       </div>
-
       <div class="bottom-bar">
         <div class="recommend-card"><p><b>Recommended:</b> 60 seconds is optimal for quick signals with good accuracy</p></div>
         <button class="back-btn">← Back</button>
@@ -101,7 +72,6 @@
       </div>
     </div>
 
-    <!-- Signal -->
     <div class="page hidden" id="signalPage">
       <div class="stepper">
         <div class="progress-bar">
@@ -112,17 +82,31 @@
         <div class="page-title">Trading Signal</div>
       </div>
 
-      <h2 class="signal-title">📡 Waiting for signal...</h2>
+      <div class="center-wrapper">
+        <div id="loadingSection" class="center-block">
+          <div class="loader"></div>
+          <p class="loading-text">Подключение к TradingView...</p>
+        </div>
+
+        <div id="signalResult" class="hidden">
+          <div class="signal-card">
+            <div class="signal-pair" id="signalPair">EUR/USD</div>
+            <div class="signal-time" id="signalTime">15s</div>
+            <div class="signal-arrow" id="signalArrow">↑</div>
+            <div class="signal-action" id="signalAction">BUY</div>
+          </div>
+          <div class="indicators-block" id="signalInfo"></div>
+        </div>
+      </div>
 
       <div class="bottom-bar">
-        <button class="new-signal-btn">+ New Signal</button>
+        <button class="new-signal-btn" id="newSignalBtn">+ New Signal</button>
         <button class="back-btn">← Back</button>
         <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
     </div>
 
   </div>
-
   <audio id="clickSound" src="click-sound.mp3"></audio>
   <script src="script.js"></script>
 </body>
