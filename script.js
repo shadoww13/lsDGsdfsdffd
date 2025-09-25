@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  ["btn1", "btn2", "btn3"].forEach(id => {
+  ["btn1", "btn2", "btn3", "btn4"].forEach(id => {
     document.getElementById(id).addEventListener("click", () => {
       playClick();
       showPage("pair");

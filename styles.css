@@ -44,9 +44,89 @@ html, body {
   text-align: center;
   font-size: clamp(24px, 4vw, 36px);
   font-weight: 800;
-  margin: 0 0 clamp(12px, 2vh, 24px) 0;
+  margin: 0 0 clamp(16px, 2vh, 28px) 0;
 }
 
+/* Главное меню */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: clamp(16px, 3vh, 32px);
+}
+.menu-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 28px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  border: 1px solid #1f2747;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.menu-card:hover {
+  background: var(--hover-color);
+  transform: translateY(-3px);
+}
+.menu-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.menu-sub {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* Popular Pairs */
+.popular {
+  margin-top: 24px;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+.popular-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  text-align: center;
+}
+.pairs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pair {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-color);
+  cursor: pointer;
+  border: 1px solid #1f2747;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  transition: all 0.25s ease;
+}
+.pair:hover {
+  background: var(--hover-color);
+  transform: translateY(-2px);
+}
+.flag { width: 22px; height: 16px; border-radius: 3px; }
+.pair .fire { color: var(--danger); font-size: 13px; font-weight: 600; }
+
+/* Остальные элементы */
 .stepper {
   display: flex;
   flex-direction: column;
@@ -83,84 +163,11 @@ html, body {
   background: #2b804f;
 }
 .step-desc {
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 13px;
   color: var(--muted);
   text-align: center;
 }
-.step-desc.big {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-.menu-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(10px, 1.5vh, 18px);
-  margin-bottom: clamp(16px, 3vh, 32px);
-}
-.menu-btn {
-  background-color: var(--card-bg);
-  border: none;
-  border-radius: 8px;
-  padding: clamp(12px, 2vh, 18px);
-  font-size: clamp(16px, 2vw, 20px);
-  font-weight: 600;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  width: 100%;
-}
-.menu-btn.primary {
-  background: var(--accent-gradient);
-  box-shadow: 0 4px 12px rgba(46, 123, 246, 0.4);
-  color: #fff;
-}
-.menu-btn.primary:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-}
-.popular-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0 0 16px 0;
-  color: var(--text-color);
-  text-align: center;
-}
-.pairs-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.pair {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1b2540;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-weight: 500;
-  font-size: 15px;
-  color: var(--text-color);
-  cursor: pointer;
-  border: 1px solid #222c45;
-}
-.pair:hover {
-  background: var(--hover-color);
-}
-.flag { width: 20px; height: 14px; border-radius: 3px; }
-.pair .fire { color: var(--danger); font-size: 13px; font-weight: 600; }
 
 .top-buttons {
   display: flex;
@@ -170,7 +177,7 @@ html, body {
 }
 .sub-btn {
   flex: 1;
-  padding: 12px;
+  padding: 14px;
   border: none;
   border-radius: 8px;
   background: var(--card-bg);
@@ -196,7 +203,7 @@ html, body {
 .pair-card {
   background: #1f2747;
   border-radius: 8px;
-  padding: 12px;
+  padding: 16px;
   text-align: center;
   font-weight: 600;
   cursor: pointer;
@@ -264,7 +271,7 @@ html, body {
 
 .back-btn,
 .new-signal-btn {
-  padding: 16px;
+  padding: 14px;
   border: none;
   border-radius: 8px;
   background: var(--accent-gradient);
@@ -272,7 +279,6 @@ html, body {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  width: 100%;
 }
 .back-btn:hover,
 .new-signal-btn:hover {

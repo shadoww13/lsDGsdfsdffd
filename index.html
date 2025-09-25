@@ -14,13 +14,26 @@
     <div class="page" id="homePage">
       <h1 class="app-title">Menu</h1>
 
-      <div class="menu-buttons">
-        <button class="menu-btn primary" id="btn1">Currencies</button>
-        <button class="menu-btn primary" id="btn2">Stocks</button>
-        <button class="menu-btn primary" id="btn3">Cryptocurrencies</button>
+      <div class="menu-grid">
+        <button class="menu-card" id="btn1">
+          <div class="menu-title">Currencies</div>
+          <div class="menu-sub">Forex pairs</div>
+        </button>
+        <button class="menu-card" id="btn2">
+          <div class="menu-title">Stocks</div>
+          <div class="menu-sub">Company shares</div>
+        </button>
+        <button class="menu-card" id="btn3">
+          <div class="menu-title">Crypto</div>
+          <div class="menu-sub">Digital assets</div>
+        </button>
+        <button class="menu-card" id="btn4">
+          <div class="menu-title">Pairs</div>
+          <div class="menu-sub">More options</div>
+        </button>
       </div>
 
-      <div class="popular card">
+      <div class="popular">
         <h2 class="popular-title">Popular Pairs</h2>
         <ul class="pairs-list" id="pairsList"></ul>
       </div>
