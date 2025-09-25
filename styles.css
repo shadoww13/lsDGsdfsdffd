@@ -191,6 +191,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
+  flex: 1;
 }
 .time-card {
   background: #1f2747;
@@ -205,7 +206,6 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 90px;
 }
 .time-card:hover { background: var(--hover-color); transform: translateY(-2px); }
 .time-card .time-top {
@@ -213,10 +213,10 @@ html, body {
   justify-content: center;
   align-items: center;
   gap: 6px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
-.time-card .time-emoji { font-size: 20px; }
+.time-card .time-emoji { font-size: 22px; }
 .time-card .time-sub {
   margin-top: 6px;
   font-size: 13px;
@@ -225,7 +225,7 @@ html, body {
 }
 
 .recommend-card {
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   padding: 14px;
   border-radius: 10px;
   background: #141c2c;
@@ -257,7 +257,7 @@ html, body {
 .new-signal-btn { background: var(--success-gradient); }
 
 .bottom-bar {
-  margin-top: auto;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 12px;
