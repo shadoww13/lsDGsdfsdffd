@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderPairs("otc");
 
-  // time buttons
   document.querySelectorAll(".time-card").forEach(btn => {
     btn.addEventListener("click", () => {
       playClick();
@@ -153,16 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
     signalResult.classList.add("hidden");
 
     const steps = [
-      "Подключение к TradingView...",
-      "Получение данных индикаторов...",
-      "Анализ..."
+      "Connecting to TradingView...",
+      "Fetching indicators...",
+      "Analyzing..."
     ];
 
     steps.forEach((text, i) => {
       const t = setTimeout(() => {
         loadingText.textContent = text;
         if (i === steps.length - 1) {
-          // небольшая пауза после последнего шага
           const finishTimeout = setTimeout(() => {
             showSignal();
           }, 700);
@@ -208,17 +206,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const indicators = [
-      "RSI показывает перепроданность",
-      "MACD подтверждает направление",
-      "Volume поддерживает тренд"
+      "RSI shows momentum",
+      "MACD confirms direction",
+      "Volume supports trend",
+      "Bollinger Bands tightening",
+      "Stochastic Oscillator active",
+      "Moving Averages crossing",
+      "Support/Resistance levels tested"
     ];
 
     if (signalInfoEl) {
-      signalInfoEl.innerHTML = "";
-      indicators.forEach(i => {
-        const d = document.createElement("div");
-        d.textContent = "• " + i;
-        signalInfoEl.appendChild(d);
+      signalInfoEl.innerHTML = "<b>Based on indicators:</b><ul></ul>";
+      const ul = signalInfoEl.querySelector("ul");
+      const shuffled = indicators.sort(() => 0.5 - Math.random());
+      shuffled.slice(0, 3 + Math.floor(Math.random() * 3)).forEach(i => {
+        const li = document.createElement("li");
+        li.textContent = i;
+        ul.appendChild(li);
       });
     }
   }
