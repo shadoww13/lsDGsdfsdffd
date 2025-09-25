@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderPairs("otc");
 
-  document.querySelectorAll(".time-btn").forEach(btn => {
+  document.querySelectorAll(".time-card").forEach(btn => {
     btn.addEventListener("click", () => {
       playClick();
       showPage("signal");

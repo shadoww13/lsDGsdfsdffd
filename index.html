@@ -12,7 +12,7 @@
   <div class="app">
 
     <div class="page" id="homePage">
-      <h1 class="app-title"></h1>
+      <h1 class="app-title">Menu</h1>
 
       <div class="menu-buttons">
         <button class="menu-btn primary" id="btn1">Currencies</button>
@@ -31,13 +31,18 @@
     </div>
 
     <div class="page hidden" id="pairPage">
-      <div class="page-header">
-        <h2 class="page-title">Pair (1/3)</h2>
+      <div class="stepper">
+        <div class="labels">
+          <span>Pair</span>
+          <span>Time</span>
+          <span>Signal</span>
+        </div>
         <div class="progress-bar">
           <div class="step active"></div>
           <div class="step"></div>
           <div class="step"></div>
         </div>
+        <div class="step-desc big">Choose Your Pair</div>
       </div>
 
       <div class="top-buttons">
@@ -54,54 +59,76 @@
     </div>
 
     <div class="page hidden" id="timePage">
-      <div class="page-header">
-        <h2 class="page-title">Time (2/3)</h2>
+      <div class="stepper">
+        <div class="labels">
+          <span>Pair</span>
+          <span>Time</span>
+          <span>Signal</span>
+        </div>
         <div class="progress-bar">
           <div class="step done"></div>
           <div class="step active"></div>
           <div class="step"></div>
         </div>
+        <div class="step-desc big">Select Time Frame</div>
       </div>
 
-      <div class="time-buttons">
-        <button class="time-btn">
-          15 sec<br><span>for fast scalping trades</span>
+      <div class="time-grid">
+        <button class="time-card">
+          <div class="time-emoji">⚡</div>
+          <div class="time-main">5s</div>
+          <span>Ultra Fast</span>
         </button>
-        <button class="time-btn">
-          30 sec<br><span>for aggressive trading</span>
+        <button class="time-card">
+          <div class="time-emoji">🔥</div>
+          <div class="time-main">15s</div>
+          <span>Fast</span>
         </button>
-        <button class="time-btn">
-          1 min<br><span>optimal for beginners</span>
+        <button class="time-card">
+          <div class="time-emoji">🎯</div>
+          <div class="time-main">30s</div>
+          <span>Stable</span>
         </button>
-        <button class="time-btn">
-          5 min<br><span>for confident analysis</span>
+        <button class="time-card">
+          <div class="time-emoji">⭐</div>
+          <div class="time-main">1m</div>
+          <span>For Beginners</span>
         </button>
-        <button class="time-btn">
-          15 min<br><span>mid-term strategies</span>
+        <button class="time-card">
+          <div class="time-emoji">📊</div>
+          <div class="time-main">3m</div>
+          <span>Analysis</span>
         </button>
-        <button class="time-btn">
-          60 min<br><span>for long-term strategies</span>
+        <button class="time-card">
+          <div class="time-emoji">⏳</div>
+          <div class="time-main">5m</div>
+          <span>Long Term</span>
         </button>
       </div>
 
-      <div class="recommend">
-        Recommended: <b>60 seconds</b> for balanced trading
+      <div class="recommend-card">
+        <p><b>Recommended:</b> 60 seconds is optimal for quick signals with good accuracy</p>
       </div>
 
       <div class="bottom-bar">
-        <button class="back-btn">← Back</button>
+        <button class="back-btn">← Back to Pairs</button>
         <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
     </div>
 
     <div class="page hidden" id="signalPage">
-      <div class="page-header">
-        <h2 class="page-title">Signal (3/3)</h2>
+      <div class="stepper">
+        <div class="labels">
+          <span>Pair</span>
+          <span>Time</span>
+          <span>Signal</span>
+        </div>
         <div class="progress-bar">
           <div class="step done"></div>
           <div class="step done"></div>
           <div class="step active"></div>
         </div>
+        <div class="step-desc big">Trading Signal</div>
       </div>
 
       <h2 class="signal-title">📡 Waiting for signal...</h2>
