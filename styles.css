@@ -29,7 +29,7 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: clamp(12px, 4vw, 32px);
+  padding: clamp(12px, 4vw, 24px);
   box-sizing: border-box;
 }
 
@@ -42,23 +42,23 @@ html, body {
 
 .app-title {
   text-align: center;
-  font-size: clamp(24px, 4vw, 36px);
+  font-size: clamp(22px, 4vw, 32px);
   font-weight: 800;
-  margin: 0 0 clamp(16px, 2vh, 28px) 0;
+  margin: 0 0 16px 0;
 }
 
 /* Главное меню */
 .menu-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: clamp(16px, 3vh, 32px);
+  gap: 12px;
+  margin-bottom: 20px;
 }
 .menu-card {
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 28px 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  border-radius: 14px;
+  padding: 20px 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
   border: 1px solid #1f2747;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -68,31 +68,29 @@ html, body {
 }
 .menu-card:hover {
   background: var(--hover-color);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 .menu-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: #fff;
 }
 .menu-sub {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--muted);
 }
 
 /* Popular Pairs */
 .popular {
-  margin-top: 24px;
-  background: transparent;
-  box-shadow: none;
+  margin-top: 12px;
   padding: 0;
 }
 .popular-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: var(--text-color);
   text-align: center;
 }
@@ -102,17 +100,17 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .pair {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--card-bg);
-  border-radius: 12px;
-  padding: 14px 16px;
+  border-radius: 10px;
+  padding: 12px 14px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-color);
   cursor: pointer;
   border: 1px solid #1f2747;
@@ -123,182 +121,45 @@ html, body {
   background: var(--hover-color);
   transform: translateY(-2px);
 }
-.flag { width: 22px; height: 16px; border-radius: 3px; }
-.pair .fire { color: var(--danger); font-size: 13px; font-weight: 600; }
+.flag { width: 20px; height: 14px; border-radius: 3px; }
+.pair .fire { color: var(--danger); font-size: 12px; font-weight: 600; }
 
-/* Остальные элементы */
-.stepper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.stepper .labels {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 260px;
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-.progress-bar {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  width: 100%;
-  max-width: 260px;
-}
-.progress-bar .step {
-  flex: 1;
-  height: 6px;
-  background: #2b3350;
-  border-radius: 3px;
-  transition: background 0.3s;
-}
-.progress-bar .step.active {
-  background: var(--accent-gradient);
-}
-.progress-bar .step.done {
-  background: #2b804f;
-}
-.step-desc {
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--muted);
-  text-align: center;
-}
+/* Остальное без изменений */
+.stepper { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; }
+.stepper .labels { display: flex; justify-content: space-between; width: 100%; max-width: 260px; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.progress-bar { display: flex; gap: 8px; justify-content: center; width: 100%; max-width: 260px; }
+.progress-bar .step { flex: 1; height: 6px; background: #2b3350; border-radius: 3px; transition: background 0.3s; }
+.progress-bar .step.active { background: var(--accent-gradient); }
+.progress-bar .step.done { background: #2b804f; }
+.step-desc { margin-top: 8px; font-size: 13px; color: var(--muted); text-align: center; }
 
-.top-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  gap: 12px;
-}
-.sub-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: var(--card-bg);
-  color: var(--text-color);
-  font-weight: 600;
-  cursor: pointer;
-}
-.sub-btn.active {
-  background: var(--accent-gradient);
-  color: #fff;
-}
+.top-buttons { display: flex; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
+.sub-btn { flex: 1; padding: 14px; border: none; border-radius: 8px; background: var(--card-bg); color: var(--text-color); font-weight: 600; cursor: pointer; }
+.sub-btn.active { background: var(--accent-gradient); color: #fff; }
 .sub-btn:hover { background: var(--hover-color); }
 
-.pairs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  flex: 1;
-}
-#pairPage .pairs-grid {
-  padding-bottom: 20px;
-}
-.pair-card {
-  background: #1f2747;
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 14px;
-}
+.pairs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; }
+#pairPage .pairs-grid { padding-bottom: 20px; }
+.pair-card { background: #1f2747; border-radius: 8px; padding: 16px; text-align: center; font-weight: 600; cursor: pointer; transition: background 0.2s; font-size: 14px; }
 .pair-card:hover { background: var(--hover-color); }
 
-.time-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.time-card {
-  background: #1f2747;
-  border: 1px solid #222c45;
-  border-radius: 10px;
-  padding: 20px 14px;
-  color: var(--text-color);
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-  transition: background 0.2s, transform 0.2s;
-}
-.time-card:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
-}
-.time-card .time-emoji {
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-.time-card .time-main {
-  font-size: 22px;
-  font-weight: 700;
-}
-.time-card span {
-  display: block;
-  margin-top: 4px;
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--muted);
-}
+.time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.time-card { background: #1f2747; border: 1px solid #222c45; border-radius: 10px; padding: 20px 14px; color: var(--text-color); font-weight: 600; cursor: pointer; text-align: center; transition: background 0.2s, transform 0.2s; }
+.time-card:hover { background: var(--hover-color); transform: translateY(-2px); }
+.time-card .time-emoji { font-size: 20px; margin-bottom: 6px; }
+.time-card .time-main { font-size: 22px; font-weight: 700; }
+.time-card span { display: block; margin-top: 4px; font-size: 13px; font-weight: 400; color: var(--muted); }
 
-.recommend-card {
-  margin: 20px 0;
-  padding: 14px;
-  border-radius: 10px;
-  background: #141c2c;
-  border: 1px solid #222c45;
-  text-align: center;
-  font-size: 14px;
-  color: var(--muted);
-}
-.recommend-card b {
-  color: var(--accent-color);
-}
+.recommend-card { margin: 20px 0; padding: 14px; border-radius: 10px; background: #141c2c; border: 1px solid #222c45; text-align: center; font-size: 14px; color: var(--muted); }
+.recommend-card b { color: var(--accent-color); }
 
-.signal-title {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 20px;
-  color: var(--text-color);
-}
+.signal-title { text-align: center; margin-top: 40px; font-size: 20px; color: var(--text-color); }
 
-.back-btn,
-.new-signal-btn {
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: var(--accent-gradient);
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.back-btn:hover,
-.new-signal-btn:hover {
-  filter: brightness(1.1);
-}
-.new-signal-btn {
-  background: var(--success-gradient);
-}
+.back-btn, .new-signal-btn { padding: 14px; border: none; border-radius: 8px; background: var(--accent-gradient); color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; }
+.back-btn:hover, .new-signal-btn:hover { filter: brightness(1.1); }
+.new-signal-btn { background: var(--success-gradient); }
 
-.bottom-bar {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.bottom-bar { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
 
-.footer {
-  text-align: center;
-  font-size: 14px;
-  color: var(--muted);
-  padding-top: 20px;
-}
+.footer { text-align: center; font-size: 14px; color: var(--muted); padding-top: 16px; }
 .footer span { color: var(--accent-color); font-weight: 600; }
