@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener("DOMContentLoaded", () => {
   Telegram.WebApp.ready();
 
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { flag1: "us", code1: "USD", code2: "EUR", flag2: "eu" },
     { flag1: "gb", code1: "GBP", code2: "USD", flag2: "us" },
     { flag1: "jp", code1: "JPY", code2: "USD", flag2: "us" },
-    { flag1: "ch", code1: "CHF", code2: "USD", flag2: "us" },
+    // removed CHF pair as requested
     { flag1: "ca", code1: "CAD", code2: "USD", flag2: "us" },
     { flag1: "au", code1: "AUD", code2: "USD", flag2: "us" },
     { flag1: "btc", code1: "BTC", code2: "USD", flag2: "us" },

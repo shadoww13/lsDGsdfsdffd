@@ -1,3 +1,4 @@
+/* styles.css */
 :root {
   --bg-color: #0b1221;
   --card-bg: #141c2c;
@@ -52,7 +53,7 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 8px; /* moved closer to popular block */
 }
 .menu-card {
   background: var(--card-bg);
@@ -84,7 +85,7 @@ html, body {
 
 /* Popular Pairs */
 .popular {
-  margin-top: 12px;
+  margin-top: 6px; /* slightly moved up closer to the four buttons */
   padding: 0;
 }
 .popular-title {
