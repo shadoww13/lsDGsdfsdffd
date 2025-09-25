@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
   Telegram.WebApp.ready();
 
@@ -59,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     { flag1: "us", code1: "USD", code2: "EUR", flag2: "eu" },
     { flag1: "gb", code1: "GBP", code2: "USD", flag2: "us" },
     { flag1: "jp", code1: "JPY", code2: "USD", flag2: "us" },
-    // removed CHF pair as requested
     { flag1: "ca", code1: "CAD", code2: "USD", flag2: "us" },
     { flag1: "au", code1: "AUD", code2: "USD", flag2: "us" },
     { flag1: "btc", code1: "BTC", code2: "USD", flag2: "us" },
@@ -73,12 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let flag1 = pair.flag1 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag1}"></span>`;
     let flag2 = pair.flag2 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag2}"></span>`;
 
-    li.innerHTML = `
-      ${flag1}
-      <span>${pair.code1} → ${pair.code2}</span>
-      ${flag2}
-      <span class="fire">🔥 OTC</span>
-    `;
+    li.innerHTML = `${flag1}<span>${pair.code1} → ${pair.code2}</span>${flag2}<span class="fire">🔥 OTC</span>`;
     li.addEventListener("click", () => {
       playClick();
       showPage("time");
