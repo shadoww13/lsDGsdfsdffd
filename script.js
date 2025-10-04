@@ -179,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const signalArrowEl = document.getElementById("signalArrow");
     const signalActionEl = document.getElementById("signalAction");
     const signalInfoEl = document.getElementById("signalInfo");
+    const signalIconEl = document.getElementById("signalIcon");
 
     if (signalPairEl) signalPairEl.textContent = pairToShow;
     if (signalTimeEl) signalTimeEl.textContent = timeToShow;
@@ -190,6 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
       signalActionEl.textContent = action;
       signalActionEl.className = "signal-action " + (action === "BUY" ? "buy" : "sell");
     }
+    if (signalIconEl) signalIconEl.textContent = "📈";
 
     const indicators = [
       "RSI shows momentum",

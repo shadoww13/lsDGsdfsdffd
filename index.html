@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trading Signal App</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <title>Trading App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app">
-    <h1 class="app-title">Menu</h1>
     <div id="homePage" class="page">
+      <h1 class="app-title">Menu</h1>
       <div class="menu-grid">
         <div class="menu-card" id="btn1">
           <div class="menu-title">Currencies</div>
@@ -34,117 +33,73 @@
         <h2 class="popular-title">Popular Pairs</h2>
         <ul id="pairsList" class="pairs-list"></ul>
       </div>
-      <div class="bottom-bar">
-        <div class="footer">Powered by <span>StocksLabs</span></div>
-      </div>
+      <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
 
     <div id="pairPage" class="page hidden">
       <div class="stepper">
         <div class="progress-bar">
-          <div class="step-item active">
-            <span class="step-label">Pair</span>
-          </div>
-          <div class="step-item">
-            <span class="step-label">Time</span>
-          </div>
-          <div class="step-item">
-            <span class="step-label">Signal</span>
-          </div>
+          <div class="step-item active"><span class="step-label">Pair</span></div>
+          <div class="step-item"><span class="step-label">Time</span></div>
+          <div class="step-item"><span class="step-label">Signal</span></div>
         </div>
       </div>
       <h2 class="page-title">Choose Your Pair</h2>
       <div class="top-buttons">
-        <button id="otcBtn" class="sub-btn active">OTC</button>
-        <button id="stockBtn" class="sub-btn">STOCK</button>
+        <button class="sub-btn active" id="otcBtn">OTC</button>
+        <button class="sub-btn" id="stockBtn">STOCK</button>
       </div>
       <div id="pairGrid" class="pairs-grid"></div>
-      <div class="bottom-bar">
-        <button class="back-btn">← Back</button>
-        <div class="footer">Powered by <span>StocksLabs</span></div>
-      </div>
+      <button class="back-btn">← Back</button>
+      <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
 
     <div id="timePage" class="page hidden">
       <div class="stepper">
         <div class="progress-bar">
-          <div class="step-item done">
-            <span class="step-label">Pair</span>
-          </div>
-          <div class="step-item active">
-            <span class="step-label">Time</span>
-          </div>
-          <div class="step-item">
-            <span class="step-label">Signal</span>
-          </div>
+          <div class="step-item done"><span class="step-label">Pair</span></div>
+          <div class="step-item active"><span class="step-label">Time</span></div>
+          <div class="step-item"><span class="step-label">Signal</span></div>
         </div>
       </div>
       <h2 class="page-title">Select Time Frame</h2>
       <div class="time-grid">
         <div class="time-card" data-time="5s">
-          <div class="time-top">
-            <span class="time-emoji">⚡</span>
-            <span>5s</span>
-          </div>
+          <div class="time-top"><span class="time-emoji">⚡</span>5s</div>
           <div class="time-sub">Ultra</div>
         </div>
         <div class="time-card" data-time="15s">
-          <div class="time-top">
-            <span class="time-emoji">🔥</span>
-            <span>15s</span>
-          </div>
+          <div class="time-top"><span class="time-emoji">🔥</span>15s</div>
           <div class="time-sub">Fast</div>
         </div>
         <div class="time-card" data-time="30s">
-          <div class="time-top">
-            <span class="time-emoji">🎯</span>
-            <span>30s</span>
-          </div>
+          <div class="time-top"><span class="time-emoji">🎯</span>30s</div>
           <div class="time-sub">Stable</div>
         </div>
         <div class="time-card" data-time="1m">
-          <div class="time-top">
-            <span class="time-emoji">⭐</span>
-            <span>1m</span>
-          </div>
+          <div class="time-top"><span class="time-emoji">⭐</span>1m</div>
           <div class="time-sub">Beginner</div>
         </div>
         <div class="time-card" data-time="3m">
-          <div class="time-top">
-            <span class="time-emoji">📊</span>
-            <span>3m</span>
-          </div>
+          <div class="time-top"><span class="time-emoji">📊</span>3m</div>
           <div class="time-sub">Analysis</div>
         </div>
         <div class="time-card" data-time="5m">
-          <div class="time-top">
-            <span class="time-emoji">⏳</span>
-            <span>5m</span>
-          </div>
+          <div class="time-top"><span class="time-emoji">⏳</span>5m</div>
           <div class="time-sub">Long</div>
         </div>
       </div>
-      <div class="recommend-card">
-        Recommended: <b>60 seconds</b> is optimal for quick signals with good accuracy
-      </div>
-      <div class="bottom-bar">
-        <button class="back-btn">← Back</button>
-        <div class="footer">Powered by <span>StocksLabs</span></div>
-      </div>
+      <div class="recommend-card">Recommended: <b>60 seconds</b> is optimal for quick signals with good accuracy</div>
+      <button class="back-btn">← Back</button>
+      <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
 
     <div id="signalPage" class="page hidden">
       <div class="stepper">
         <div class="progress-bar">
-          <div class="step-item done">
-            <span class="step-label">Pair</span>
-          </div>
-          <div class="step-item done">
-            <span class="step-label">Time</span>
-          </div>
-          <div class="step-item active">
-            <span class="step-label">Signal</span>
-          </div>
+          <div class="step-item done"><span class="step-label">Pair</span></div>
+          <div class="step-item done"><span class="step-label">Time</span></div>
+          <div class="step-item active"><span class="step-label">Signal</span></div>
         </div>
       </div>
       <h2 class="page-title">Trading Signal</h2>
@@ -155,21 +110,28 @@
         </div>
       </div>
       <div id="signalResult" class="center-block hidden">
-        <div class="signal-card-grid">
-          <div id="signalArrow" class="signal-arrow">↑</div>
-          <div id="signalPair" class="signal-pair">EUR/USD</div>
-          <div id="signalAction" class="signal-action">BUY</div>
-          <div id="signalTime" class="signal-time">15s</div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <div class="signal-action-block">
+              <span id="signalArrow" class="signal-arrow">↗</span>
+              <span id="signalAction" class="signal-action">BUY</span>
+            </div>
+            <div class="signal-pair-container">
+              <span id="signalPair" class="signal-pair">Pair 10</span>
+              <span id="signalTime" class="signal-time">3m</span>
+            </div>
+          </div>
         </div>
         <div id="signalInfo" class="indicators-block"></div>
       </div>
       <div class="bottom-bar">
         <button id="newSignalBtn" class="new-signal-btn">+ New Signal</button>
         <button class="back-btn">← Back</button>
-        <div class="footer">Powered by <span>StocksLabs</span></div>
       </div>
+      <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
   </div>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
