@@ -1,14 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   Telegram.WebApp && Telegram.WebApp.ready();
 
-  const clickSound = document.getElementById("clickSound");
-  function playClick() {
-    if (clickSound) {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(() => {});
-    }
-  }
-
   const pages = {
     home: document.getElementById("homePage"),
     pair: document.getElementById("pairPage"),
@@ -38,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function goBack() {
-    playClick();
     clearStepTimeouts();
     if (historyStack.length > 1) {
       historyStack.pop();
@@ -52,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ["btn1","btn2","btn3","btn4"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("click", () => {
-      playClick();
       showPage("pair");
     });
   });
@@ -74,11 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
     pairs.forEach(pair => {
       const li = document.createElement("li");
       li.className = "pair";
-      const flag1 = pair.flag1 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag1}"></span>`;
-      const flag2 = pair.flag2 === "btc" ? "₿" : `<span class="flag fi fi-${pair.flag2}"></span>`;
+      const flag1 = pair.flag1 === "btc" ? `<span class="flag">₿</span>` : `<span class="flag flag-icon flag-icon-${pair.flag1}"></span>`;
+      const flag2 = pair.flag2 === "btc" ? `<span class="flag">₿</span>` : `<span class="flag flag-icon flag-icon-${pair.flag2}"></span>`;
       li.innerHTML = `${flag1}<span>${pair.label}</span>${flag2}<span class="fire">🔥</span>`;
       li.addEventListener("click", () => {
-        playClick();
         selectedPair = pair.label;
         showPage("time");
       });
@@ -102,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
       div.className = "pair-card";
       div.textContent = p;
       div.addEventListener("click", () => {
-        playClick();
         selectedPair = p;
         showPage("time");
       });
@@ -125,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".time-card").forEach(btn => {
     btn.addEventListener("click", () => {
-      playClick();
       selectedTime = btn.getAttribute("data-time") || null;
       showPage("signal");
     });
@@ -134,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const newSignalBtn = document.getElementById("newSignalBtn");
   if (newSignalBtn) {
     newSignalBtn.addEventListener("click", () => {
-      playClick();
       startSignalLoading();
     });
   }
