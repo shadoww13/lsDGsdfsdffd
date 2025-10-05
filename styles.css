@@ -36,8 +36,9 @@ html, body {
 .page {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  min-height: 100%;
 }
+
 .hidden { display: none !important; }
 
 .app-title {
@@ -297,7 +298,6 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 16px 0;
-  flex: 1;
 }
 
 .center-wrapper {
@@ -328,29 +328,32 @@ html, body {
 
 .signal-card {
   width: 100%;
-  max-width: 500px;
-  margin: 0 0 16px 0;
-  padding: 20px;
+  max-width: 400px;
+  margin: 16px auto;
+  padding: 16px;
   border-radius: 16px;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  box-sizing: border-box;
+  align-self: center;
 }
 
 .signal-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .signal-action-block {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 8px;
 }
 
 .signal-arrow {
@@ -375,7 +378,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 12px;
+  gap: 8px;
 }
 
 .signal-pair {
@@ -392,7 +395,7 @@ html, body {
 }
 
 .indicators-block {
-  margin: 16px auto 16px;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -400,7 +403,7 @@ html, body {
   color: var(--muted);
   font-size: 15px;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
 }
 
 .indicators-block b {
@@ -423,7 +426,7 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
 }
 
 #signalResult {
@@ -431,14 +434,13 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  flex: 1;
-  min-height: calc(100vh - 200px);
+  flex-grow: 1;
 }
 
 @media (max-width: 420px) {
   .signal-card {
-    padding: 16px;
-    min-height: 250px;
+    padding: 12px;
+    max-width: 100%;
   }
   .signal-arrow { font-size: 24px; }
   .signal-action { font-size: 24px; }
@@ -446,5 +448,4 @@ html, body {
   .signal-time { font-size: 24px; }
   .indicators-block { font-size: 14px; }
   .indicators-block li { font-size: 13px; }
-  #signalResult { min-height: calc(100vh - 180px); }
 }
