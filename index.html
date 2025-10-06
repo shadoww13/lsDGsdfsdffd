@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trading App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -11,24 +11,7 @@
   <div class="app">
     <div id="homePage" class="page">
       <h1 class="app-title">Menu</h1>
-      <div class="menu-grid">
-        <div class="menu-card" id="btn1">
-          <div class="menu-title">Currencies</div>
-          <div class="menu-sub">Forex pairs</div>
-        </div>
-        <div class="menu-card" id="btn2">
-          <div class="menu-title">Stocks</div>
-          <div class="menu-sub">Company shares</div>
-        </div>
-        <div class="menu-card" id="btn3">
-          <div class="menu-title">Crypto</div>
-          <div class="menu-sub">Digital assets</div>
-        </div>
-        <div class="menu-card" id="btn4">
-          <div class="menu-title">Pairs</div>
-          <div class="menu-sub">More options</div>
-        </div>
-      </div>
+      <div class="menu-grid" id="menuGrid"></div>
       <div class="popular">
         <h2 class="popular-title">Popular Pairs</h2>
         <ul id="pairsList" class="pairs-list"></ul>
@@ -63,33 +46,8 @@
         </div>
       </div>
       <h2 class="page-title">Select Time Frame</h2>
-      <div class="time-grid">
-        <div class="time-card" data-time="5s">
-          <div class="time-top"><span class="time-emoji">⚡</span>5s</div>
-          <div class="time-sub">Ultra</div>
-        </div>
-        <div class="time-card" data-time="15s">
-          <div class="time-top"><span class="time-emoji">🔥</span>15s</div>
-          <div class="time-sub">Fast</div>
-        </div>
-        <div class="time-card" data-time="30s">
-          <div class="time-top"><span class="time-emoji">🎯</span>30s</div>
-          <div class="time-sub">Stable</div>
-        </div>
-        <div class="time-card" data-time="1m">
-          <div class="time-top"><span class="time-emoji">⭐</span>1m</div>
-          <div class="time-sub">Beginner</div>
-        </div>
-        <div class="time-card" data-time="3m">
-          <div class="time-top"><span class="time-emoji">📊</span>3m</div>
-          <div class="time-sub">Analysis</div>
-        </div>
-        <div class="time-card" data-time="5m">
-          <div class="time-top"><span class="time-emoji">⏳</span>5m</div>
-          <div class="time-sub">Long</div>
-        </div>
-      </div>
-      <div class="recommend-card">Recommended: <b>60 seconds</b> is optimal for quick signals with good accuracy</div>
+      <div id="timeGrid" class="time-grid"></div>
+      <div class="recommend-card">Recommended: <b>60 seconds</b> is optimal for quick signals</div>
       <button class="back-btn">← Back</button>
       <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
@@ -106,21 +64,19 @@
       <div id="loadingSection" class="center-block">
         <div class="center-wrapper">
           <div class="loader"></div>
-          <div class="loading-text">Connecting to TradingView...</div>
+          <div class="loading-text">Connecting...</div>
         </div>
       </div>
       <div id="signalResult" class="center-block hidden">
-        <div class="signal-container">
-          <div class="signal-card">
-            <div class="signal-header">
-              <div class="signal-action-block">
-                <span id="signalArrow" class="signal-arrow">↗</span>
-                <span id="signalAction" class="signal-action">BUY</span>
-              </div>
-              <div class="signal-pair-container">
-                <span id="signalPair" class="signal-pair">Pair 10</span>
-                <span id="signalTime" class="signal-time">3m</span>
-              </div>
+        <div class="signal-card">
+          <div class="signal-header">
+            <div class="signal-action-block">
+              <span id="signalArrow" class="signal-arrow">↗</span>
+              <span id="signalAction" class="signal-action">BUY</span>
+            </div>
+            <div class="signal-pair-container">
+              <span id="signalPair" class="signal-pair">Pair</span>
+              <span id="signalTime" class="signal-time">1m</span>
             </div>
           </div>
         </div>
@@ -133,7 +89,9 @@
       <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
   </div>
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

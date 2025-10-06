@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  Telegram.WebApp && Telegram.WebApp.ready();
+  Telegram?.WebApp?.ready?.();
 
   const pages = {
     home: document.getElementById("homePage"),
@@ -8,227 +8,112 @@ document.addEventListener("DOMContentLoaded", () => {
     signal: document.getElementById("signalPage")
   };
 
-  let historyStack = ["home"];
-  let selectedPair = null;
-  let selectedTime = null;
+  let history = ["home"], selectedPair = null, selectedTime = null, timers = [];
 
-  let stepTimeouts = [];
-
-  function clearStepTimeouts() {
-    if (stepTimeouts && stepTimeouts.length) {
-      stepTimeouts.forEach(t => clearTimeout(t));
-    }
-    stepTimeouts = [];
-  }
-
-  function showPage(id) {
-    clearStepTimeouts();
+  const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
+  const show = id => {
+    clearTimers();
     Object.values(pages).forEach(p => p.classList.add("hidden"));
     pages[id].classList.remove("hidden");
-    historyStack.push(id);
-    if (id === "signal") startSignalLoading();
-  }
+    if (history.at(-1) !== id) history.push(id);
+    if (id === "signal") loadSignal();
+  };
+  const back = () => {
+    clearTimers();
+    if (history.length > 1) {
+      history.pop();
+      show(history.at(-1));
+    } else show("home");
+  };
+  document.querySelectorAll(".back-btn").forEach(b => b.onclick = back);
 
-  function goBack() {
-    clearStepTimeouts();
-    if (historyStack.length > 1) {
-      historyStack.pop();
-      const prev = historyStack[historyStack.length - 1];
-      showPage(prev);
-    } else {
-      showPage("home");
-    }
-  }
+  // menu
+  const menuGrid = document.getElementById("menuGrid");
+  menuGrid.innerHTML = PAIRS_CONFIG.menu
+    .map(m => `<div class="menu-card" id="${m.id}"><div class="menu-title">${m.title}</div><div class="menu-sub">${m.sub}</div></div>`)
+    .join("");
+  PAIRS_CONFIG.menu.forEach(m => document.getElementById(m.id).onclick = () => show("pair"));
 
-  ["btn1","btn2","btn3","btn4"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener("click", () => {
-      showPage("pair");
-    });
-  });
-
-  document.querySelectorAll(".back-btn").forEach(btn => btn.addEventListener("click", goBack));
-
-  const pairs = [
-    { flag1: "us", flag2: "eu", label: "USD/EUR" },
-    { flag1: "gb", flag2: "us", label: "GBP/USD" },
-    { flag1: "jp", flag2: "us", label: "USD/JPY" },
-    { flag1: "ca", flag2: "us", label: "CAD/USD" },
-    { flag1: "au", flag2: "us", label: "AUD/USD" },
-    { flag1: "btc", flag2: "us", label: "BTC/USD" }
-  ];
-
+  // popular pairs
   const pairsList = document.getElementById("pairsList");
-  function renderPopularPairs() {
-    pairsList.innerHTML = "";
-    pairs.forEach(pair => {
-      const li = document.createElement("li");
-      li.className = "pair";
-      const flag1 = pair.flag1 === "btc" ? `<span class="flag">₿</span>` : `<span class="flag flag-icon flag-icon-${pair.flag1}"></span>`;
-      const flag2 = pair.flag2 === "btc" ? `<span class="flag">₿</span>` : `<span class="flag flag-icon flag-icon-${pair.flag2}"></span>`;
-      li.innerHTML = `${flag1}<span>${pair.label}</span>${flag2}<span class="fire">🔥</span>`;
-      li.addEventListener("click", () => {
-        selectedPair = pair.label;
-        showPage("time");
-      });
-      pairsList.appendChild(li);
-    });
-  }
-  renderPopularPairs();
+  pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
+    <li class="pair">
+      ${p.flag1 === "btc" ? "<span class='flag'>₿</span>" : `<span class="flag flag-icon flag-icon-${p.flag1}"></span>`}
+      <span>${p.label}</span>
+      ${p.flag2 === "btc" ? "<span class='flag'>₿</span>" : `<span class="flag flag-icon flag-icon-${p.flag2}"></span>`}
+      <span class="fire">🔥</span>
+    </li>`).join("");
+  pairsList.querySelectorAll(".pair").forEach((el,i)=>el.onclick=()=>{selectedPair=PAIRS_CONFIG.popularPairs[i].label; show("time")});
 
-  const pairGrid = document.getElementById("pairGrid");
+  // pair page
+  const pairGridEl = document.getElementById("pairGrid");
   const otcBtn = document.getElementById("otcBtn");
   const stockBtn = document.getElementById("stockBtn");
 
-  const otcPairs = Array.from({ length: 12 }, (_, i) => `OTC Pair ${i+1}`);
-  const stockPairs = Array.from({ length: 12 }, (_, i) => `STOCK Pair ${i+1}`);
-
-  function renderPairs(mode) {
-    pairGrid.innerHTML = "";
-    const list = mode === "otc" ? otcPairs : stockPairs;
-    list.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "pair-card";
-      div.textContent = p;
-      div.addEventListener("click", () => {
-        selectedPair = p;
-        showPage("time");
-      });
-      pairGrid.appendChild(div);
+  const renderPairs = mode => {
+    const list = mode === "otc" ? PAIRS_CONFIG.otcPairs : PAIRS_CONFIG.stockPairs;
+    pairGridEl.innerHTML = list.map(p => `<div class="pair-card">${p.label}</div>`).join("");
+    pairGridEl.querySelectorAll(".pair-card").forEach(c => c.onclick = () => {
+      selectedPair = c.textContent;
+      show("time");
     });
-  }
-
-  otcBtn.addEventListener("click", () => {
-    otcBtn.classList.add("active");
-    stockBtn.classList.remove("active");
-    renderPairs("otc");
-  });
-  stockBtn.addEventListener("click", () => {
-    stockBtn.classList.add("active");
-    otcBtn.classList.remove("active");
-    renderPairs("stock");
-  });
-
+  };
+  otcBtn.onclick = () => { otcBtn.classList.add("active"); stockBtn.classList.remove("active"); renderPairs("otc"); };
+  stockBtn.onclick = () => { stockBtn.classList.add("active"); otcBtn.classList.remove("active"); renderPairs("stock"); };
   renderPairs("otc");
 
-  document.querySelectorAll(".time-card").forEach(btn => {
-    btn.addEventListener("click", () => {
-      selectedTime = btn.getAttribute("data-time") || null;
-      showPage("signal");
-    });
-  });
+  // time page
+  const timeGridEl = document.getElementById("timeGrid");
+  timeGridEl.innerHTML = PAIRS_CONFIG.times.map(t =>
+    `<div class="time-card" data-time="${t.time}">
+       <div class="time-top"><span class="time-emoji">${t.emoji}</span>${t.time}</div>
+       <div class="time-sub">${t.sub}</div>
+     </div>`).join("");
+  timeGridEl.querySelectorAll(".time-card").forEach(b => b.onclick = () => { selectedTime = b.dataset.time; show("signal"); });
 
+  // signal page
   const newSignalBtn = document.getElementById("newSignalBtn");
-  if (newSignalBtn) {
-    newSignalBtn.addEventListener("click", () => {
-      startSignalLoading();
-    });
-  }
+  newSignalBtn.onclick = () => loadSignal();
 
-  function startSignalLoading() {
-    clearStepTimeouts();
+  const loadSignal = () => {
+    clearTimers();
+    const loading = document.getElementById("loadingSection");
+    const result = document.getElementById("signalResult");
+    const text = loading.querySelector(".loading-text");
+    loading.classList.remove("hidden"); result.classList.add("hidden");
 
-    const loadingSection = document.getElementById("loadingSection");
-    const signalResult = document.getElementById("signalResult");
-    const loadingText = document.querySelector(".loading-text");
-
-    if (!loadingSection || !loadingText || !signalResult) return;
-
-    loadingSection.classList.remove("hidden");
-    signalResult.classList.add("hidden");
-
-    const steps = [
-      "Connecting to TradingView...",
-      "Fetching indicators...",
-      "Analyzing..."
-    ];
-
-    steps.forEach((text, i) => {
-      const t = setTimeout(() => {
-        loadingText.textContent = text;
-        if (i === steps.length - 1) {
-          const finishTimeout = setTimeout(() => {
-            showSignal();
-          }, 700);
-          stepTimeouts.push(finishTimeout);
+    PAIRS_CONFIG.loadingSteps.forEach((t,i)=>{
+      const timer = setTimeout(()=>{
+        text.textContent = t;
+        if(i===PAIRS_CONFIG.loadingSteps.length-1){
+          timers.push(setTimeout(showSignal,700));
         }
-      }, i * 1400);
-      stepTimeouts.push(t);
+      }, i*1400);
+      timers.push(timer);
     });
-  }
+  };
 
-  function showSignal() {
-    clearStepTimeouts();
-
-    const loadingSection = document.getElementById("loadingSection");
-    const signalResult = document.getElementById("signalResult");
-
-    if (!loadingSection || !signalResult) return;
-
+  const showSignal = () => {
+    clearTimers();
     loadingSection.classList.add("hidden");
     signalResult.classList.remove("hidden");
 
-    const fallbackPairs = ["EUR/USD", "GBP/USD", "USD/JPY", "BTC/USD"];
-    const pairToShow = selectedPair || fallbackPairs[Math.floor(Math.random() * fallbackPairs.length)];
-    const timeToShow = selectedTime || "1m";
-    const action = Math.random() > 0.5 ? "BUY" : "SELL";
-    const arrow = action === "BUY" ? "↗" : "↘";
+    const pair = selectedPair || PAIRS_CONFIG.popularPairs[Math.floor(Math.random()*PAIRS_CONFIG.popularPairs.length)].label;
+    const time = selectedTime || "1m";
+    const action = Math.random()>0.5?"BUY":"SELL";
+    const arrow = action==="BUY"?"↗":"↘";
 
-    const signalPairEl = document.getElementById("signalPair");
-    const signalTimeEl = document.getElementById("signalTime");
-    const signalArrowEl = document.getElementById("signalArrow");
-    const signalActionEl = document.getElementById("signalAction");
-    const signalInfoEl = document.getElementById("signalInfo");
-    const signalIconEl = document.getElementById("signalIcon");
+    signalPair.textContent = pair;
+    signalTime.textContent = time;
+    signalArrow.textContent = arrow;
+    signalArrow.className = `signal-arrow ${action==="BUY"?"up":"down"}`;
+    signalAction.textContent = action;
+    signalAction.className = `signal-action ${action==="BUY"?"buy":"sell"}`;
 
-    if (signalPairEl) signalPairEl.textContent = pairToShow;
-    if (signalTimeEl) signalTimeEl.textContent = timeToShow;
-    if (signalArrowEl) {
-      signalArrowEl.textContent = arrow;
-      signalArrowEl.className = "signal-arrow " + (action === "BUY" ? "up" : "down");
-    }
-    if (signalActionEl) {
-      signalActionEl.textContent = action;
-      signalActionEl.className = "signal-action " + (action === "BUY" ? "buy" : "sell");
-    }
-    if (signalIconEl) signalIconEl.textContent = "📈";
+    const indicators = action==="BUY" ? PAIRS_CONFIG.buyIndicators : PAIRS_CONFIG.sellIndicators;
+    signalInfo.innerHTML = "<b>Based on indicators:</b><ul>" +
+      indicators.sort(()=>0.5-Math.random()).slice(0,3).map(i=>`<li>${i}</li>`).join("") + "</ul>";
+  };
 
-    const buyIndicators = [
-      "RSI indicates oversold condition",
-      "MACD bullish crossover",
-      "Volume increasing on uptrend",
-      "Bollinger Bands expanding upwards",
-      "Stochastic Oscillator buy signal",
-      "Moving Averages golden cross",
-      "Breaking resistance level"
-    ];
-
-    const sellIndicators = [
-      "RSI indicates overbought condition",
-      "MACD bearish crossover",
-      "Volume increasing on downtrend",
-      "Bollinger Bands expanding downwards",
-      "Stochastic Oscillator sell signal",
-      "Moving Averages death cross",
-      "Breaking support level"
-    ];
-
-    const indicators = action === "BUY" ? buyIndicators : sellIndicators;
-
-    // Randomize indicators for each new signal
-    const shuffled = [...indicators].sort(() => 0.5 - Math.random());
-    const selectedIndicators = shuffled.slice(0, 3);
-
-    if (signalInfoEl) {
-      signalInfoEl.innerHTML = "<b>Based on indicators:</b><ul></ul>";
-      const ul = signalInfoEl.querySelector("ul");
-      selectedIndicators.forEach(i => {
-        const li = document.createElement("li");
-        li.textContent = i;
-        ul.appendChild(li);
-      });
-    }
-  }
-
-  showPage("home");
+  show("home");
 });
