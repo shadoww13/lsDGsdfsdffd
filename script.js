@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearStepTimeouts();
     if (historyStack.length > 1) {
       historyStack.pop();
-      const prev = historyStack.pop();
+      const prev = historyStack[historyStack.length - 1];
       showPage(prev);
     } else {
       showPage("home");
@@ -193,20 +193,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (signalIconEl) signalIconEl.textContent = "📈";
 
-    const indicators = [
-      "RSI shows momentum",
-      "MACD confirms direction",
-      "Volume supports trend",
-      "Bollinger Bands tightening",
-      "Stochastic Oscillator active",
-      "Moving Averages crossing",
-      "Support/Resistance levels tested"
+    const buyIndicators = [
+      "RSI indicates oversold condition",
+      "MACD bullish crossover",
+      "Volume increasing on uptrend",
+      "Bollinger Bands expanding upwards",
+      "Stochastic Oscillator buy signal",
+      "Moving Averages golden cross",
+      "Breaking resistance level"
     ];
+
+    const sellIndicators = [
+      "RSI indicates overbought condition",
+      "MACD bearish crossover",
+      "Volume increasing on downtrend",
+      "Bollinger Bands expanding downwards",
+      "Stochastic Oscillator sell signal",
+      "Moving Averages death cross",
+      "Breaking support level"
+    ];
+
+    const indicators = action === "BUY" ? buyIndicators : sellIndicators;
+
+    // Randomize indicators for each new signal
+    const shuffled = [...indicators].sort(() => 0.5 - Math.random());
+    const selectedIndicators = shuffled.slice(0, 3);
 
     if (signalInfoEl) {
       signalInfoEl.innerHTML = "<b>Based on indicators:</b><ul></ul>";
       const ul = signalInfoEl.querySelector("ul");
-      const selectedIndicators = indicators.slice(0, 3); // Фиксируем 3 индикатора
       selectedIndicators.forEach(i => {
         const li = document.createElement("li");
         li.textContent = i;

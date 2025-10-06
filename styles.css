@@ -444,8 +444,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  flex-grow: 0; /* Prevent expansion */
+  justify-content: flex-end;
+  flex-grow: 1; /* Prevent expansion */
 }
 
 @media (max-width: 620px) {
