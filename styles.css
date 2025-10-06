@@ -279,10 +279,11 @@ html, body {
 }
 
 .bottom-bar {
-  margin-top: 16px;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 }
 .footer {
   text-align: center;
@@ -339,27 +340,27 @@ html, body {
   flex-direction: column;
   box-sizing: border-box;
   align-self: center;
-  flex-grow: 0;
+  flex-grow: 0; /* Remove grow to make dynamic */
   min-height: 0;
-  height: calc(30vh - 48px);
-  justify-content: center; /* Center content vertically */
+  height: auto; /* Dynamic height */
+  justify-content: flex-start; /* Align to top */
 }
 
 .signal-header {
   display: flex;
-  justify-content: center; /* Center content horizontally */
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  text-align: center; /* Center text within header */
+  text-align: center;
 }
 
 .signal-action-block {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
+  align-items: center;
   gap: 12px;
-  text-align: center; /* Center text within block */
+  text-align: center;
 }
 
 .signal-arrow {
@@ -383,26 +384,27 @@ html, body {
 .signal-pair-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
+  align-items: center;
   gap: 12px;
-  text-align: center; /* Center text within container */
+  text-align: center;
 }
 
 .signal-pair {
   font-size: 40px;
   font-weight: 900;
-  text-align: center; /* Center text */
+  text-align: center;
 }
 
 .signal-time {
   font-size: 40px;
   font-weight: 900;
   color: var(--muted);
-  text-align: center; /* Center text */
+  text-align: center;
 }
 
 .indicators-block {
-  margin: 0 0 16px; /* Adjusted to push indicators to the bottom, above new signal button */
+  margin-top: 8px;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -411,8 +413,8 @@ html, body {
   font-size: 16px;
   width: 100%;
   max-width: 600px;
-  flex-grow: 1; /* Allow it to fill remaining space */
-  justify-content: flex-end; /* Push to bottom */
+  flex-grow: 0; /* No grow for dynamic */
+  justify-content: flex-start;
 }
 
 .indicators-block b {
@@ -443,14 +445,13 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  flex-grow: 1;
+  flex-grow: 0; /* Prevent expansion */
 }
 
 @media (max-width: 620px) {
   .signal-card {
     padding: 16px;
     max-width: 100%;
-    height: calc(25vh - 32px);
   }
   .signal-arrow { font-size: 32px; }
   .signal-action { font-size: 32px; }
