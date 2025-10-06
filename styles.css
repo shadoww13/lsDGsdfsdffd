@@ -340,10 +340,9 @@ html, body {
   flex-direction: column;
   box-sizing: border-box;
   align-self: center;
-  flex-grow: 0; /* Remove grow to make dynamic */
-  min-height: 0;
-  height: auto; /* Dynamic height */
-  justify-content: flex-start; /* Align to top */
+  flex-grow: 1;
+  height: auto;
+  justify-content: space-between;
 }
 
 .signal-header {
@@ -413,7 +412,7 @@ html, body {
   font-size: 16px;
   width: 100%;
   max-width: 600px;
-  flex-grow: 0; /* No grow for dynamic */
+  flex-grow: 0;
   justify-content: flex-start;
 }
 
@@ -444,8 +443,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  flex-grow: 1; /* Prevent expansion */
+  justify-content: flex-start;
+  flex-grow: 1;
 }
 
 @media (max-width: 620px) {
