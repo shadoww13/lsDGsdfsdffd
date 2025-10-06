@@ -27,14 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   document.querySelectorAll(".back-btn").forEach(b => b.onclick = back);
 
-  // menu
   const menuGrid = document.getElementById("menuGrid");
   menuGrid.innerHTML = PAIRS_CONFIG.menu
     .map(m => `<div class="menu-card" id="${m.id}"><div class="menu-title">${m.title}</div><div class="menu-sub">${m.sub}</div></div>`)
     .join("");
   PAIRS_CONFIG.menu.forEach(m => document.getElementById(m.id).onclick = () => show("pair"));
 
-  // popular pairs
   const pairsList = document.getElementById("pairsList");
   pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
     <li class="pair">
@@ -45,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </li>`).join("");
   pairsList.querySelectorAll(".pair").forEach((el,i)=>el.onclick=()=>{selectedPair=PAIRS_CONFIG.popularPairs[i].label; show("time")});
 
-  // pair page
   const pairGridEl = document.getElementById("pairGrid");
   const otcBtn = document.getElementById("otcBtn");
   const stockBtn = document.getElementById("stockBtn");
@@ -62,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
   stockBtn.onclick = () => { stockBtn.classList.add("active"); otcBtn.classList.remove("active"); renderPairs("stock"); };
   renderPairs("otc");
 
-  // time page
   const timeGridEl = document.getElementById("timeGrid");
   timeGridEl.innerHTML = PAIRS_CONFIG.times.map(t =>
     `<div class="time-card" data-time="${t.time}">
@@ -71,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
      </div>`).join("");
   timeGridEl.querySelectorAll(".time-card").forEach(b => b.onclick = () => { selectedTime = b.dataset.time; show("signal"); });
 
-  // signal page
   const newSignalBtn = document.getElementById("newSignalBtn");
   newSignalBtn.onclick = () => loadSignal();
 
