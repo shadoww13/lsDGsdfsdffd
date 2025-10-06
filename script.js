@@ -206,8 +206,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (signalInfoEl) {
       signalInfoEl.innerHTML = "<b>Based on indicators:</b><ul></ul>";
       const ul = signalInfoEl.querySelector("ul");
-      const shuffled = indicators.sort(() => 0.5 - Math.random());
-      shuffled.slice(0, 3 + Math.floor(Math.random() * 3)).forEach(i => {
+      const selectedIndicators = indicators.slice(0, 3); // Фиксируем 3 индикатора
+      selectedIndicators.forEach(i => {
         const li = document.createElement("li");
         li.textContent = i;
         ul.appendChild(li);

@@ -328,10 +328,10 @@ html, body {
 
 .signal-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin: 16px auto;
-  padding: 16px;
-  border-radius: 16px;
+  padding: 24px;
+  border-radius: 24px;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
@@ -339,25 +339,31 @@ html, body {
   flex-direction: column;
   box-sizing: border-box;
   align-self: center;
+  flex-grow: 0;
+  min-height: 0;
+  height: calc(30vh - 48px);
+  justify-content: center; /* Center content vertically */
 }
 
 .signal-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center; /* Center content horizontally */
+  align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
+  text-align: center; /* Center text within header */
 }
 
 .signal-action-block {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center; /* Center items horizontally */
+  gap: 12px;
+  text-align: center; /* Center text within block */
 }
 
 .signal-arrow {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 900;
   line-height: 1;
 }
@@ -366,7 +372,7 @@ html, body {
 .signal-arrow.down { color: #FF5666; transform: translateY(2px); }
 
 .signal-action {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 900;
   letter-spacing: 0.8px;
 }
@@ -377,33 +383,36 @@ html, body {
 .signal-pair-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
+  align-items: center; /* Center items horizontally */
+  gap: 12px;
+  text-align: center; /* Center text within container */
 }
 
 .signal-pair {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 900;
-  text-align: right;
+  text-align: center; /* Center text */
 }
 
 .signal-time {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 900;
   color: var(--muted);
-  text-align: right;
+  text-align: center; /* Center text */
 }
 
 .indicators-block {
-  margin: 16px auto 0;
+  margin: 0 0 16px; /* Adjusted to push indicators to the bottom, above new signal button */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  flex-grow: 1; /* Allow it to fill remaining space */
+  justify-content: flex-end; /* Push to bottom */
 }
 
 .indicators-block b {
@@ -416,8 +425,8 @@ html, body {
 }
 
 .indicators-block li {
-  font-size: 14px;
-  margin: 4px 0;
+  font-size: 15px;
+  margin: 6px 0;
   list-style: disc;
 }
 
@@ -437,15 +446,16 @@ html, body {
   flex-grow: 1;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 620px) {
   .signal-card {
-    padding: 12px;
+    padding: 16px;
     max-width: 100%;
+    height: calc(25vh - 32px);
   }
-  .signal-arrow { font-size: 24px; }
-  .signal-action { font-size: 24px; }
-  .signal-pair { font-size: 24px; }
-  .signal-time { font-size: 24px; }
+  .signal-arrow { font-size: 32px; }
+  .signal-action { font-size: 32px; }
+  .signal-pair { font-size: 32px; }
+  .signal-time { font-size: 32px; }
   .indicators-block { font-size: 14px; }
   .indicators-block li { font-size: 13px; }
 }
