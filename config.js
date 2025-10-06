@@ -24,22 +24,23 @@ const PAIRS_CONFIG = {
     { time: "5m", emoji: "⏳", sub: "Long" }
   ],
   loadingSteps: ["Connecting to TradingView...", "Fetching indicators...", "Analyzing..."],
+  // Упрощённые индикаторы: короткие метки (не больше 2 слов)
   buyIndicators: [
-    "RSI indicates oversold condition",
-    "MACD bullish crossover",
-    "Volume increasing on uptrend",
-    "Bollinger Bands expanding upwards",
-    "Stochastic Oscillator buy signal",
-    "Moving Averages golden cross",
-    "Breaking resistance level"
+    "RSI",
+    "MACD",
+    "Volume",
+    "MA Cross",
+    "Bollinger",
+    "Breakout",
+    "Support"
   ],
   sellIndicators: [
-    "RSI indicates overbought condition",
-    "MACD bearish crossover",
-    "Volume increasing on downtrend",
-    "Bollinger Bands expanding downwards",
-    "Stochastic Oscillator sell signal",
-    "Moving Averages death cross",
-    "Breaking support level"
+    "RSI",
+    "MACD",
+    "Volume",
+    "MA Cross",
+    "Bollinger",
+    "Resistance",
+    "Breakdown"
   ]
 };

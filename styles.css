@@ -5,9 +5,10 @@
   --danger:#ff4d6d;--glow:rgba(47,128,255,.45);
 }
 
+/* page + layout */
 html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);font-family:"Inter",system-ui,sans-serif;color:var(--text);display:flex;justify-content:center;align-items:stretch;}
-.app{width:100%;max-width:600px;flex:1;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;}
-.page{display:flex;flex-direction:column;min-height:100%;}
+.app{width:100%;max-width:600px;flex:1;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;min-height:100vh;}
+.page{flex:1;display:flex;flex-direction:column;min-height:0;} /* page fills available vertical space */
 .hidden{display:none!important;}
 .app-title{text-align:center;font-size:clamp(22px,4vw,32px);font-weight:800;margin:0 0 16px;}
 
@@ -34,7 +35,7 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .step-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;padding:4px 8px;transition:all .3s;}
 .step-item.active .step-label,.step-item.done .step-label{color:var(--accent);font-weight:700;}
 
-.page-title{font-size:20px;font-weight:700;color:var(--text);text-align:center;margin:16px 0;}
+.page-title{font-size:20px;font-weight:700;color:var(--text);text-align:center;margin:20px 0;} /* увеличил отступ для симметрии */
 .top-buttons{display:flex;justify-content:space-between;margin-bottom:16px;gap:16px;}
 .sub-btn{flex:1;padding:14px;border:none;border-radius:8px;background:var(--card);color:var(--text);font-weight:600;cursor:pointer;}
 .sub-btn.active{background:var(--accent-grad);color:#fff;}
@@ -55,13 +56,13 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .new-signal-btn{background:var(--accent-grad);box-shadow:0 0 18px var(--glow);transition:all .25s;}
 .new-signal-btn:hover{filter:brightness(1.05);box-shadow:0 0 26px rgba(47,128,255,.7);}
 
-.bottom-bar{display:flex;flex-direction:column;gap:18px;} /* увеличен отступ для равновесия */
-.footer{text-align:center;font-size:14px;color:var(--muted);padding:16px 0 10px;}
+.bottom-bar{display:flex;flex-direction:column;gap:16px;margin-top:10px;} /* небольшой верхний отступ, чтобы не прилипало */
+.footer{text-align:center;font-size:14px;color:var(--muted);padding:16px 0 10px;margin-top:auto;} /* margin-top:auto чтобы футер всегда внизу страницы */
 .footer span{color:var(--accent);font-weight:600;}
 
 .center-block,.center-wrapper{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex:1;}
 
-/* 🔹 Минималистичный лоадер */
+/* Минималистичный лоадер */
 .loader{
   width:56px;
   height:56px;
@@ -70,14 +71,30 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
   border-top:4px solid var(--accent);
   animation:spin 1s linear infinite;
   box-shadow:none;
-  opacity:0.9;
+  opacity:0.95;
 }
 @keyframes spin{to{transform:rotate(360deg);}}
 
 /* SIGNAL PAGE refined */
 #signalPage {display:flex;flex-direction:column;min-height:100%;}
 #loadingSection, #signalResult {flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 24px;box-sizing:border-box;min-height:0;}
-.signal-card {width:100%;max-width:600px;margin:0 auto;padding:clamp(16px,3vh,28px);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border-radius:16px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 6px 20px rgba(0,0,0,0.35);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;min-height:0;transform:scale(0.8);}
+.signal-card {
+  width:100%;
+  max-width:100%;
+  margin:0 auto;
+  padding:clamp(16px,3vh,28px);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 6px 20px rgba(0,0,0,0.35);
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  transform:none; /* убрал масштабирование, чтобы совпадало по ширине с кнопками */
+}
 
 .signal-header{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;box-sizing:border-box;padding:0;}
 .signal-action-block{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
@@ -92,26 +109,45 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .signal-pair{font-size:clamp(22px,4.8vh,40px);font-weight:800;}
 .signal-time{font-size:clamp(18px,3.4vh,26px);color:var(--muted);font-weight:600;}
 
+/* Индикаторы — центрируем заголовок, а список элементов центрируем блоком, но выравниваем сами элементы по левому краю */
 .indicators-block{
   width:100%;
   max-width:600px;
   color:var(--muted);
   font-size:clamp(14px,1.8vh,16px);
   text-align:center;
-  margin:28px auto 28px; /* одинаковые отступы сверху и снизу */
+  margin:20px auto 20px; /* одинаковый отступ сверху и снизу */
   padding:0;
   background:none;
   box-shadow:none;
   flex:0 0 auto;
 }
-.indicators-block b{color:var(--text);display:block;margin-bottom:10px;font-size:16px;}
-.indicators-block ul{margin:0 auto;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;align-items:center;}
-.indicators-block li{margin:0;line-height:1.4;text-align:center;}
+.indicators-block b{color:var(--text);display:block;margin-bottom:10px;font-size:16px;text-align:center;}
+.indicators-block ul{
+  margin:0 auto;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:fit-content; /* благодаря этому блок списка центрируется, но элементы внутри будут слева */
+  align-items:flex-start;
+}
+.indicators-block li{
+  margin:0;
+  line-height:1.4;
+  text-align:left;
+  padding:0 8px;
+  color:var(--muted);
+  font-weight:600;
+}
 
+/* адаптив */
 @media(max-width:620px){
-  .signal-card{padding:18px;transform:scale(0.85);}
+  .signal-card{padding:18px;}
   .signal-arrow{font-size:clamp(44px,8.5vh,84px);}
   .signal-action{font-size:clamp(24px,5.5vh,44px);}
   .signal-pair{font-size:clamp(20px,5vh,36px);}
   .signal-time{font-size:clamp(16px,3.4vh,22px);}
+  .indicators-block ul{gap:8px;}
 }
