@@ -24,6 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
   newSignalBtn.onclick=()=>loadSignal();
 
   const loadSignal=()=>{clearTimers();loadingSection.classList.remove("hidden");signalResult.classList.add("hidden");const text=loadingSection.querySelector(".loading-text");PAIRS_CONFIG.loadingSteps.forEach((t,i)=>{const timer=setTimeout(()=>{text.textContent=t;if(i===PAIRS_CONFIG.loadingSteps.length-1){timers.push(setTimeout(showSignal,700));}},i*1000+200);timers.push(timer);});};
-  const showSignal=()=>{clearTimers();loadingSection.classList.add("hidden");signalResult.classList.remove("hidden");const pair=selectedPair||PAIRS_CONFIG.popularPairs[Math.floor(Math.random()*PAIRS_CONFIG.popularPairs.length)].label;const time=selectedTime||PAIRS_CONFIG.times[Math.floor(Math.random()*PAIRS_CONFIG.times.length)].time;const action=Math.random()>0.5?"BUY":"SELL";const arrow=action==="BUY"?"↗":"↘";signalPair.textContent=pair;signalTime.textContent=time;signalArrow.textContent=arrow;signalArrow.className=`signal-arrow ${action==="BUY"?"up":"down"}`;signalAction.textContent=action;signalAction.className=`signal-action ${action==="BUY"?"buy":"sell"}`;const indicators=action==="BUY"?PAIRS_CONFIG.buyIndicators:PAIRS_CONFIG.sellIndicators;signalInfo.innerHTML="<b>Based on indicators:</b><ul>"+indicators.sort(()=>0.5-Math.random()).slice(0,3).map(i=>`<li>${i}</li>`).join("")+"</ul>";};
+
+  const showSignal=()=>{
+    clearTimers();
+    loadingSection.classList.add("hidden");
+    signalResult.classList.remove("hidden");
+    const pair=selectedPair||PAIRS_CONFIG.popularPairs[Math.floor(Math.random()*PAIRS_CONFIG.popularPairs.length)].label;
+    const time=selectedTime||PAIRS_CONFIG.times[Math.floor(Math.random()*PAIRS_CONFIG.times.length)].time;
+    const action=Math.random()>0.5?"BUY":"SELL";
+    const arrow=action==="BUY"?"↗":"↘";
+    signalPair.textContent=pair;
+    signalTime.textContent=time;
+    signalArrow.textContent=arrow;
+    signalArrow.className=`signal-arrow ${action==="BUY"?"up":"down"}`;
+    signalAction.textContent=action;
+    signalAction.className=`signal-action ${action==="BUY"?"buy":"sell"}`;
+    const indicators=action==="BUY"?PAIRS_CONFIG.buyIndicators:PAIRS_CONFIG.sellIndicators;
+    signalInfo.innerHTML="<ul>"+indicators.sort(()=>0.5-Math.random()).slice(0,3).map(i=>`<li>${i}</li>`).join("")+"</ul>";
+  };
+
   show("home");
 });

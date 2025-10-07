@@ -74,9 +74,9 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 #signalPage{display:flex;flex-direction:column;min-height:100%;}
 #loadingSection,#signalResult{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 24px;box-sizing:border-box;min-height:0;}
 .signal-card{width:100%;margin:0 auto;padding:clamp(28px,5vh,42px);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 24px rgba(0,0,0,0.45);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.signal-header{display:flex;justify-content:space-between;align-items:stretch;width:100%;}
-.signal-left{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;}
-.signal-right{display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.signal-header{display:flex;justify-content:space-between;align-items:center;width:100%;}
+.signal-left{display:flex;flex-direction:column;align-items:flex-end;}
+.signal-right{display:flex;flex-direction:column;align-items:flex-start;}
 .signal-arrow{font-size:clamp(56px,10vh,100px);font-weight:900;line-height:1;}
 .signal-action{font-size:clamp(28px,6vh,52px);font-weight:900;}
 .signal-arrow.up,.signal-action.buy{color:#2CE074;}
@@ -84,15 +84,4 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .signal-pair{font-size:clamp(20px,4.6vh,32px);font-weight:800;}
 .signal-time{margin-top:6px;font-size:clamp(22px,4.4vh,30px);color:var(--muted);font-weight:700;text-align:center;}
 
-.indicators-block{width:100%;max-width:500px;color:var(--text);font-size:clamp(17px,2vh,19px);text-align:center;margin:18px auto 10px;padding:0 12px;}
-.indicators-block b{color:var(--accent);display:block;margin-bottom:10px;font-size:18px;font-weight:700;text-align:center;}
-.indicators-block ul{margin:0 auto;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;width:fit-content;align-items:flex-start;}
-.indicators-block li{margin:0;line-height:1.5;text-align:left;padding:4px 10px;color:var(--muted);font-weight:700;}
-
-@media(max-width:620px){
-  .signal-card{padding:26px;}
-  .signal-arrow{font-size:clamp(48px,9vh,90px);}
-  .signal-action{font-size:clamp(24px,5.5vh,46px);}
-  .signal-pair{font-size:clamp(18px,4.5vh,30px);}
-  .signal-time{font-size:clamp(20px,3.8vh,28px);}
-}
+.indicators-block{width:100%;max-width:500px;color:var(--text);font-size:clamp
