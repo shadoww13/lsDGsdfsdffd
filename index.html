@@ -3,31 +3,28 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trading App</title>
+  <title>Pulse Trading</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app">
     <div id="homePage" class="page">
-      <h1 class="app-title">Menu</h1>
+      <header class="app-header">Pulse</header>
       <div class="menu-grid" id="menuGrid"></div>
-      <div class="popular">
-        <h2 class="popular-title">Popular Pairs</h2>
-        <ul id="pairsList" class="pairs-list"></ul>
-      </div>
+      <ul id="pairsList" class="pairs-list"></ul>
       <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
 
     <div id="pairPage" class="page hidden">
+      <header class="app-header">Pulse</header>
       <div class="stepper">
         <div class="progress-bar">
-          <div class="step-item active"><span class="step-label">Pair</span></div>
-          <div class="step-item"><span class="step-label">Time</span></div>
-          <div class="step-item"><span class="step-label">Signal</span></div>
+          <div class="step-item active"><span class="step-label">PAIR</span></div>
+          <div class="step-item"><span class="step-label">TIME</span></div>
+          <div class="step-item"><span class="step-label">SIGNAL</span></div>
         </div>
       </div>
-      <h2 class="page-title compact-title">Choose Your Pair</h2>
       <div class="top-buttons">
         <button class="sub-btn active" id="otcBtn">OTC</button>
         <button class="sub-btn" id="stockBtn">STOCK</button>
@@ -38,14 +35,18 @@
     </div>
 
     <div id="timePage" class="page hidden">
+      <header class="app-header">Pulse</header>
       <div class="stepper">
         <div class="progress-bar">
-          <div class="step-item done"><span class="step-label">Pair</span></div>
-          <div class="step-item active"><span class="step-label">Time</span></div>
-          <div class="step-item"><span class="step-label">Signal</span></div>
+          <div class="step-item done"><span class="step-label">PAIR</span></div>
+          <div class="step-item active"><span class="step-label">TIME</span></div>
+          <div class="step-item"><span class="step-label">SIGNAL</span></div>
         </div>
       </div>
-      <h2 class="page-title compact-title">Select Time Frame</h2>
+      <div class="top-buttons">
+        <button class="sub-btn active" id="otcBtn">OTC</button>
+        <button class="sub-btn" id="stockBtn">STOCK</button>
+      </div>
       <div id="timeGrid" class="time-grid"></div>
       <div class="recommend-card">Recommended: <b>60 seconds</b> is optimal for quick signals</div>
       <button class="back-btn">← Back</button>
@@ -53,44 +54,37 @@
     </div>
 
     <div id="signalPage" class="page hidden">
+      <header class="app-header">Pulse</header>
       <div class="stepper">
-        <div class="progress-bar tight-progress">
-          <div class="step-item done"><span class="step-label">Pair</span></div>
-          <div class="step-item done"><span class="step-label">Time</span></div>
-          <div class="step-item active"><span class="step-label">Signal</span></div>
+        <div class="progress-bar">
+          <div class="step-item done"><span class="step-label">PAIR</span></div>
+          <div class="step-item done"><span class="step-label">TIME</span></div>
+          <div class="step-item active"><span class="step-label">SIGNAL</span></div>
         </div>
       </div>
-
-      <h2 class="page-title compact-title">Signal</h2>
-
       <div id="loadingSection" class="center-block">
         <div class="center-wrapper">
           <div class="loader"></div>
           <div class="loading-text">Connecting...</div>
         </div>
       </div>
-
       <div id="signalResult" class="center-block hidden">
         <div class="signal-header-top">
           <span id="signalPair" class="signal-pair">USD/EUR</span>
           <span id="signalTime" class="signal-time">1m</span>
         </div>
-
         <div class="signal-card">
           <div class="signal-body">
             <span id="signalArrow" class="signal-arrow">↗</span>
             <span id="signalAction" class="signal-action">BUY</span>
           </div>
         </div>
-
         <div id="signalInfo" class="indicators-block"></div>
       </div>
-
       <div class="bottom-bar">
         <button id="newSignalBtn" class="new-signal-btn">+ New Signal</button>
         <button class="back-btn">← Back</button>
       </div>
-
       <div class="footer">Powered by <span>StocksLabs</span></div>
     </div>
   </div>
