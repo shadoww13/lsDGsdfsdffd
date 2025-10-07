@@ -5,8 +5,8 @@
   --danger:#ff4d6d;--glow:rgba(47,128,255,.45);
 }
 
-html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);font-family:"Inter",system-ui,sans-serif;color:var(--text);display:flex;justify-content:center;align-items:stretch;}
-.app{width:100%;max-width:600px;flex:1;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;min-height:100vh;}
+html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);font-family:"Inter",system-ui,sans-serif;color:var(--text);display:flex;justify-content:center;align-items:stretch;overflow-x:hidden;}
+.app{width:100%;max-width:600px;flex:1;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;min-height:100vh;overflow-x:hidden;}
 .page{flex:1;display:flex;flex-direction:column;min-height:0;}
 .hidden{display:none!important;}
 .app-title{text-align:center;font-size:clamp(22px,4vw,32px);font-weight:800;margin:0 0 16px;}
@@ -70,10 +70,10 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 @keyframes spin{to{transform:rotate(360deg);}}
 
 /* SIGNAL PAGE */
-#signalPage{display:flex;flex-direction:column;min-height:100%;width:100%;max-width:600px;}
-#loadingSection,#signalResult{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 24px;box-sizing:border-box;}
+#signalPage{display:flex;flex-direction:column;min-height:100%;width:100%;max-width:600px;box-sizing:border-box;}
+#loadingSection,#signalResult{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 16px;box-sizing:border-box;}
 
-.signal-card{width:100%;max-width:420px;margin:0 auto;padding:clamp(28px,5vh,42px);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 24px rgba(0,0,0,0.45);display:flex;justify-content:center;align-items:center;}
+.signal-card{width:100%;max-width:420px;margin:0 auto;padding:clamp(28px,5vh,42px);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 24px rgba(0,0,0,0.45);display:flex;justify-content:center;align-items:center;box-sizing:border-box;}
 .signal-body{display:flex;align-items:center;justify-content:center;gap:30px;}
 .signal-arrow{font-size:clamp(56px,10vh,100px);font-weight:900;line-height:1;}
 .signal-action{font-size:clamp(28px,6vh,52px);font-weight:900;}
@@ -83,6 +83,6 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .signal-pair{font-size:clamp(20px,4.6vh,32px);font-weight:800;}
 .signal-time{font-size:clamp(20px,4vh,28px);color:var(--muted);font-weight:700;}
 
-.indicators-block{width:100%;max-width:480px;text-align:center;margin-top:26px;}
+.indicators-block{width:100%;max-width:420px;text-align:center;margin-top:26px;}
 .indicators-block ul{list-style:none;padding:0;margin:0;display:flex;justify-content:center;flex-wrap:wrap;gap:10px;}
 .indicators-block li{background:var(--card);padding:8px 14px;border-radius:8px;border:1px solid #1f2747;font-weight:600;font-size:14px;}
