@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <li class="pair">
         <div class="pair-left">
           ${p.flag1==="btc"?"₿":`<span class="flag flag-icon flag-icon-${p.flag1}"></span>`}
-          <span class="pair-label">${p.label}</span>
         </div>
+        <span class="pair-label">${p.label}</span>
         <div class="pair-right">
           ${p.flag2==="btc"?"₿":`<span class="flag flag-icon flag-icon-${p.flag2}"></span>`}
         </div>
