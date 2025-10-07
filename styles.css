@@ -28,6 +28,9 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .flag-icon{background-size:cover;background-position:center;}
 .pair .fire{color:var(--danger);font-size:12px;font-weight:600;}
 
+/* заголовок Popular Pairs по центру */
+.popular-title{text-align:center;font-size:18px;font-weight:700;margin:20px 0 12px;}
+
 .stepper{display:flex;justify-content:center;align-items:center;margin:8px 0 16px;}
 .progress-bar{display:flex;align-items:center;gap:12px;background:#1f2747;border-radius:16px;padding:6px 10px;box-shadow:0 2px 4px rgba(0,0,0,.3);}
 .step-item{display:flex;align-items:center;}
@@ -71,7 +74,7 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
   width:100%;
   max-width:100%;
   margin:0 auto;
-  padding:clamp(28px,5vh,40px);
+  padding:clamp(34px,6vh,48px); /* выше на 20% */
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
   border-radius:20px;
   border:1px solid rgba(255,255,255,0.08);
@@ -84,90 +87,28 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
   flex:0 0 auto;
 }
 
-.signal-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:stretch;
-  width:100%;
-}
-.signal-left {
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:flex-start;
-}
-.signal-right {
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
+.signal-header{display:flex;justify-content:space-between;align-items:stretch;width:100%;}
+.signal-left{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;}
+.signal-right{display:flex;flex-direction:column;justify-content:center;align-items:center;}
 
-.signal-arrow {
-  font-size:clamp(56px,10vh,100px);
-  font-weight:900;
-  line-height:1;
-}
-.signal-action {
-  font-size:clamp(28px,6vh,52px);
-  font-weight:900;
-}
-.signal-arrow.up,.signal-action.buy {color:#2CE074;}
-.signal-arrow.down,.signal-action.sell {color:#FF5666;}
+.signal-arrow{font-size:clamp(56px,10vh,100px);font-weight:900;line-height:1;}
+.signal-action{font-size:clamp(28px,6vh,52px);font-weight:900;}
+.signal-arrow.up,.signal-action.buy{color:#2CE074;}
+.signal-arrow.down,.signal-action.sell{color:#FF5666;}
 
-.signal-pair {font-size:clamp(20px,4.8vh,34px);font-weight:800;}
-.signal-time {
-  margin-top:4px;
-  font-size:clamp(20px,4vh,28px);
-  color:var(--muted);
-  font-weight:700;
-  text-align:center;
-}
+.signal-pair{font-size:clamp(20px,4.6vh,32px);font-weight:800;}
+.signal-time{margin-top:10px;font-size:clamp(22px,4.4vh,30px);color:var(--muted);font-weight:700;text-align:center;}
 
-.indicators-block {
-  width:100%;
-  max-width:600px;
-  color:var(--text);
-  font-size:clamp(16px,2vh,18px);
-  text-align:center;
-  margin:28px auto;
-  padding:0 12px;
-  background:none;
-  box-shadow:none;
-  flex:0 0 auto;
-}
-.indicators-block b {
-  color:var(--accent);
-  display:block;
-  margin-bottom:14px;
-  font-size:18px;
-  font-weight:700;
-  text-align:center;
-}
-.indicators-block ul {
-  margin:0 auto;
-  padding:0;
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  width:fit-content;
-  align-items:flex-start;
-}
-.indicators-block li {
-  margin:0;
-  line-height:1.5;
-  text-align:left;
-  padding:4px 10px;
-  color:var(--muted);
-  font-weight:700;
-}
+.indicators-block{width:100%;max-width:600px;color:var(--text);font-size:clamp(18px,2.2vh,20px);text-align:center;margin:28px auto;padding:0 12px;background:none;box-shadow:none;flex:0 0 auto;}
+.indicators-block b{color:var(--accent);display:block;margin-bottom:16px;font-size:20px;font-weight:700;text-align:center;}
+.indicators-block ul{margin:0 auto;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;width:fit-content;align-items:flex-start;}
+.indicators-block li{margin:0;line-height:1.5;text-align:left;padding:4px 12px;color:var(--muted);font-weight:700;}
 
 @media(max-width:620px){
-  .signal-card{padding:22px;}
+  .signal-card{padding:26px;}
   .signal-arrow{font-size:clamp(48px,9vh,90px);}
   .signal-action{font-size:clamp(24px,5.5vh,46px);}
-  .signal-pair{font-size:clamp(18px,4.5vh,32px);}
-  .signal-time{font-size:clamp(18px,3.5vh,26px);}
-  .indicators-block ul{gap:10px;}
+  .signal-pair{font-size:clamp(18px,4.5vh,30px);}
+  .signal-time{font-size:clamp(20px,3.8vh,28px);}
+  .indicators-block ul{gap:7px;}
 }
