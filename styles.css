@@ -70,7 +70,7 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 @keyframes spin{to{transform:rotate(360deg);}}
 
 /* SIGNAL PAGE */
-#signalPage{display:flex;flex-direction:column;min-height:100%;}
+#signalPage{display:flex;flex-direction:column;min-height:100%;width:100%;max-width:600px;}
 #loadingSection,#signalResult{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 24px;box-sizing:border-box;}
 
 .signal-card{width:100%;max-width:420px;margin:0 auto;padding:clamp(28px,5vh,42px);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 24px rgba(0,0,0,0.45);display:flex;justify-content:center;align-items:center;}
