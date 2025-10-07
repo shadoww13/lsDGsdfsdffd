@@ -5,7 +5,6 @@
   --danger:#ff4d6d;--glow:rgba(47,128,255,.45);
 }
 
-/* page + layout */
 html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);font-family:"Inter",system-ui,sans-serif;color:var(--text);display:flex;justify-content:center;align-items:stretch;}
 .app{width:100%;max-width:600px;flex:1;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;min-height:100vh;}
 .page{flex:1;display:flex;flex-direction:column;min-height:0;}
@@ -65,18 +64,18 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
 .loader{width:56px;height:56px;border-radius:50%;border:4px solid rgba(255,255,255,0.08);border-top:4px solid var(--accent);animation:spin 1s linear infinite;box-shadow:none;opacity:0.95;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* SIGNAL PAGE refined */
+/* SIGNAL PAGE */
 #signalPage {display:flex;flex-direction:column;min-height:100%;}
 #loadingSection, #signalResult {flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 24px;box-sizing:border-box;min-height:0;}
 .signal-card {
   width:100%;
   max-width:100%;
   margin:0 auto;
-  padding:clamp(16px,3vh,28px);
+  padding:clamp(28px,5vh,40px);
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.06);
-  box-shadow:0 6px 20px rgba(0,0,0,0.35);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 8px 24px rgba(0,0,0,0.45);
   box-sizing:border-box;
   display:flex;
   flex-direction:column;
@@ -101,33 +100,74 @@ html,body{margin:0;padding:0;width:100%;min-height:100vh;background:var(--bg);fo
   display:flex;
   flex-direction:column;
   justify-content:center;
-  align-items:flex-end;
+  align-items:center;
 }
 
 .signal-arrow {
-  font-size:clamp(44px,8vh,84px);
+  font-size:clamp(56px,10vh,100px);
   font-weight:900;
   line-height:1;
 }
 .signal-action {
-  font-size:clamp(24px,5vh,44px);
+  font-size:clamp(28px,6vh,52px);
   font-weight:900;
 }
 .signal-arrow.up,.signal-action.buy {color:#2CE074;}
 .signal-arrow.down,.signal-action.sell {color:#FF5666;}
-.signal-pair {font-size:clamp(20px,5vh,36px);font-weight:800;}
-.signal-time {font-size:clamp(16px,3vh,22px);color:var(--muted);font-weight:600;}
 
-.indicators-block{width:100%;max-width:600px;color:var(--muted);font-size:clamp(14px,1.8vh,16px);text-align:center;margin:20px auto 20px;padding:0;background:none;box-shadow:none;flex:0 0 auto;}
-.indicators-block b{color:var(--text);display:block;margin-bottom:10px;font-size:16px;text-align:center;}
-.indicators-block ul{margin:0 auto;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;width:fit-content;align-items:flex-start;}
-.indicators-block li{margin:0;line-height:1.4;text-align:left;padding:0 8px;color:var(--muted);font-weight:600;}
+.signal-pair {font-size:clamp(20px,4.8vh,34px);font-weight:800;}
+.signal-time {
+  margin-top:4px;
+  font-size:clamp(20px,4vh,28px);
+  color:var(--muted);
+  font-weight:700;
+  text-align:center;
+}
+
+.indicators-block {
+  width:100%;
+  max-width:600px;
+  color:var(--text);
+  font-size:clamp(16px,2vh,18px);
+  text-align:center;
+  margin:28px auto;
+  padding:0 12px;
+  background:none;
+  box-shadow:none;
+  flex:0 0 auto;
+}
+.indicators-block b {
+  color:var(--accent);
+  display:block;
+  margin-bottom:14px;
+  font-size:18px;
+  font-weight:700;
+  text-align:center;
+}
+.indicators-block ul {
+  margin:0 auto;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:fit-content;
+  align-items:flex-start;
+}
+.indicators-block li {
+  margin:0;
+  line-height:1.5;
+  text-align:left;
+  padding:4px 10px;
+  color:var(--muted);
+  font-weight:700;
+}
 
 @media(max-width:620px){
-  .signal-card{padding:18px;}
-  .signal-arrow{font-size:clamp(40px,8vh,80px);}
-  .signal-action{font-size:clamp(22px,5vh,40px);}
-  .signal-pair{font-size:clamp(18px,5vh,34px);}
-  .signal-time{font-size:clamp(14px,3vh,20px);}
-  .indicators-block ul{gap:8px;}
+  .signal-card{padding:22px;}
+  .signal-arrow{font-size:clamp(48px,9vh,90px);}
+  .signal-action{font-size:clamp(24px,5.5vh,46px);}
+  .signal-pair{font-size:clamp(18px,4.5vh,32px);}
+  .signal-time{font-size:clamp(18px,3.5vh,26px);}
+  .indicators-block ul{gap:10px;}
 }
