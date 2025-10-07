@@ -24,23 +24,6 @@ const PAIRS_CONFIG = {
     { time: "5m", emoji: "⏳", sub: "Long" }
   ],
   loadingSteps: ["Connecting to TradingView...", "Fetching indicators...", "Analyzing..."],
-  // Упрощённые индикаторы: короткие метки (не больше 2 слов)
-  buyIndicators: [
-    "RSI",
-    "MACD",
-    "Volume",
-    "MA Cross",
-    "Bollinger",
-    "Breakout",
-    "Support"
-  ],
-  sellIndicators: [
-    "RSI",
-    "MACD",
-    "Volume",
-    "MA Cross",
-    "Bollinger",
-    "Resistance",
-    "Breakdown"
-  ]
+  buyIndicators: ["RSI", "MACD", "Volume", "MA Cross", "Bollinger", "Breakout", "Support"],
+  sellIndicators: ["RSI", "MACD", "Volume", "MA Cross", "Bollinger", "Resistance", "Breakdown"]
 };
