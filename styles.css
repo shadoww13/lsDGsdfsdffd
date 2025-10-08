@@ -1,5 +1,4 @@
 :root {
-  --app-height: 100vh;
   --bg-main: linear-gradient(180deg, #05080f 0%, #0a0e18 100%);
   --window-bg: #0f141f;
   --card-bg: #191e2c;
@@ -9,7 +8,6 @@
   --accent-grad: linear-gradient(90deg, #2a9ef1 0%, #1f7fd8 100%);
   --text: #e8ebf5;
   --muted: #9ba2b8;
-  --danger: #ff5666;
   --buy: #2ce074;
   --sell: #ff5666;
   --radius: 14px;
@@ -25,17 +23,21 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: var(--app-height);
+  min-height: 100%;
   background: var(--bg-main);
   font-family: "Inter", system-ui, sans-serif;
   color: var(--text);
 }
 
+body {
+  display: flex;
+  justify-content: center;
+}
+
 .app {
   width: 100%;
   max-width: 640px;
-  height: var(--app-height);
-  margin: 0 auto;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   padding: 16px 20px;
@@ -45,18 +47,16 @@ html, body {
 .page {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  height: 100%;
-  padding-top: 12px;
-  padding-bottom: 10px;
+  flex-grow: 1;
+  min-height: 0;
 }
 
 .hidden { display: none !important; }
 
 .app-header {
   text-align: center;
-  padding-top: 8px;
-  padding-bottom: 6px;
+  padding: 8px 0 6px;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -76,10 +76,13 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  flex: 1;
+  flex-grow: 1;
   min-height: 0;
   margin-top: 8px;
   margin-bottom: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .window {
@@ -91,7 +94,6 @@ html, body {
   flex-direction: column;
   gap: 10px;
   flex-grow: 1;
-  min-height: 120px;
 }
 
 .menu-grid {
@@ -181,9 +183,8 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  flex: 1;
+  flex-grow: 1;
   min-height: 0;
-  margin-top: 6px;
 }
 
 .pair-card, .time-card {
@@ -231,11 +232,13 @@ html, body {
 .new-signal-btn { background: var(--accent-grad); color: #fff; }
 
 .bottom-bar {
-  margin-top: auto;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding-top: 12px;
+  padding-bottom: 4px;
+  margin-top: auto;
 }
 
 .center-block, .center-wrapper {
@@ -244,7 +247,7 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  flex: 1;
+  flex-grow: 1;
   min-height: 180px;
 }
 
@@ -329,49 +332,20 @@ html, body {
   text-align: center;
   font-size: 12px;
   color: var(--muted);
-  padding-bottom: 6px;
 }
 
 .footer span { color: var(--accent); }
 
-/* === АДАПТАЦИЯ ПОД МАЛЕНЬКИЕ ЭКРАНЫ === */
-
-.page {
-  min-height: 100%;
-  max-height: var(--app-height);
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-}
-
-.content {
-  flex: 1;
-  min-height: 0;
-  overflow: visible;
-}
-
-.bottom-bar {
-  flex-shrink: 0;
-  position: sticky;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(10,14,24,0.8) 0%, rgba(10,14,24,1) 100%);
-  padding-top: 12px;
-  padding-bottom: 8px;
-  backdrop-filter: blur(6px);
-}
-
+/* --- адаптация под низкие окна --- */
 @media (max-height: 620px) {
   .logo { font-size: 24px; }
   .sub-btn, .back-btn, .new-signal-btn { padding: 10px; font-size: 14px; }
   .pair-card, .time-card { padding: 12px; font-size: 13px; }
   .signal-arrow { font-size: 44px; }
   .signal-action { font-size: 26px; }
-  .page { padding-top: 4px; padding-bottom: 4px; }
 }
 
 @media (max-height: 500px) {
-  .subtitle { display: none; }
+  .subtitle, .footer { display: none; }
   .recommend-card { font-size: 12px; padding: 10px; }
-  .footer { display: none; }
 }
