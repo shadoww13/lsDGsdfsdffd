@@ -1,4 +1,5 @@
 :root {
+  --app-height: 100vh;
   --bg-main: linear-gradient(180deg, #05080f 0%, #0a0e18 100%);
   --window-bg: #0f141f;
   --card-bg: #191e2c;
@@ -22,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh;
+  height: var(--app-height);
   font-family: "Inter", sans-serif;
   background: var(--bg-main);
   color: var(--text);
@@ -33,7 +34,7 @@ body {
 .app {
   width: 100%;
   max-width: 620px;
-  min-height: 100vh;
+  height: var(--app-height);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,7 +45,6 @@ body {
 
 .app-header {
   text-align: center;
-  margin-bottom: 10px;
 }
 
 .logo {
@@ -76,6 +76,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-grow: 1;
 }
 
 .menu-grid {
@@ -158,44 +159,4 @@ body {
 
 .footer span {
   color: var(--accent);
-}
-
-@media (max-height: 680px) {
-  .logo {
-    font-size: 26px;
-  }
-  .window {
-    padding: 10px;
-  }
-  .menu-card {
-    font-size: 13px;
-    padding: 12px 0;
-  }
-  .pair-label {
-    font-size: 13px;
-  }
-  .section-title {
-    font-size: 14px;
-  }
-}
-
-@media (max-height: 550px) {
-  .app {
-    padding-top: 14px;
-    gap: 10px;
-  }
-  .logo {
-    font-size: 24px;
-  }
-  .window {
-    padding: 8px;
-    gap: 6px;
-  }
-  .menu-card {
-    font-size: 12px;
-    padding: 10px 0;
-  }
-  .pair {
-    padding: 6px 8px;
-  }
 }
