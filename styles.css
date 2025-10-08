@@ -12,6 +12,7 @@
   --sell: #ff5666;
   --radius: 14px;
   --shadow: 0 6px 18px rgba(0,0,0,0.6);
+  --danger: #ff5666;
 }
 
 *,
@@ -96,6 +97,7 @@ body {
   flex-grow: 1;
 }
 
+/* --- Меню (главная) --- */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -105,26 +107,38 @@ body {
 .menu-card {
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 18px 0;
+  padding: 12px;
   text-align: center;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: transform 0.18s, background 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 78px;
 }
 
-.menu-card:hover { background: var(--hover); }
+.menu-card:hover { transform: translateY(-4px); background: var(--hover); }
 
-.section-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  color: var(--accent);
+.menu-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.menu-title {
   font-weight: 700;
   font-size: 15px;
+  color: var(--text);
 }
 
+.menu-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* --- Пары --- */
 .pairs-list {
   list-style: none;
   margin: 0;
@@ -147,6 +161,14 @@ body {
 
 .pair:hover { background: var(--hover); }
 
+.pair-left {
+  width: 36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
+
 .pair-label {
   flex: 1;
   text-align: center;
@@ -154,8 +176,27 @@ body {
   color: var(--text);
 }
 
-.flag { border-radius: 3px; }
+.pair-right {
+  min-width: 64px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  font-size:14px;
+}
 
+/* OTC бейдж */
+.otc-badge {
+  background: rgba(255,255,255,0.04);
+  color: var(--muted);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Верхние кнопки (OTC / STOCK) на странице пар */
 .top-buttons {
   display: flex;
   justify-content: center;
@@ -163,21 +204,40 @@ body {
   margin-bottom: 8px;
 }
 
+/* Простые насыщенно-синие кнопки без анимации */
 .sub-btn {
   flex: 1;
-  max-width: 160px;
-  padding: 14px;
-  border: none;
-  border-radius: var(--radius);
-  background: #0f1724;
-  color: #fff;
+  max-width: 180px;
+  padding: 14px 16px;
+  border: 1px solid rgba(42,158,241,0.6);
+  border-radius: 14px;
+  background: rgba(42,158,241,0.25);
+  color: var(--text);
   font-weight: 700;
+  font-size: 15px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.sub-btn.active { background: var(--accent-grad); }
-.sub-btn:hover { background: var(--hover); }
+.sub-btn:hover {
+  background: rgba(42,158,241,0.35);
+  border-color: rgba(42,158,241,0.8);
+  box-shadow: 0 0 10px rgba(42,158,241,0.25);
+}
+
+.sub-btn.active {
+  background: rgba(42,158,241,0.5);
+  border-color: rgba(42,158,241,0.9);
+  box-shadow: 0 0 14px rgba(42,158,241,0.35);
+}
+
+.sub-btn.otc, .sub-btn.stock {
+  color: var(--text);
+}
 
 .pairs-grid, .time-grid {
   display: grid;
@@ -195,6 +255,11 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-height: 88px;
 }
 
 .pair-card:hover, .time-card:hover { background: var(--hover); }
@@ -202,12 +267,16 @@ body {
 .time-top {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
+  align-items: center;
 }
+
+.time-emoji { font-size: 18px; line-height: 1; }
 
 .time-sub {
   font-size: 12px;
   color: var(--muted);
+  margin-top: 6px;
 }
 
 .recommend-card {
@@ -265,28 +334,30 @@ body {
 .signal-card {
   background: var(--card-inner);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 8px;
 }
 
+/* увеличенная иконка сигнала */
 .signal-body {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
+  transform: scale(1.3);
 }
 
 .signal-arrow {
-  font-size: 56px;
+  font-size: 80px;
   font-weight: 900;
 }
 
 .signal-action {
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 900;
 }
 
@@ -341,8 +412,8 @@ body {
   .logo { font-size: 24px; }
   .sub-btn, .back-btn, .new-signal-btn { padding: 10px; font-size: 14px; }
   .pair-card, .time-card { padding: 12px; font-size: 13px; }
-  .signal-arrow { font-size: 44px; }
-  .signal-action { font-size: 26px; }
+  .signal-arrow { font-size: 64px; }
+  .signal-action { font-size: 28px; }
 }
 
 @media (max-height: 500px) {

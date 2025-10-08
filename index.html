@@ -41,8 +41,9 @@
 
       <main class="content grow">
         <div class="top-buttons">
-          <button id="otcBtn" class="sub-btn active">OTC</button>
-          <button id="stockBtn" class="sub-btn">STOCK</button>
+          <!-- добавлены классы otc/stock для отдельной стилизации -->
+          <button id="otcBtn" class="sub-btn otc active">OTC</button>
+          <button id="stockBtn" class="sub-btn stock">STOCK</button>
         </div>
 
         <div id="pairGrid" class="pairs-grid"></div>
@@ -59,10 +60,7 @@
       <header class="app-header"><h1 class="logo">Pulse</h1></header>
 
       <main class="content grow">
-        <div class="top-buttons">
-          <button class="sub-btn active">OTC</button>
-          <button class="sub-btn">STOCK</button>
-        </div>
+        <!-- УБРАНЫ OTC/STOCK кнопки — они не нужны на этой странице -->
 
         <div id="timeGrid" class="time-grid"></div>
         <div class="recommend-card">Recommended: <b>60 seconds</b> is optimal for quick signals</div>
