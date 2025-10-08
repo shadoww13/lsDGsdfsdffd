@@ -196,50 +196,70 @@ body {
   border: 1px solid rgba(255,255,255,0.03);
 }
 
-/* Верхние кнопки (OTC / STOCK) на странице пар */
+/* --- Верхние кнопки (OTC / STOCK) --- */
 .top-buttons {
   display: flex;
   justify-content: center;
   gap: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-/* Простые насыщенно-синие кнопки без анимации */
 .sub-btn {
   flex: 1;
   max-width: 180px;
-  padding: 14px 16px;
-  border: 1px solid rgba(42,158,241,0.6);
+  min-height: 60px;
+  border: 1px solid rgba(42,158,241,0.7);
   border-radius: 14px;
   background: rgba(42,158,241,0.25);
   color: var(--text);
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  display: inline-flex;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 }
 
 .sub-btn:hover {
   background: rgba(42,158,241,0.35);
-  border-color: rgba(42,158,241,0.8);
-  box-shadow: 0 0 10px rgba(42,158,241,0.25);
+  border-color: rgba(42,158,241,0.9);
+  box-shadow: 0 0 10px rgba(42,158,241,0.3);
 }
 
 .sub-btn.active {
   background: rgba(42,158,241,0.5);
-  border-color: rgba(42,158,241,0.9);
-  box-shadow: 0 0 14px rgba(42,158,241,0.35);
+  border-color: rgba(42,158,241,1);
+  box-shadow: 0 0 14px rgba(42,158,241,0.4);
 }
 
-.sub-btn.otc, .sub-btn.stock {
-  color: var(--text);
+/* --- Сетка пар --- */
+.pairs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  flex-grow: 1;
+  align-content: stretch;
 }
 
-.pairs-grid, .time-grid {
+.pair-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.pair-card:hover { background: var(--hover); }
+
+/* --- Вкладка времени --- */
+.time-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -247,7 +267,7 @@ body {
   min-height: 0;
 }
 
-.pair-card, .time-card {
+.time-card {
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 16px;
@@ -262,7 +282,7 @@ body {
   min-height: 88px;
 }
 
-.pair-card:hover, .time-card:hover { background: var(--hover); }
+.time-card:hover { background: var(--hover); }
 
 .time-top {
   display: flex;
@@ -288,6 +308,7 @@ body {
   margin-top: 8px;
 }
 
+/* --- Кнопки внизу --- */
 .back-btn, .new-signal-btn {
   width: 100%;
   padding: 14px;
@@ -310,6 +331,7 @@ body {
   margin-top: auto;
 }
 
+/* --- Сигналы --- */
 .center-block, .center-wrapper {
   display: flex;
   flex-direction: column;
@@ -341,7 +363,6 @@ body {
   margin-top: 8px;
 }
 
-/* увеличенная иконка сигнала */
 .signal-body {
   display: flex;
   align-items: center;
@@ -399,6 +420,7 @@ body {
   font-size: 13px;
 }
 
+/* --- Footer --- */
 .footer {
   text-align: center;
   font-size: 12px;
