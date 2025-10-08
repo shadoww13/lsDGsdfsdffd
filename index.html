@@ -49,9 +49,9 @@
       </header>
       <div class="content">
         <div class="window">
-          <div class="recommend-card">Recommended: 60 seconds is optimal for quick signals</div>
           <div id="timeGrid" class="time-grid"></div>
         </div>
+        <div class="recommend-card">Recommended: 60 seconds is optimal for quick signals</div>
       </div>
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
@@ -65,6 +65,13 @@
       </header>
       <div class="content">
         <div class="window signal-window">
+          <div class="signal-header-top">
+            <div id="signalPair" class="signal-pair">USD/EUR</div>
+          </div>
+          <div class="signal-header-bottom">
+            <div id="signalType" class="signal-type">OTC</div>
+            <div id="signalTime" class="signal-time">1m</div>
+          </div>
           <div id="loadingSection" class="center-block">
             <div class="center-wrapper">
               <div class="loader"></div>
@@ -72,10 +79,6 @@
             </div>
           </div>
           <div id="signalResult" class="signal-card hidden">
-            <div class="signal-header-top">
-              <div id="signalPair" class="signal-pair">USD/EUR</div>
-              <div id="signalTime" class="signal-time">1m</div>
-            </div>
             <div class="signal-body">
               <div id="signalArrow" class="signal-arrow">↗</div>
               <div id="signalAction" class="signal-action">BUY</div>

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingSection = document.getElementById("loadingSection");
   const signalResult = document.getElementById("signalResult");
   const signalPair = document.getElementById("signalPair");
+  const signalType = document.getElementById("signalType");
   const signalTime = document.getElementById("signalTime");
   const signalArrow = document.getElementById("signalArrow");
   const signalAction = document.getElementById("signalAction");
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let history = ["home"];
   let selectedPair = null;
   let selectedTime = null;
+  let selectedType = "OTC";
   let timers = [];
 
   const clearTimers = () => { timers.forEach(t => clearTimeout(t)); timers = []; };
@@ -84,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pairGrid.querySelectorAll(".pair-card").forEach(c => {
       c.addEventListener("click", () => {
         selectedPair = c.textContent.trim();
+        selectedType = mode.toUpperCase();
         show("time");
       });
     });
@@ -141,10 +144,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pair = selectedPair || "USD/EUR";
     const time = selectedTime || "1m";
+    const type = selectedType || "OTC";
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
     const arrow = action === "BUY" ? "↗" : "↘";
 
     signalPair.textContent = pair;
+    signalType.textContent = type;
     signalTime.textContent = time;
     signalArrow.textContent = arrow;
     signalArrow.className = `signal-arrow ${action === "BUY" ? "up" : "down"}`;

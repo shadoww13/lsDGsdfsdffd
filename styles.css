@@ -297,7 +297,6 @@ body {
   padding: 10px;
   text-align: center;
   color: var(--muted);
-  margin-top: 6px;
   font-size: 12px;
 }
 
@@ -309,9 +308,13 @@ body {
   border-radius: var(--radius);
   font-weight: 700;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.back-btn { background: #0f1724; color: #fff; }
+.back-btn {
+  background: #0f1724;
+  color: #fff;
+}
 
 .new-signal-btn {
   background: var(--accent-grad);
@@ -360,7 +363,7 @@ body {
 /* --- Вкладка SIGNAL --- */
 .signal-bg {
   background: var(--window-bg);
-  padding: 20px 16px;
+  padding: 12px;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
@@ -375,7 +378,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin-top: 14px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -385,8 +387,13 @@ body {
 }
 
 .signal-header-top {
+  text-align: center;
+  width: 100%;
+}
+
+.signal-header-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 12px;
   width: 100%;
@@ -396,6 +403,15 @@ body {
   font-size: 20px;
   font-weight: 700;
   color: var(--text);
+}
+
+.signal-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 6px 12px;
 }
 
 .signal-time {
@@ -461,32 +477,6 @@ body {
 
 .indicators-block li:hover {
   transform: translateY(-3px);
-}
-
-/* --- Кнопка нового сигнала --- */
-.new-signal-btn {
-  background: var(--accent-grad);
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  display: inline-block;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 240px;
-}
-
-.new-signal-btn:hover {
-  background: var(--accent);
-  box-shadow: 0 6px 16px rgba(42, 158, 241, 0.3);
-}
-
-.new-signal-btn:active {
-  transform: scale(0.98);
 }
 
 /* --- Плавная анимация для всей страницы --- */
