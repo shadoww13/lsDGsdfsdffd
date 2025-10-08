@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Pulse Trading</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pulse</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,37 +12,31 @@
     <div id="homePage" class="page">
       <header class="app-header">
         <h1 class="logo">Pulse</h1>
-        <p class="subtitle">Advanced Trading AI</p>
+        <div class="subtitle">Advanced Trading AI</div>
       </header>
-
-      <main class="content grow">
-        <section class="window">
+      <div class="content">
+        <div class="window">
           <div id="menuGrid" class="menu-grid"></div>
-        </section>
-
-        <section class="window">
-          <h2 class="section-title centered">Popular Pairs</h2>
+          <div class="section-title">Popular Pairs</div>
           <ul id="pairsList" class="pairs-list"></ul>
-        </section>
-      </main>
-
-      <div class="bottom-bar">
-        <footer class="footer">Powered by <span>StocksLabs</span></footer>
+        </div>
       </div>
+      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
     <div id="pairPage" class="page hidden">
-      <header class="app-header"><h1 class="logo">Pulse</h1></header>
-
-      <main class="content grow">
-        <div class="top-buttons">
-          <button id="otcBtn" class="sub-btn otc active">OTC</button>
-          <button id="stockBtn" class="sub-btn stock">STOCK</button>
+      <header class="app-header">
+        <h1 class="logo">Pulse</h1>
+      </header>
+      <div class="content">
+        <div class="window">
+          <div class="top-buttons">
+            <button id="otcBtn" class="sub-btn active">OTC</button>
+            <button id="stockBtn" class="sub-btn">STOCK</button>
+          </div>
+          <div id="pairGrid" class="pairs-grid"></div>
         </div>
-
-        <div id="pairGrid" class="pairs-grid"></div>
-      </main>
-
+      </div>
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
         <footer class="footer">Powered by <span>StocksLabs</span></footer>
@@ -51,62 +44,46 @@
     </div>
 
     <div id="timePage" class="page hidden">
-      <header class="app-header"><h1 class="logo">Pulse</h1></header>
-
-      <main class="content grow">
-        <div id="timeGrid" class="time-grid"></div>
-        <div class="recommend-card">Recommended: <b>60 seconds</b> is optimal for quick signals</div>
-      </main>
-
+      <header class="app-header">
+        <h1 class="logo">Pulse</h1>
+      </header>
+      <div class="content">
+        <div class="window">
+          <div class="recommend-card">Recommended: 60 seconds is optimal for quick signals</div>
+          <div id="timeGrid" class="time-grid"></div>
+        </div>
+      </div>
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
         <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
     </div>
 
-    <!-- --- Страница SIGNAL --- -->
     <div id="signalPage" class="page hidden">
-      <header class="app-header"><h1 class="logo">Pulse</h1></header>
-
-      <main class="content grow">
-        <section class="window signal-window">
-          <div class="signal-frame">
-            <div class="signal-inner">
-              <div class="signal-card-wrapper">
-                <div id="loadingSection" class="center-block">
-                  <div class="center-wrapper">
-                    <div class="loader"></div>
-                    <div class="loading-text">Connecting...</div>
-                  </div>
-                </div>
-
-                <div id="signalResult" class="center-block hidden">
-                  <div class="signal-wrapper">
-                    <div class="signal-header-top">
-                      <span id="signalPair" class="signal-pair">USD/EUR</span>
-                      <span id="signalTime" class="signal-time">1m</span>
-                    </div>
-
-                    <div class="signal-card-pro">
-                      <div class="signal-glow"></div>
-                      <div class="signal-main">
-                        <span id="signalArrow" class="signal-arrow">↗</span>
-                        <span id="signalAction" class="signal-action">BUY</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <header class="app-header">
+        <h1 class="logo">Pulse</h1>
+      </header>
+      <div class="content">
+        <div class="window signal-window">
+          <div id="loadingSection" class="center-block">
+            <div class="center-wrapper">
+              <div class="loader"></div>
+              <div class="loading-text">Connecting...</div>
             </div>
           </div>
-        </section>
-      </main>
-
-      <section id="signalIndicators" class="window signal-indicators">
-        <h3>Indicators</h3>
-        <div id="signalInfo"></div>
-      </section>
-
+          <div id="signalResult" class="signal-card hidden">
+            <div class="signal-header-top">
+              <div id="signalPair" class="signal-pair">USD/EUR</div>
+              <div id="signalTime" class="signal-time">1m</div>
+            </div>
+            <div class="signal-body">
+              <div id="signalArrow" class="signal-arrow">↗</div>
+              <div id="signalAction" class="signal-action">BUY</div>
+            </div>
+            <div id="signalInfo" class="indicators-block"></div>
+          </div>
+        </div>
+      </div>
       <div class="bottom-bar">
         <button id="newSignalBtn" class="new-signal-btn">+ New Signal</button>
         <button class="back-btn">← Back</button>
@@ -114,8 +91,6 @@
       </div>
     </div>
   </div>
-
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
