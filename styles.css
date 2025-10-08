@@ -333,3 +333,45 @@ html, body {
 }
 
 .footer span { color: var(--accent); }
+
+/* === АДАПТАЦИЯ ПОД МАЛЕНЬКИЕ ЭКРАНЫ === */
+
+.page {
+  min-height: 100%;
+  max-height: var(--app-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
+}
+
+.bottom-bar {
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(10,14,24,0.8) 0%, rgba(10,14,24,1) 100%);
+  padding-top: 12px;
+  padding-bottom: 8px;
+  backdrop-filter: blur(6px);
+}
+
+@media (max-height: 620px) {
+  .logo { font-size: 24px; }
+  .sub-btn, .back-btn, .new-signal-btn { padding: 10px; font-size: 14px; }
+  .pair-card, .time-card { padding: 12px; font-size: 13px; }
+  .signal-arrow { font-size: 44px; }
+  .signal-action { font-size: 26px; }
+  .page { padding-top: 4px; padding-bottom: 4px; }
+}
+
+@media (max-height: 500px) {
+  .subtitle { display: none; }
+  .recommend-card { font-size: 12px; padding: 10px; }
+  .footer { display: none; }
+}
