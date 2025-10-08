@@ -361,7 +361,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  flex-grow: 1;
 }
 
 .signal-header-top {
@@ -378,20 +377,20 @@ body {
 }
 
 .signal-pair {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text);
 }
 
 .signal-type {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text);
   padding: 6px 12px;
 }
 
 .signal-time {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
 }
 
@@ -459,9 +458,15 @@ body {
 }
 
 /* --- Информация об индикаторах --- */
+.indicators-title {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
 .indicators-block {
   text-align: center;
-  margin-top: 20px;
 }
 
 .indicators-block ul {

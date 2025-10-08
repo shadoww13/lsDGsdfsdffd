@@ -91,16 +91,16 @@
       <div class="content">
         <div class="signal-bg">
 
-          <div class="signal-header-top">
-            <div id="signalPair" class="signal-pair">USD/EUR</div>
-          </div>
-
-          <div class="signal-header-bottom">
-            <div id="signalType" class="signal-type">OTC</div>
-            <div id="signalTime" class="signal-time">1m</div>
-          </div>
-
           <div class="signal-card">
+
+            <div class="signal-header-top">
+              <div id="signalPair" class="signal-pair">USD/EUR</div>
+            </div>
+
+            <div class="signal-header-bottom">
+              <div id="signalType" class="signal-type">OTC</div>
+              <div id="signalTime" class="signal-time">1m</div>
+            </div>
 
             <div id="loadingSection" class="center-block">
               <div class="loader"></div>
@@ -113,23 +113,28 @@
                 <div id="signalAction" class="signal-action">BUY</div>
               </div>
 
-              <div class="signal-progress">
-
-                <div class="progress-texts">
-                  <div class="progress-step">Probability of successful development:</div>
-                </div>
-
-                <div class="progress-circle">
-                  <div class="progress-text">73%</div>
-                </div>
-
-              </div>
-
             </div>
 
           </div>
 
-          <div id="signalInfo" class="indicators-block"></div>
+          <div id="signalDetails" class="hidden">
+
+            <div class="signal-progress">
+
+              <div class="progress-texts">
+                <div class="progress-step">Probability of successful development:</div>
+              </div>
+
+              <div class="progress-circle">
+                <div class="progress-text">73%</div>
+              </div>
+
+            </div>
+
+            <div class="indicators-title">Based on indicators:</div>
+            <div id="signalInfo" class="indicators-block"></div>
+
+          </div>
 
         </div>
       </div>

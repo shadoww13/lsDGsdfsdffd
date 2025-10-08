@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const signalTime = document.getElementById("signalTime");
   const signalAction = document.getElementById("signalAction");
   const signalInfo = document.getElementById("signalInfo");
+  const signalDetails = document.getElementById("signalDetails");
 
   const pages = { home: homePage, pair: pairPage, time: timePage, signal: signalPage };
 
@@ -125,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimers();
     loadingSection.classList.remove("hidden");
     signalResult.classList.add("hidden");
+    signalDetails.classList.add("hidden");
     const text = loadingSection.querySelector(".loading-text");
     PAIRS_CONFIG.loadingSteps.forEach((step, i) => {
       const timer = setTimeout(() => {
@@ -141,17 +143,22 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimers();
     loadingSection.classList.add("hidden");
     signalResult.classList.remove("hidden");
+    signalDetails.classList.remove("hidden");
 
     const pair = selectedPair || "USD/EUR";
     const time = selectedTime || "1m";
     const type = selectedType || "OTC";
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
+    const percentage = Math.floor(Math.random() * 26) + 70;
 
     signalPair.textContent = pair;
     signalType.textContent = type;
     signalTime.textContent = time;
     signalAction.textContent = action;
-    signalAction.className = `signal-action ${action === "BUY" ? "buy" : "sell"}`;
+    signalAction.className = `signal-action ${action.toLowerCase()}`;
+
+    document.querySelector('.progress-text').textContent = `${percentage}%`;
+    document.querySelector('.progress-circle').style.background = `conic-gradient(var(--accent) ${percentage}%, var(--card-bg) 0)`;
 
     const indicators = action === "BUY" ? PAIRS_CONFIG.buyIndicators : PAIRS_CONFIG.sellIndicators;
     const chosen = indicators.slice().sort(() => 0.5 - Math.random()).slice(0, 3);
