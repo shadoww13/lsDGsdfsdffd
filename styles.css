@@ -15,11 +15,10 @@
   --danger: #ff5666;
 }
 
+/* базовые */
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -54,6 +53,7 @@ body {
 
 .hidden { display: none !important; }
 
+/* --- HEADER --- */
 .app-header {
   text-align: center;
   padding: 8px 0 6px;
@@ -73,6 +73,7 @@ body {
   color: var(--muted);
 }
 
+/* --- CONTENT --- */
 .content {
   display: flex;
   flex-direction: column;
@@ -97,7 +98,7 @@ body {
   flex-grow: 1;
 }
 
-/* --- Меню (главная) --- */
+/* --- MAIN MENU --- */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -107,7 +108,7 @@ body {
 .menu-card {
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 14px;
   text-align: center;
   font-weight: 600;
   font-size: 15px;
@@ -117,25 +118,17 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  min-height: 78px;
+  min-height: 90px;
 }
 
 .menu-card:hover { transform: translateY(-4px); background: var(--hover); }
 
-.menu-icon {
-  font-size: 20px;
-  line-height: 1;
-}
-
-.menu-title {
+/* --- Заголовок популярных пар --- */
+.section-title {
+  text-align: center;
+  font-size: 18px;
   font-weight: 700;
-  font-size: 15px;
-  color: var(--text);
-}
-
-.menu-sub {
-  font-size: 12px;
-  color: var(--muted);
+  margin: 4px 0 6px 0;
 }
 
 /* --- Пары --- */
@@ -145,7 +138,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .pair {
@@ -154,15 +147,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 10px;
+  padding: 10px 12px;
   cursor: pointer;
   transition: background 0.2s ease;
+  min-height: 60px;
 }
 
 .pair:hover { background: var(--hover); }
 
 .pair-left {
-  width: 36px;
+  width: 40px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -177,7 +171,7 @@ body {
 }
 
 .pair-right {
-  min-width: 64px;
+  min-width: 70px;
   display:flex;
   align-items:center;
   justify-content:flex-end;
@@ -187,13 +181,13 @@ body {
 
 /* OTC бейдж */
 .otc-badge {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 3px 8px;
   color: var(--muted);
-  padding: 4px 8px;
-  border-radius: 12px;
   font-size: 12px;
   font-weight: 700;
-  border: 1px solid rgba(255,255,255,0.03);
 }
 
 /* --- Верхние кнопки (OTC / STOCK) --- */
@@ -253,7 +247,6 @@ body {
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  min-height: 0;
 }
 
 .pair-card:hover { background: var(--hover); }
@@ -319,7 +312,18 @@ body {
 }
 
 .back-btn { background: #0f1724; color: #fff; }
-.new-signal-btn { background: var(--accent-grad); color: #fff; }
+
+.new-signal-btn {
+  background: var(--accent-grad);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(42,158,241,0.4);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.new-signal-btn:hover {
+  box-shadow: 0 0 22px rgba(42,158,241,0.8);
+  transform: scale(1.02);
+}
 
 .bottom-bar {
   flex-shrink: 0;
@@ -331,7 +335,7 @@ body {
   margin-top: auto;
 }
 
-/* --- Сигналы --- */
+/* --- LOADER (оставляем как был) --- */
 .center-block, .center-wrapper {
   display: flex;
   flex-direction: column;
@@ -353,53 +357,103 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* --- Все, что связано с SIGNAL, начинается здесь --- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Вкладка SIGNAL --- */
+.signal-bg {
+  background: var(--window-bg);
+  padding: 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .signal-card {
   background: var(--card-inner);
   border-radius: var(--radius);
+  box-shadow: var(--shadow), inset 0 1px 1px rgba(255,255,255,0.03);
   padding: 30px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin-top: 8px;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.signal-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.signal-pair {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.signal-time {
+  font-size: 18px;
+  color: var(--muted);
 }
 
 .signal-body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  flex-wrap: wrap;
+  gap: 30px;
   transform: scale(1.3);
 }
 
 .signal-arrow {
-  font-size: 80px;
+  font-size: 100px;
   font-weight: 900;
+  transition: transform 0.3s ease;
 }
 
 .signal-action {
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.signal-arrow.up, .signal-action.buy { color: var(--buy); }
-.signal-arrow.down, .signal-action.sell { color: var(--sell); }
-
-.signal-header-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  margin-top: 8px;
+.signal-arrow.up, .signal-action.buy {
+  color: var(--buy);
 }
 
-.signal-pair { font-size: 22px; font-weight: 800; }
-.signal-time { font-size: 18px; color: var(--muted); }
+.signal-arrow.down, .signal-action.sell {
+  color: var(--sell);
+}
 
+/* --- Информация об индикаторах --- */
 .indicators-block {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .indicators-block ul {
@@ -408,28 +462,77 @@ body {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
   justify-content: center;
 }
 
 .indicators-block li {
   background: var(--card-bg);
-  border-radius: 6px;
-  padding: 8px 12px;
+  border-radius: 12px;
+  padding: 12px 20px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* --- Footer --- */
+.indicators-block li:hover {
+  transform: translateY(-4px);
+}
+
+/* --- Кнопка нового сигнала --- */
+.new-signal-btn {
+  background: var(--accent-grad);
+  color: #fff;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.new-signal-btn:hover {
+  background: var(--accent);
+  box-shadow: 0 8px 20px rgba(42, 158, 241, 0.3);
+}
+
+.new-signal-btn:active {
+  transform: scale(0.98);
+}
+
+/* --- Плавная анимация для всей страницы --- */
+.signal-window {
+  transition: all 0.3s ease;
+}
+
+.signal-window.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.signal-window.hidden {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* --- Конец стилей SIGNAL --- */
+
+/* --- FOOTER --- */
 .footer {
   text-align: center;
   font-size: 12px;
   color: var(--muted);
 }
-
 .footer span { color: var(--accent); }
 
-/* --- адаптация под низкие окна --- */
+/* адаптация */
 @media (max-height: 620px) {
   .logo { font-size: 24px; }
   .sub-btn, .back-btn, .new-signal-btn { padding: 10px; font-size: 14px; }
