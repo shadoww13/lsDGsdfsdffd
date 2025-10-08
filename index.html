@@ -1,112 +1,132 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app">
+
+    <!-- HOME PAGE -->
     <div id="homePage" class="page">
-      <header class="app-header">
+      <div class="app-header">
         <h1 class="logo">Pulse</h1>
         <div class="subtitle">Advanced Trading AI</div>
-      </header>
+      </div>
+
       <div class="content">
         <div class="window">
           <div id="menuGrid" class="menu-grid"></div>
+
           <div class="section-title">Popular Pairs</div>
+
           <ul id="pairsList" class="pairs-list"></ul>
         </div>
       </div>
-      <footer class="footer">Powered by <span>StocksLabs</span></footer>
+
+      <div class="footer">Powered by StocksLabs</div>
     </div>
 
+    <!-- PAIR PAGE -->
     <div id="pairPage" class="page hidden">
-      <header class="app-header">
+      <div class="app-header">
         <h1 class="logo">Pulse</h1>
-      </header>
+      </div>
+
       <div class="content">
         <div class="window">
           <div class="top-buttons">
             <button id="otcBtn" class="sub-btn active">OTC</button>
             <button id="stockBtn" class="sub-btn">STOCK</button>
           </div>
+
           <div id="pairGrid" class="pairs-grid"></div>
         </div>
       </div>
+
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
-        <footer class="footer">Powered by <span>StocksLabs</span></footer>
+        <div class="footer">Powered by StocksLabs</div>
       </div>
     </div>
 
+    <!-- TIME PAGE -->
     <div id="timePage" class="page hidden">
-      <header class="app-header">
+      <div class="app-header">
         <h1 class="logo">Pulse</h1>
-      </header>
+      </div>
+
       <div class="content">
-        <div class="top-buttons">
-          <button id="otcBtnTime" class="sub-btn active">OTC</button>
-          <button id="stockBtnTime" class="sub-btn">STOCK</button>
-        </div>
         <div class="window">
           <div id="timeGrid" class="time-grid"></div>
         </div>
+
         <div class="recommend-card">Recommended: 60 seconds is optimal for quick signals</div>
       </div>
+
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
-        <footer class="footer">Powered by <span>StocksLabs</span></footer>
+        <div class="footer">Powered by StocksLabs</div>
       </div>
     </div>
 
+    <!-- SIGNAL PAGE -->
     <div id="signalPage" class="page hidden">
-      <header class="app-header">
+      <div class="app-header">
         <h1 class="logo">Pulse</h1>
-      </header>
+      </div>
+
       <div class="content">
-        <div class="window signal-window">
-          <div class="signal-header-top">
-            <div id="signalPair" class="signal-pair">USD/EUR</div>
-          </div>
-          <div class="signal-header-bottom">
-            <div id="signalType" class="signal-type">OTC</div>
-            <div id="signalTime" class="signal-time">1m</div>
-          </div>
-          <div id="loadingSection" class="center-block">
-            <div class="center-wrapper">
+        <div class="window signal-bg">
+          <div class="signal-card">
+            <div class="signal-header-top">
+              <div class="signal-pair" id="signalPair">USD/EUR</div>
+            </div>
+
+            <div class="signal-header-bottom">
+              <div class="signal-type" id="signalType">OTC</div>
+              <div class="signal-time" id="signalTime">1m</div>
+            </div>
+
+            <div id="loadingSection" class="center-block">
               <div class="loader"></div>
               <div class="loading-text">Connecting...</div>
             </div>
-          </div>
-          <div id="signalResult" class="signal-card hidden">
-            <div class="signal-progress">
-              <div class="progress-circle">
-                <span class="progress-text">73%</span>
+
+            <div id="signalResult" class="signal-result hidden">
+              <div class="signal-progress">
+                <div class="progress-texts">
+                  Pattern found!<br>
+                  Probability of successful development:
+                </div>
+                <div class="progress-circle">
+                  <div class="progress-text">73%</div>
+                </div>
               </div>
-              <div class="progress-texts">
-                <div class="progress-step">Analyzing signal...</div>
-                <div class="progress-step">Processing market data</div>
+
+              <div class="signal-body">
+                <div class="signal-arrow" id="signalArrow">↗</div>
+                <div class="signal-action" id="signalAction">BUY</div>
               </div>
+
+              <div class="indicators-block" id="signalInfo"></div>
             </div>
-            <div class="signal-body">
-              <div id="signalArrow" class="signal-arrow">↗</div>
-              <div id="signalAction" class="signal-action">BUY</div>
-            </div>
-            <div id="signalInfo" class="indicators-block"></div>
           </div>
         </div>
       </div>
+
       <div class="bottom-bar">
         <button id="newSignalBtn" class="new-signal-btn">+ New Signal</button>
         <button class="back-btn">← Back</button>
-        <footer class="footer">Powered by <span>StocksLabs</span></footer>
+        <div class="footer">Powered by StocksLabs</div>
       </div>
     </div>
+
   </div>
+
   <script src="config.js"></script>
   <script src="script.js"></script>
 </body>

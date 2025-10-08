@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener("DOMContentLoaded", () => {
   try { Telegram?.WebApp?.ready?.(); } catch (e) {}
 
@@ -11,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const pairGrid = document.getElementById("pairGrid");
   const otcBtn = document.getElementById("otcBtn");
   const stockBtn = document.getElementById("stockBtn");
-  const otcBtnTime = document.getElementById("otcBtnTime");
-  const stockBtnTime = document.getElementById("stockBtnTime");
   const timeGrid = document.getElementById("timeGrid");
   const newSignalBtn = document.getElementById("newSignalBtn");
 
@@ -103,17 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
     stockBtn.classList.add("active");
     otcBtn.classList.remove("active");
     renderPairs("stock");
-  });
-
-  otcBtnTime.addEventListener("click", () => {
-    otcBtnTime.classList.add("active");
-    stockBtnTime.classList.remove("active");
-    selectedType = "OTC";
-  });
-  stockBtnTime.addEventListener("click", () => {
-    stockBtnTime.classList.add("active");
-    otcBtnTime.classList.remove("active");
-    selectedType = "STOCK";
   });
 
   renderPairs("otc");

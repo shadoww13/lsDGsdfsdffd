@@ -1,3 +1,4 @@
+/* styles.css */
 :root {
   --bg-main: linear-gradient(180deg, #05080f 0%, #0a0e18 100%);
   --window-bg: #0f141f;
@@ -477,7 +478,6 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Плавная анимация для всей страницы --- */
 .signal-window {
   transition: all 0.2s ease;
 }
@@ -492,7 +492,6 @@ body {
   opacity: 0;
 }
 
-/* --- FOOTER --- */
 .footer {
   text-align: center;
   font-size: 11px;
@@ -501,7 +500,6 @@ body {
 }
 .footer span { color: var(--accent); }
 
-/* адаптация */
 @media (max-height: 600px) {
   .logo { font-size: 20px; }
   .sub-btn, .back-btn, .new-signal-btn { padding: 8px; font-size: 13px; }
