@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,89 +5,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="app">
 
     <!-- HOME PAGE -->
     <div id="homePage" class="page">
-      <div class="app-header">
+      <header class="app-header">
         <h1 class="logo">Pulse</h1>
-        <div class="subtitle">Advanced Trading AI</div>
-      </div>
+        <p class="subtitle">Advanced Trading AI</p>
+      </header>
 
       <div class="content">
         <div class="window">
+
           <div id="menuGrid" class="menu-grid"></div>
 
           <div class="section-title">Popular Pairs</div>
 
           <ul id="pairsList" class="pairs-list"></ul>
+
         </div>
       </div>
 
-      <div class="footer">Powered by StocksLabs</div>
+      <footer class="footer">Powered by <span>StocksLabs</span></footer>
     </div>
 
     <!-- PAIR PAGE -->
     <div id="pairPage" class="page hidden">
-      <div class="app-header">
+      <header class="app-header">
         <h1 class="logo">Pulse</h1>
-      </div>
+      </header>
 
       <div class="content">
         <div class="window">
+
           <div class="top-buttons">
             <button id="otcBtn" class="sub-btn active">OTC</button>
             <button id="stockBtn" class="sub-btn">STOCK</button>
           </div>
 
           <div id="pairGrid" class="pairs-grid"></div>
+
         </div>
       </div>
 
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
-        <div class="footer">Powered by StocksLabs</div>
+        <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
+
     </div>
 
     <!-- TIME PAGE -->
     <div id="timePage" class="page hidden">
-      <div class="app-header">
+      <header class="app-header">
         <h1 class="logo">Pulse</h1>
-      </div>
+      </header>
 
       <div class="content">
         <div class="window">
-          <div id="timeGrid" class="time-grid"></div>
-        </div>
 
-        <div class="recommend-card">Recommended: 60 seconds is optimal for quick signals</div>
+          <div id="timeGrid" class="time-grid"></div>
+
+          <div class="recommend-card">Recommended: 60 seconds is optimal for quick signals</div>
+
+        </div>
       </div>
 
       <div class="bottom-bar">
         <button class="back-btn">← Back</button>
-        <div class="footer">Powered by StocksLabs</div>
+        <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
+
     </div>
 
     <!-- SIGNAL PAGE -->
     <div id="signalPage" class="page hidden">
-      <div class="app-header">
+      <header class="app-header">
         <h1 class="logo">Pulse</h1>
-      </div>
+      </header>
 
       <div class="content">
-        <div class="window signal-bg">
+        <div class="signal-bg">
+
           <div class="signal-card">
+
             <div class="signal-header-top">
-              <div class="signal-pair" id="signalPair">USD/EUR</div>
+              <div id="signalPair" class="signal-pair">USD/EUR</div>
             </div>
 
             <div class="signal-header-bottom">
-              <div class="signal-type" id="signalType">OTC</div>
-              <div class="signal-time" id="signalTime">1m</div>
+              <div id="signalType" class="signal-type">OTC</div>
+              <div id="signalTime" class="signal-time">1m</div>
             </div>
 
             <div id="loadingSection" class="center-block">
@@ -96,38 +107,39 @@
               <div class="loading-text">Connecting...</div>
             </div>
 
-            <div id="signalResult" class="signal-result hidden">
+            <div id="signalResult" class="signal-window hidden">
+
               <div class="signal-progress">
-                <div class="progress-texts">
-                  Pattern found!<br>
-                  Probability of successful development:
-                </div>
                 <div class="progress-circle">
                   <div class="progress-text">73%</div>
+                </div>
+
+                <div class="progress-texts">
+                  <div class="progress-step">Probability of successful development:</div>
                 </div>
               </div>
 
               <div class="signal-body">
-                <div class="signal-arrow" id="signalArrow">↗</div>
-                <div class="signal-action" id="signalAction">BUY</div>
+                <div id="signalAction" class="signal-action">BUY</div>
               </div>
 
-              <div class="indicators-block" id="signalInfo"></div>
             </div>
+
           </div>
+
+          <div id="signalInfo" class="indicators-block"></div>
+
         </div>
       </div>
 
       <div class="bottom-bar">
         <button id="newSignalBtn" class="new-signal-btn">+ New Signal</button>
         <button class="back-btn">← Back</button>
-        <div class="footer">Powered by StocksLabs</div>
+        <footer class="footer">Powered by <span>StocksLabs</span></footer>
       </div>
+
     </div>
 
   </div>
-
-  <script src="config.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

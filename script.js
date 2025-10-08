@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const signalPair = document.getElementById("signalPair");
   const signalType = document.getElementById("signalType");
   const signalTime = document.getElementById("signalTime");
-  const signalArrow = document.getElementById("signalArrow");
   const signalAction = document.getElementById("signalAction");
   const signalInfo = document.getElementById("signalInfo");
 
@@ -147,13 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const time = selectedTime || "1m";
     const type = selectedType || "OTC";
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
-    const arrow = action === "BUY" ? "↗" : "↘";
 
     signalPair.textContent = pair;
     signalType.textContent = type;
     signalTime.textContent = time;
-    signalArrow.textContent = arrow;
-    signalArrow.className = `signal-arrow ${action === "BUY" ? "up" : "down"}`;
     signalAction.textContent = action;
     signalAction.className = `signal-action ${action === "BUY" ? "buy" : "sell"}`;
 
