@@ -346,6 +346,9 @@ body {
   padding: 12px;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .signal-card {
@@ -358,6 +361,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 14px;
+  flex-grow: 1;
 }
 
 .signal-header-top {

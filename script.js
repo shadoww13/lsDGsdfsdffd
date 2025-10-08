@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const indicators = action === "BUY" ? PAIRS_CONFIG.buyIndicators : PAIRS_CONFIG.sellIndicators;
     const chosen = indicators.slice().sort(() => 0.5 - Math.random()).slice(0, 3);
-    signalInfo.innerHTML = chosen.map(i => `<div>${i}</div>`).join("");
+    signalInfo.innerHTML = `<ul>${chosen.map(i => `<li>${i}</li>`).join("")}</ul>`;
   };
 
   show("home");
