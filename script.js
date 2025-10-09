@@ -73,9 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
     <li class="pair">
-      <div class="pair-left">${p.flag1 === "btc" ? "₿" : `<span class="flag flag-icon flag-icon-${p.flag1}"></span>`}</div>
-      <div class="pair-label">${p.label}</div>
-      <div class="pair-right">${p.flag2 === "btc" ? "₿" : `<span class="flag flag-icon flag-icon-${p.flag2}"></span>`}<span class="otc-badge">OTC</span></div>
+      <div class="pair-left">${p.flag1 === "btc" ? "₿" : `<span class="fi fi-${p.flag1}"></span>`}</div>
+      <div class="pair-label">${p.label.replace('/', ' → ')}</div>
+      <div class="pair-right">${p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`}<span class="otc-badge">OTC</span></div>
     </li>
   `).join("");
 
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
     const percentage = Math.floor(Math.random() * 26) + 70;
 
-    signalPair.textContent = pair;
+    signalPair.textContent = pair.replace('/', ' → ');
     signalType.textContent = type;
     signalTime.textContent = time;
     signalAction.textContent = action;

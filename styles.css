@@ -390,11 +390,10 @@ body { display: flex; justify-content: center; }
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: conic-gradient(var(--accent) var(--progress, 73%), var(--card-bg) 0);
+  background: conic-gradient(var(--accent) var(--progress, 73%), rgba(255,255,255,0.1) 0);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 15px rgba(42,158,241,0.5), inset 0 0 10px rgba(0,0,0,0.3);
 }
 
 .progress-circle::after {
@@ -406,7 +405,6 @@ body { display: flex; justify-content: center; }
   height: 100px;
   background: var(--card-bg);
   border-radius: 50%;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 .progress-text {
