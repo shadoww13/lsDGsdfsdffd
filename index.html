@@ -100,12 +100,12 @@
 
             <div class="signal-header-bottom">
               <div id="signalType" class="signal-type">OTC</div>
+              <span class="separator">|</span>
               <div id="signalTime" class="signal-time">1m</div>
             </div>
 
-            <div id="loadingSection" class="center-block">
-              <div class="loader"></div>
-              <div class="loading-text">Connecting...</div>
+            <div id="actionPlaceholder" class="signal-body hidden" style="transform: none; animation: none;">
+              <div class="signal-action" style="visibility: hidden;">BUY</div>
             </div>
 
             <div id="signalResult" class="signal-window hidden">
@@ -123,15 +123,32 @@
             <div class="signal-progress">
 
               <div class="progress-texts">
-                <div class="progress-step">Probability of successful development:</div>
+                <div id="progressStep" class="progress-step"></div>
               </div>
 
-              <div class="progress-circle">
-                <div class="progress-text">73%</div>
+              <div class="center-wrapper">
+                <div id="loadingSection" class="hidden">
+                  <div class="loader"></div>
+                </div>
+
+                <div id="progressCircle" class="progress-circle hidden">
+                  <div class="progress-text">73%</div>
+                </div>
               </div>
 
             </div>
 
+          </div>
+
+          <div id="indicatorsPlaceholder" class="hidden">
+            <div class="indicators-title" style="visibility: hidden;">Based on indicators:</div>
+            <div class="indicators-block">
+              <ul>
+                <li style="visibility: hidden;">RSI</li>
+                <li style="visibility: hidden;">MACD</li>
+                <li style="visibility: hidden;">Volume</li>
+              </ul>
+            </div>
           </div>
 
           <div id="signalIndicators" class="hidden">

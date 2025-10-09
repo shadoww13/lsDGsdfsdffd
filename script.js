@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const newSignalBtn = document.getElementById("newSignalBtn");
 
   const loadingSection = document.getElementById("loadingSection");
+  const progressCircle = document.getElementById("progressCircle");
+  const progressStep = document.getElementById("progressStep");
+  const actionPlaceholder = document.getElementById("actionPlaceholder");
+  const indicatorsPlaceholder = document.getElementById("indicatorsPlaceholder");
   const signalResult = document.getElementById("signalResult");
   const signalPair = document.getElementById("signalPair");
   const signalType = document.getElementById("signalType");
@@ -125,14 +129,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loadSignal = () => {
     clearTimers();
-    loadingSection.classList.remove("hidden");
     signalResult.classList.add("hidden");
-    signalDetails.classList.add("hidden");
+    actionPlaceholder.classList.remove("hidden");
+    signalDetails.classList.remove("hidden");
+    indicatorsPlaceholder.classList.remove("hidden");
     signalIndicators.classList.add("hidden");
-    const text = loadingSection.querySelector(".loading-text");
+    loadingSection.classList.remove("hidden");
+    progressCircle.classList.add("hidden");
+    progressStep.textContent = PAIRS_CONFIG.loadingSteps[0];
     PAIRS_CONFIG.loadingSteps.forEach((step, i) => {
       const timer = setTimeout(() => {
-        text.textContent = step;
+        progressStep.textContent = step;
         if (i === PAIRS_CONFIG.loadingSteps.length - 1) {
           timers.push(setTimeout(showSignal, 700));
         }
@@ -144,8 +151,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const showSignal = () => {
     clearTimers();
     loadingSection.classList.add("hidden");
+    progressCircle.classList.remove("hidden");
     signalResult.classList.remove("hidden");
-    signalDetails.classList.remove("hidden");
+    actionPlaceholder.classList.add("hidden");
+    indicatorsPlaceholder.classList.add("hidden");
     signalIndicators.classList.remove("hidden");
 
     const pair = selectedPair || "USD/EUR";
@@ -160,9 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
     signalAction.textContent = action;
     signalAction.className = `signal-action ${action.toLowerCase()}`;
 
+    progressStep.textContent = "Probability of successful development:";
     document.querySelector('.progress-text').textContent = `${percentage}%`;
-    document.querySelector('.progress-circle').style.background = `conic-gradient(var(--accent) ${percentage}%, var(--card-bg) 0)`;
-
+    document.querySelector('.progress-circle').style.setProperty('--progress', `${percentage}%`);
     const indicators = action === "BUY" ? PAIRS_CONFIG.buyIndicators : PAIRS_CONFIG.sellIndicators;
     const chosen = indicators.slice().sort(() => 0.5 - Math.random()).slice(0, 3);
     signalInfo.innerHTML = `<ul>${chosen.map(i => `<li>${i}</li>`).join("")}</ul>`;
