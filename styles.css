@@ -29,10 +29,7 @@ html, body {
   overflow: hidden;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-}
+body { display: flex; justify-content: center; }
 
 .app {
   width: 100%;
@@ -44,12 +41,7 @@ body {
   box-sizing: border-box;
 }
 
-.page {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  min-height: 0;
-}
+.page { display: flex; flex-direction: column; flex-grow: 1; min-height: 0; }
 
 .hidden { display: none !important; }
 
@@ -116,7 +108,9 @@ body {
   align-items: center;
   gap: 6px;
   min-height: 70px;
+  transition: 0.2s;
 }
+.menu-card:hover { background: var(--hover); transform: scale(1.02); }
 
 /* --- Заголовок популярных пар --- */
 .section-title {
@@ -147,29 +141,9 @@ body {
   min-height: 50px;
 }
 
-.pair-left {
-  width: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
-
-.pair-label {
-  flex: 1;
-  text-align: center;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.pair-right {
-  min-width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  font-size: 12px;
-}
+.pair-left { width: 30px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.pair-label { flex: 1; text-align: center; font-weight: 600; color: var(--text); }
+.pair-right { min-width: 60px; display: flex; align-items: center; justify-content: flex-end; gap: 6px; font-size: 12px; }
 
 /* OTC бейдж */
 .otc-badge {
@@ -257,20 +231,9 @@ body {
   min-height: 70px;
 }
 
-.time-top {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  align-items: center;
-}
-
+.time-top { display: flex; justify-content: center; gap: 5px; align-items: center; }
 .time-emoji { font-size: 16px; line-height: 1; }
-
-.time-sub {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 4px;
-}
+.time-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
 .recommend-card {
   background: #0f1724;
@@ -293,20 +256,13 @@ body {
   font-size: 14px;
 }
 
-.back-btn {
-  background: #0f1724;
-  color: #fff;
-}
-
+.back-btn { background: #0f1724; color: #fff; }
 .new-signal-btn {
   background: var(--accent-grad);
   color: #fff;
   box-shadow: 0 0 12px rgba(42,158,241,0.4);
 }
-
-.new-signal-btn:active {
-  transform: scale(0.98);
-}
+.new-signal-btn:active { transform: scale(0.98); }
 
 .bottom-bar {
   flex-shrink: 0;
@@ -340,17 +296,23 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* --- Вкладка SIGNAL --- */
+/* --- SIGNAL PAGE --- */
 .signal-bg {
   background: var(--window-bg);
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* добавлено */
+  justify-content: space-between;
   flex-grow: 1;
-  gap: 14px;
+  gap: 16px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .signal-card {
@@ -361,58 +323,72 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 14px;
-  flex-grow: 0; /* добавлено */
+  flex-grow: 0;
 }
 
 #signalDetails,
-#signalIndicators {
-  margin-top: auto; /* добавлено */
-}
+#signalIndicators { margin-top: auto; }
 
-.signal-header-top {
-  text-align: center;
-  width: 100%;
-}
+.signal-header-top { text-align: center; width: 100%; }
+.signal-header-bottom { display: flex; justify-content: center; align-items: center; gap: 12px; width: 100%; }
 
-.signal-header-bottom {
+.signal-pair { font-size: 26px; font-weight: 800; color: var(--text); }
+.signal-type { font-size: 16px; font-weight: 600; color: var(--text); padding: 6px 12px; }
+.signal-time { font-size: 16px; color: var(--muted); }
+
+.signal-body {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 12px;
-  width: 100%;
+  justify-content: center;
+  gap: 20px;
+  transform: scale(1.1);
+  animation: pulse 1.2s infinite alternate;
 }
 
-.signal-pair {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text);
+@keyframes pulse {
+  0% { transform: scale(1.08); }
+  100% { transform: scale(1.12); }
 }
 
-.signal-type {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  padding: 6px 12px;
+.signal-arrow {
+  font-size: 64px;
+  font-weight: 900;
+  animation: arrowPulse 1.6s ease-in-out infinite;
 }
 
-.signal-time {
-  font-size: 16px;
-  color: var(--muted);
+@keyframes arrowPulse {
+  0%,100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-8px); opacity: 0.7; }
 }
 
+.signal-action {
+  font-size: 52px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.signal-action.buy {
+  color: var(--buy);
+  text-shadow: 0 0 14px rgba(44,224,116,0.6), 0 0 30px rgba(44,224,116,0.3);
+}
+.signal-action.sell {
+  color: var(--sell);
+  text-shadow: 0 0 14px rgba(255,86,102,0.6), 0 0 30px rgba(255,86,102,0.3);
+}
+
+/* Прогресс */
 .signal-progress {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
 }
 
 .progress-circle {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: conic-gradient(var(--accent) 73%, var(--card-bg) 0);
   display: flex;
@@ -426,46 +402,10 @@ body {
   color: var(--text);
 }
 
-.progress-texts {
-  text-align: center;
-  color: var(--muted);
-}
+.progress-texts { text-align: center; color: var(--muted); }
+.progress-step { font-size: 12px; }
 
-.progress-step {
-  font-size: 12px;
-}
-
-.signal-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  transform: scale(1.1);
-}
-
-.signal-arrow {
-  font-size: 64px;
-  font-weight: 900;
-}
-
-.signal-action {
-  font-size: 48px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
-
-.signal-action.buy {
-  color: var(--buy);
-  text-shadow: 0 0 8px rgba(44,224,116,0.6);
-}
-
-.signal-action.sell {
-  color: var(--sell);
-  text-shadow: 0 0 8px rgba(255,86,102,0.6);
-}
-
-/* --- Информация об индикаторах --- */
+/* Индикаторы */
 .indicators-title {
   text-align: center;
   font-size: 14px;
@@ -494,7 +434,15 @@ body {
   font-weight: 600;
   font-size: 12px;
   color: var(--text);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.indicators-block li.active {
+  background: rgba(0,255,136,0.1);
+  color: var(--buy);
+  box-shadow: 0 0 12px rgba(0,255,136,0.4);
+  transform: scale(1.05);
 }
 
 .signal-window {
@@ -511,6 +459,7 @@ body {
   opacity: 0;
 }
 
+/* FOOTER */
 .footer {
   text-align: center;
   font-size: 11px;
@@ -519,12 +468,13 @@ body {
 }
 .footer span { color: var(--accent); }
 
+/* MEDIA QUERIES */
 @media (max-height: 600px) {
   .logo { font-size: 20px; }
   .sub-btn, .back-btn, .new-signal-btn { padding: 8px; font-size: 13px; }
   .pair-card, .time-card { padding: 8px; font-size: 12px; }
   .signal-arrow { font-size: 48px; }
-  .signal-action { font-size: 24px; }
+  .signal-action { font-size: 38px; }
 }
 
 @media (max-height: 480px) {
