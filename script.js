@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const signalAction = document.getElementById("signalAction");
   const signalInfo = document.getElementById("signalInfo");
   const signalDetails = document.getElementById("signalDetails");
+  const signalIndicators = document.getElementById("signalIndicators");
 
   const pages = { home: homePage, pair: pairPage, time: timePage, signal: signalPage };
 
@@ -127,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadingSection.classList.remove("hidden");
     signalResult.classList.add("hidden");
     signalDetails.classList.add("hidden");
+    signalIndicators.classList.add("hidden");
     const text = loadingSection.querySelector(".loading-text");
     PAIRS_CONFIG.loadingSteps.forEach((step, i) => {
       const timer = setTimeout(() => {
@@ -144,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadingSection.classList.add("hidden");
     signalResult.classList.remove("hidden");
     signalDetails.classList.remove("hidden");
+    signalIndicators.classList.remove("hidden");
 
     const pair = selectedPair || "USD/EUR";
     const time = selectedTime || "1m";

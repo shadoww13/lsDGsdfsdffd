@@ -348,7 +348,9 @@ body {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* добавлено */
   flex-grow: 1;
+  gap: 14px;
 }
 
 .signal-card {
@@ -361,6 +363,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 14px;
+  flex-grow: 0; /* добавлено */
+}
+
+#signalDetails,
+#signalIndicators {
+  margin-top: auto; /* добавлено */
 }
 
 .signal-header-top {
