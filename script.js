@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (history.at(-1) !== id) history.push(id);
     if (id === "signal") loadSignal();
     if (id === "pair") {
-      currentMode = getModeForCategory(selectedCategory);
       if (currentMode === "otc") {
         otcBtn.classList.add("active");
         stockBtn.classList.remove("active");
@@ -134,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   pairsList.querySelectorAll(".pair").forEach((el, i) => {
     el.addEventListener("click", () => {
-      selectedPair = PAIRS_CONFIG.popularPairs[i].label;
+      selectedPair = PAIRS_CONFIG.popularPairs[i];
       show("time");
     });
   });
@@ -160,9 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="otc-badge">${mode.toUpperCase()}</span>
       </div>
     `).join("");
-    pairGrid.querySelectorAll(".pair").forEach(c => {
+    pairGrid.querySelectorAll(".pair").forEach((c, i) => {
       c.addEventListener("click", () => {
-        selectedPair = c.querySelector(".pair-label").textContent.trim();
+        selectedPair = pageList[i];
         selectedType = mode.toUpperCase();
         show("time");
       });
@@ -248,13 +247,16 @@ document.addEventListener("DOMContentLoaded", () => {
     indicatorsPlaceholder.classList.add("hidden");
     signalIndicators.classList.remove("hidden");
 
-    const pair = selectedPair || "USD/EUR";
+    const selectedPairObj = selectedPair || { label: "USD/EUR", flag1: "us", flag2: "eu" };
+    const isCurrency = selectedCategory === "currencies" || !selectedPair;
+    const flag1Html = isCurrency ? (selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : "")) : selectedPairObj.label.split('/')[0];
+    const flag2Html = isCurrency ? (selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : "")) : (selectedPairObj.label.split('/')[1] || "");
     const time = selectedTime || "1m";
     const type = selectedType || "OTC";
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
     const percentage = Math.floor(Math.random() * 26) + 70;
 
-    signalPair.textContent = pair;
+    signalPair.innerHTML = `${flag1Html} ${selectedPairObj.label} ${flag2Html}`;
     signalType.textContent = type;
     signalTime.textContent = time;
     signalAction.textContent = action;
