@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const stockBtn = document.getElementById("stockBtn");
   const timeGrid = document.getElementById("timeGrid");
   const newSignalBtn = document.getElementById("newSignalBtn");
+  const prevPage = document.getElementById("prevPage");
+  const nextPage = document.getElementById("nextPage");
+  const pageIndicator = document.getElementById("pageIndicator");
 
   const loadingSection = document.getElementById("loadingSection");
   const progressCircle = document.getElementById("progressCircle");
@@ -36,6 +39,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedTime = null;
   let selectedType = "OTC";
   let timers = [];
+  let currentMode = "otc";
+  let selectedCategory = null;
+  let categoryList = null;
+  const pagination = {
+    otc: { currentPage: 0 },
+    stock: { currentPage: 0 }
+  };
+
+  const getCategoryList = (category) => {
+    switch (category) {
+      case "currencies": return PAIRS_CONFIG.forexPairs;
+      case "stocks": return PAIRS_CONFIG.stockPairs;
+      case "crypto": return PAIRS_CONFIG.cryptoPairs;
+      case "commodities": return PAIRS_CONFIG.commoditiesPairs;
+      default: return [];
+    }
+  };
+
+  const getModeForCategory = (category) => {
+    return category === "crypto" ? "otc" : "stock";
+  };
 
   const clearTimers = () => { timers.forEach(t => clearTimeout(t)); timers = []; };
 
@@ -45,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pages[id].classList.remove("hidden");
     if (history.at(-1) !== id) history.push(id);
     if (id === "signal") loadSignal();
+    if (id === "pair") renderPairs(currentMode);
   };
 
   const back = () => {
@@ -68,7 +93,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   PAIRS_CONFIG.menu.forEach(m => {
     const el = document.getElementById(m.id);
-    if (el) el.addEventListener("click", () => show("pair"));
+    if (el) el.addEventListener("click", () => {
+      selectedCategory = m.title.toLowerCase();
+      categoryList = getCategoryList(selectedCategory);
+      currentMode = getModeForCategory(selectedCategory);
+      pagination[currentMode].currentPage = 0;
+      if (currentMode === "otc") {
+        otcBtn.classList.add("active");
+        stockBtn.classList.remove("active");
+      } else {
+        stockBtn.classList.add("active");
+        otcBtn.classList.remove("active");
+      }
+      show("pair");
+    });
   });
 
   pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
@@ -87,8 +125,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const renderPairs = (mode) => {
-    const list = mode === "otc" ? PAIRS_CONFIG.otcPairs : PAIRS_CONFIG.stockPairs;
-    pairGrid.innerHTML = list.map(p => `<div class="pair-card">${p.label}</div>`).join("");
+    let list = (categoryList && mode === getModeForCategory(selectedCategory)) ? categoryList : (mode === "otc" ? PAIRS_CONFIG.otcPairs : PAIRS_CONFIG.stockPairs);
+    const pageSize = 10;
+    let state = pagination[mode];
+    if (state.currentPage < 0) state.currentPage = 0;
+    const totalPages = Math.ceil(list.length / pageSize);
+    if (state.currentPage >= totalPages) state.currentPage = totalPages - 1 >= 0 ? totalPages - 1 : 0;
+    const start = state.currentPage * pageSize;
+    const end = start + pageSize;
+    const pageList = list.slice(start, end);
+    pairGrid.innerHTML = pageList.map(p => `<div class="pair-card">${p.label}</div>`).join("");
     pairGrid.querySelectorAll(".pair-card").forEach(c => {
       c.addEventListener("click", () => {
         selectedPair = c.textContent.trim();
@@ -96,17 +142,38 @@ document.addEventListener("DOMContentLoaded", () => {
         show("time");
       });
     });
+    prevPage.disabled = state.currentPage === 0;
+    nextPage.disabled = state.currentPage === totalPages - 1 || totalPages <= 1;
+    pageIndicator.textContent = `${state.currentPage + 1} / ${totalPages}`;
   };
 
   otcBtn.addEventListener("click", () => {
     otcBtn.classList.add("active");
     stockBtn.classList.remove("active");
+    currentMode = "otc";
+    categoryList = null;
     renderPairs("otc");
   });
   stockBtn.addEventListener("click", () => {
     stockBtn.classList.add("active");
     otcBtn.classList.remove("active");
+    currentMode = "stock";
+    categoryList = null;
     renderPairs("stock");
+  });
+
+  prevPage.addEventListener("click", () => {
+    const state = pagination[currentMode];
+    if (state.currentPage > 0) {
+      state.currentPage--;
+      renderPairs(currentMode);
+    }
+  });
+
+  nextPage.addEventListener("click", () => {
+    const state = pagination[currentMode];
+    state.currentPage++;
+    renderPairs(currentMode);
   });
 
   renderPairs("otc");
