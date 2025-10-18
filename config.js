@@ -36,23 +36,23 @@ const PAIRS_CONFIG = {
   ],
   cryptoPairs: [
     // OTC Crypto Pairs (12 pairs)
+    { label: "DOGE" },
+    { label: "SOL" },
+    { label: "TON" },
+    { label: "TRX" },
+    { label: "LINK" },
     { label: "BTC" },
     { label: "ETH" },
-    { label: "SOL" },
-    { label: "ADA" },
-    { label: "XRP" },
-    { label: "DOT" },
-    { label: "LINK" },
-    { label: "BNB" },
-    { label: "MATIC" },
     { label: "AVAX" },
-    { label: "LTC" },
-    { label: "TRX" },
+    { label: "BTCETF" },
+    { label: "DOT" },
+    { label: "MATIC" },
+    { label: "BNB" },
     // Stock Crypto Pairs (4 pairs)
-    { label: "COIN" }, // Coinbase Global
-    { label: "MSTR" }, // MicroStrategy
-    { label: "RIOT" }, // Riot Blockchain
-    { label: "MARA" }  // Marathon Digital
+    { label: "LINK" },
+    { label: "ETH" },
+    { label: "BTC" },
+    { label: "DASH" }
   ],
   commoditiesPairs: [
     { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 1" },
