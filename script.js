@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
     <li class="pair">
       <div class="pair-left">${p.flag1 === "btc" ? "₿" : `<span class="fi fi-${p.flag1}"></span>`}</div>
-      <div class="pair-label">${p.label.replace('/', '  → ')}</div>
+      <div class="pair-label">${p.label}</div>
       <div class="pair-right">${p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`}<span class="otc-badge">OTC</span></div>
     </li>
   `).join("");
@@ -138,13 +138,13 @@ document.addEventListener("DOMContentLoaded", () => {
     pairGrid.innerHTML = pageList.map((p, i) => `
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
         <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : p.label.split('/')[0]}</div>
-        <div class="pair-label">${p.label.replace('/', '  → ')}</div>
-        <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}<span class="otc-badge">${mode.toUpperCase()}</span></div>
+        <div class="pair-label">${p.label}</div>
+        <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}</div>
       </div>
     `).join("");
     pairGrid.querySelectorAll(".pair").forEach(c => {
       c.addEventListener("click", () => {
-        selectedPair = c.querySelector(".pair-label").textContent.trim().replace('  → ', '/');
+        selectedPair = c.querySelector(".pair-label").textContent.trim();
         selectedType = mode.toUpperCase();
         show("time");
       });
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
     const percentage = Math.floor(Math.random() * 26) + 70;
 
-    signalPair.textContent = pair.replace('/', '  → ');
+    signalPair.textContent = pair;
     signalType.textContent = type;
     signalTime.textContent = time;
     signalAction.textContent = action;
