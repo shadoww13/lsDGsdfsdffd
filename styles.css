@@ -1,11 +1,12 @@
+/* styles.css */
 :root {
   --bg-main: linear-gradient(180deg, #05080f 0%, #0a0e18 100%);
   --window-bg: #0f141f;
   --card-bg: #191e2c;
   --card-inner: #212633;
   --hover: #2a3040;
-  --accent: #2a9ef1;
-  --accent-grad: linear-gradient(90deg, #2a9ef1 0%, #1f7fd8 100%);
+  --accent: #40C4B4; /* Updated to match requested color */
+  --accent-grad: linear-gradient(90deg, #40C4B4 0%, #2f9fa0 100%); /* Adjusted gradient */
   --text: #e8ebf5;
   --muted: #9ba2b8;
   --buy: #2ce074;
@@ -173,8 +174,8 @@ body { display: flex; justify-content: center; }
 }
 
 .sub-btn.active {
-  background: var(--accent);
-  color: #fff;
+  background: var(--accent); /* Updated to match requested color */
+  color: black; /* Changed to black text */
 }
 
 .pairs-grid {
@@ -282,9 +283,9 @@ body { display: flex; justify-content: center; }
 
 .back-btn { background: #0f1724; color: #fff; }
 .new-signal-btn {
-  background: var(--accent-grad);
-  color: #fff;
-  box-shadow: 0 0 12px rgba(42,158,241,0.4);
+  background: var(--accent); /* Updated to match requested color */
+  color: black; /* Changed to black text */
+  box-shadow: 0 0 12px rgba(64,196,180,0.4); /* Adjusted shadow to match new accent */
 }
 .new-signal-btn:active { transform: scale(0.98); }
 
@@ -310,7 +311,8 @@ body { display: flex; justify-content: center; }
   width: 120px;
   height: 120px;
   border: 6px solid rgba(255, 255, 255, 0.1);
-  border-top: 6px solid var(--accent);
+  border-top: 6px solid var(--accent); /* Updated to match requested color */
+  border-left: 6px solid var(--accent); /* Updated to match requested color */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -411,7 +413,7 @@ body { display: flex; justify-content: center; }
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: conic-gradient(var(--accent) var(--progress, 73%), rgba(255,255,255,0.1) 0);
+  background: conic-gradient(var(--accent) var(--progress, 73%), rgba(255,255,255,0.1) 0); /* Updated to var(--accent) */
   display: flex;
   align-items: center;
   justify-content: center;
