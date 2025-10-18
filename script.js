@@ -2,6 +2,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   try { Telegram?.WebApp?.ready?.(); } catch (e) {}
 
+  PAIRS_CONFIG.popularPairs.sort(() => Math.random() - 0.5);
+  PAIRS_CONFIG.otcPairs.sort(() => Math.random() - 0.5);
+  PAIRS_CONFIG.stockPairs.sort(() => Math.random() - 0.5);
+  PAIRS_CONFIG.cryptoPairs.sort(() => Math.random() - 0.5);
+  PAIRS_CONFIG.commoditiesPairs.sort(() => Math.random() - 0.5);
+  PAIRS_CONFIG.forexPairs.sort(() => Math.random() - 0.5);
+
   const homePage = document.getElementById("homePage");
   const pairPage = document.getElementById("pairPage");
   const timePage = document.getElementById("timePage");
@@ -41,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let timers = [];
   let currentMode = "otc";
   let selectedCategory = null;
-  let categoryList = null;
+  let otcCategoryList = null;
+  let stockCategoryList = null;
   const pagination = {
     otc: { currentPage: 0 },
     stock: { currentPage: 0 }
@@ -70,9 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (history.at(-1) !== id) history.push(id);
     if (id === "signal") loadSignal();
     if (id === "pair") {
-      currentMode = selectedCategory === "crypto" ? "otc" : "otc"; // Default to OTC
-      otcBtn.classList.add("active");
-      stockBtn.classList.remove("active");
+      currentMode = getModeForCategory(selectedCategory);
+      if (currentMode === "otc") {
+        otcBtn.classList.add("active");
+        stockBtn.classList.remove("active");
+      } else {
+        stockBtn.classList.add("active");
+        otcBtn.classList.remove("active");
+      }
       renderPairs(currentMode);
     }
   };
@@ -100,7 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = document.getElementById(m.id);
     if (el) el.addEventListener("click", () => {
       selectedCategory = m.title.toLowerCase();
-      categoryList = getCategoryList(selectedCategory);
+      const categoryList = getCategoryList(selectedCategory);
+      otcCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
+      stockCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
       currentMode = "otc"; // Default to OTC for all categories
       pagination[currentMode].currentPage = 0;
       otcBtn.classList.add("active");
@@ -125,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const renderPairs = (mode) => {
-    let list = categoryList || PAIRS_CONFIG.otcPairs; // Use categoryList if available, fallback to otcPairs
+    let list = mode === "otc" ? otcCategoryList || PAIRS_CONFIG.otcPairs : stockCategoryList || PAIRS_CONFIG.stockPairs;
     const pageSize = 10; // 2 columns x 5 rows
     let state = pagination[mode];
     if (state.currentPage < 0) state.currentPage = 0;
