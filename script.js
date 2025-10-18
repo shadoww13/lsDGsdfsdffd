@@ -69,7 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
     pages[id].classList.remove("hidden");
     if (history.at(-1) !== id) history.push(id);
     if (id === "signal") loadSignal();
-    if (id === "pair") renderPairs(currentMode);
+    if (id === "pair") {
+      currentMode = selectedCategory === "crypto" ? "otc" : "otc"; // Default to OTC
+      otcBtn.classList.add("active");
+      stockBtn.classList.remove("active");
+      renderPairs(currentMode);
+    }
   };
 
   const back = () => {
@@ -96,15 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el) el.addEventListener("click", () => {
       selectedCategory = m.title.toLowerCase();
       categoryList = getCategoryList(selectedCategory);
-      currentMode = getModeForCategory(selectedCategory);
+      currentMode = "otc"; // Default to OTC for all categories
       pagination[currentMode].currentPage = 0;
-      if (currentMode === "otc") {
-        otcBtn.classList.add("active");
-        stockBtn.classList.remove("active");
-      } else {
-        stockBtn.classList.add("active");
-        otcBtn.classList.remove("active");
-      }
+      otcBtn.classList.add("active");
+      stockBtn.classList.remove("active");
       show("pair");
     });
   });
@@ -125,8 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const renderPairs = (mode) => {
-    let list = (categoryList && mode === getModeForCategory(selectedCategory)) ? categoryList : (mode === "otc" ? PAIRS_CONFIG.otcPairs : PAIRS_CONFIG.stockPairs);
-    const pageSize = 10;
+    let list = categoryList || PAIRS_CONFIG.otcPairs; // Use categoryList if available, fallback to otcPairs
+    const pageSize = 10; // 2 columns x 5 rows
     let state = pagination[mode];
     if (state.currentPage < 0) state.currentPage = 0;
     const totalPages = Math.ceil(list.length / pageSize);
@@ -134,10 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const start = state.currentPage * pageSize;
     const end = start + pageSize;
     const pageList = list.slice(start, end);
-    pairGrid.innerHTML = pageList.map(p => `<div class="pair-card">${p.label}</div>`).join("");
-    pairGrid.querySelectorAll(".pair-card").forEach(c => {
+    const isCurrency = selectedCategory === "currencies";
+    pairGrid.innerHTML = pageList.map((p, i) => `
+      <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
+        <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : p.label.split('/')[0]}</div>
+        <div class="pair-label">${p.label.replace('/', '  → ')}</div>
+        <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}<span class="otc-badge">${mode.toUpperCase()}</span></div>
+      </div>
+    `).join("");
+    pairGrid.querySelectorAll(".pair").forEach(c => {
       c.addEventListener("click", () => {
-        selectedPair = c.textContent.trim();
+        selectedPair = c.querySelector(".pair-label").textContent.trim().replace('  → ', '/');
         selectedType = mode.toUpperCase();
         show("time");
       });
@@ -151,14 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
     otcBtn.classList.add("active");
     stockBtn.classList.remove("active");
     currentMode = "otc";
-    categoryList = null;
     renderPairs("otc");
   });
+
   stockBtn.addEventListener("click", () => {
     stockBtn.classList.add("active");
     otcBtn.classList.remove("active");
     currentMode = "stock";
-    categoryList = null;
     renderPairs("stock");
   });
 
