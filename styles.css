@@ -393,8 +393,8 @@ body { display: flex; justify-content: center; }
 }
 
 .signal-action.buy {
-  color: var(--buy);
-  text-shadow: 0 0 14px rgba(44,224,116,0.6), 0 0 30px rgba(44,224,116,0.3);
+  color: var(--accent);
+  text-shadow: 0 0 14px rgba(64,196,180,0.6), 0 0 30px rgba(64,196,180,0.3);
 }
 .signal-action.sell {
   color: var(--sell);
@@ -438,7 +438,7 @@ body { display: flex; justify-content: center; }
 }
 
 .progress-texts { text-align: center; color: var(--muted); }
-.progress-step { font-size: 12px; }
+.progress-step { font-size: 14px; }
 
 .indicators-title {
   text-align: center;
