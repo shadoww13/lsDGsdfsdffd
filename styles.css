@@ -1,4 +1,5 @@
 /* styles.css */
+/* styles.css */
 :root {
   --bg-main: linear-gradient(180deg, #05080f 0%, #0a0e18 100%);
   --window-bg: #0f141f;
@@ -141,13 +142,12 @@ body { display: flex; justify-content: center; }
 .pair-right { display: flex; align-items: center; gap: 6px; font-size: 12px; }
 
 .otc-badge {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 6px; /* Reduced from 8px to 6px */
-  padding: 1px 4px; /* Reduced from 2px 6px to 1px 4px */
-  color: var(--muted);
-  font-size: 9px; /* Reduced from 10px to 9px */
-  font-weight: 700;
+  background: transparent;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 0;
+  border: none; /* Removed border */
 }
 
 .top-buttons {

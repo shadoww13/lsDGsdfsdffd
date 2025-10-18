@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <li class="pair">
       <div class="pair-left">${p.flag1 === "btc" ? "₿" : `<span class="fi fi-${p.flag1}"></span>`}</div>
       <div class="pair-label">${p.label}</div>
-      <div class="pair-right">${p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`}<span class="otc-badge" style="border: 1px solid #00C4B4;">OTC</span></div>
+      <div class="pair-right">${p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`}<span class="otc-badge">OTC</span></div>
     </li>
   `).join("");
 
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="pair-label">${p.label}</div>
           <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}</div>
         </div>
-        <span class="otc-badge" style="border: 1px solid #00C4B4;">${mode.toUpperCase()}</span>
+        <span class="otc-badge">${mode.toUpperCase()}</span>
       </div>
     `).join("");
     pairGrid.querySelectorAll(".pair").forEach((c, i) => {
