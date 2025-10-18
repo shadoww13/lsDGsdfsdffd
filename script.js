@@ -113,8 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el) el.addEventListener("click", () => {
       selectedCategory = m.title.toLowerCase();
       const categoryList = getCategoryList(selectedCategory);
-      otcCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
-      stockCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
+      if (selectedCategory === "crypto") {
+        otcCategoryList = categoryList.slice(0, 12).sort(() => Math.random() - 0.5); // First 12 are OTC
+        stockCategoryList = categoryList.slice(12, 16).sort(() => Math.random() - 0.5); // Last 4 are Stock
+      } else {
+        otcCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
+        stockCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
+      }
       currentMode = "otc";
       pagination[currentMode].currentPage = 0;
       otcBtn.classList.add("active");
@@ -138,27 +143,23 @@ document.addEventListener("DOMContentLoaded", () => {
   pairsList.querySelectorAll(".pair").forEach((el, i) => {
     el.addEventListener("click", () => {
       selectedPair = PAIRS_CONFIG.popularPairs[i];
+      selectedType = "OTC";
       show("time");
     });
   });
 
   const renderPairs = (mode) => {
-    let list = mode === "otc" ? otcCategoryList || PAIRS_CONFIG.otcPairs : stockCategoryList || PAIRS_CONFIG.stockPairs;
-    const pageSize = 10;
-    let state = pagination[mode];
-    if (state.currentPage < 0) state.currentPage = 0;
-    const totalPages = Math.ceil(list.length / pageSize);
-    if (state.currentPage >= totalPages) state.currentPage = totalPages - 1 >= 0 ? totalPages - 1 : 0;
-    const start = state.currentPage * pageSize;
-    const end = start + pageSize;
+    const state = pagination[mode];
+    const list = mode === "otc" ? otcCategoryList : stockCategoryList;
+    const itemsPerPage = 12;
+    const totalPages = Math.ceil(list.length / itemsPerPage);
+    const start = state.currentPage * itemsPerPage;
+    const end = start + itemsPerPage;
     const pageList = list.slice(start, end);
-    const isCurrency = selectedCategory === "currencies";
     pairGrid.innerHTML = pageList.map((p, i) => `
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
         <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-          <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : p.label.split('/')[0]}</div>
           <div class="pair-label">${p.label}</div>
-          <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}</div>
         </div>
         <span class="otc-badge">${mode.toUpperCase()}</span>
       </div>
@@ -207,11 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextPage.addEventListener("click", () => {
     const state = pagination[currentMode];
-    state.currentPage++;
-    renderPairs(currentMode);
+    if (state.currentPage < Math.ceil((currentMode === "otc" ? otcCategoryList : stockCategoryList).length / 12) - 1) {
+      state.currentPage++;
+      renderPairs(currentMode);
+    }
   });
-
-  renderPairs("otc");
 
   timeGrid.innerHTML = PAIRS_CONFIG.times.map(t => `
     <div class="time-card" data-time="${t.time}">
@@ -241,15 +242,10 @@ document.addEventListener("DOMContentLoaded", () => {
     progressStep.textContent = PAIRS_CONFIG.loadingSteps[0];
 
     const selectedPairObj = selectedPair || { label: "USD/EUR", flag1: "us", flag2: "eu" };
-    const isCurrency = selectedCategory === "currencies" || !selectedPair;
-    const flag1Html = isCurrency ? (selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : "")) : selectedPairObj.label.split('/')[0];
-    const flag2Html = isCurrency ? (selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : "")) : (selectedPairObj.label.split('/')[1] || "");
-    const time = selectedTime || "1m";
-    const type = selectedType || "OTC";
-
-    signalPair.innerHTML = `${flag1Html} ${selectedPairObj.label} ${flag2Html}`;
-    signalType.textContent = type;
-    signalTime.textContent = time;
+    const pairLabel = selectedCategory === "currencies" ? selectedPairObj.label : selectedPairObj.label;
+    signalPair.innerHTML = pairLabel;
+    signalType.textContent = selectedType || "OTC";
+    signalTime.textContent = selectedTime || "1m";
 
     PAIRS_CONFIG.loadingSteps.forEach((step, i) => {
       const timer = setTimeout(() => {
