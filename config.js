@@ -1,3 +1,4 @@
+// config.js
 const PAIRS_CONFIG = {
   menu: [
     { id: "btn1", title: "Currencies", sub: "Forex pairs" },

@@ -134,22 +134,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const isCurrency = selectedCategory === "currencies";
     if (isCurrency) {
       pairGrid.innerHTML = pageList.map((p, i) => `
-        <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
-          <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-            <div class="pair-left">${p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : p.label.split('/')[0])}</div>
-            <div class="pair-label">${p.label}</div>
-            <div class="pair-right">${p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : p.label.split('/')[1] || "")}</div>
+        <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
+          <div class="pair-content">
+            <span class="fi fi-${p.flag1}"></span>
+            <span class="pair-label">${p.label}</span>
+            <span class="fi fi-${p.flag2}"></span>
           </div>
-          <span class="otc-badge">${mode.toUpperCase()}</span>
         </div>
       `).join("");
     } else {
       pairGrid.innerHTML = pageList.map((p, i) => `
-        <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
-          <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-            <div class="pair-label">${p.label}</div>
-          </div>
-          <span class="otc-badge">${mode.toUpperCase()}</span>
+        <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
+          <div class="pair-label">${p.label}</div>
         </div>
       `).join("");
     }
