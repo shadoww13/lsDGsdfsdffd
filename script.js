@@ -3,11 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   try { Telegram?.WebApp?.ready?.(); } catch (e) {}
 
   PAIRS_CONFIG.popularPairs.sort(() => Math.random() - 0.5);
-  PAIRS_CONFIG.otcPairs.sort(() => Math.random() - 0.5);
-  PAIRS_CONFIG.stockPairs.sort(() => Math.random() - 0.5);
-  PAIRS_CONFIG.cryptoPairs.sort(() => Math.random() - 0.5);
-  PAIRS_CONFIG.commoditiesPairs.sort(() => Math.random() - 0.5);
-  PAIRS_CONFIG.forexPairs.sort(() => Math.random() - 0.5);
 
   const homePage = document.getElementById("homePage");
   const pairPage = document.getElementById("pairPage");
@@ -55,20 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     stock: { currentPage: 0 }
   };
 
-  const getCategoryList = (category) => {
-    switch (category) {
-      case "currencies": return PAIRS_CONFIG.forexPairs;
-      case "stocks": return PAIRS_CONFIG.stockPairs;
-      case "crypto": return PAIRS_CONFIG.cryptoPairs;
-      case "commodities": return PAIRS_CONFIG.commoditiesPairs;
-      default: return [];
-    }
-  };
-
-  const getModeForCategory = (category) => {
-    return category === "crypto" ? "otc" : "stock";
-  };
-
   const clearTimers = () => { timers.forEach(t => clearTimeout(t)); timers = []; };
 
   const show = (id) => {
@@ -111,14 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = document.getElementById(m.id);
     if (el) el.addEventListener("click", () => {
       selectedCategory = m.title.toLowerCase();
-      const categoryList = getCategoryList(selectedCategory);
-      if (selectedCategory === "crypto") {
-        otcCategoryList = categoryList.slice(0, 12).sort(() => Math.random() - 0.5); // First 12 are OTC
-        stockCategoryList = categoryList.slice(12, 16).sort(() => Math.random() - 0.5); // Next 4 are Stock
-      } else {
-        otcCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
-        stockCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
-      }
+      const cat = PAIRS_CONFIG.categories[selectedCategory];
+      otcCategoryList = [...cat.otc].sort(() => Math.random() - 0.5);
+      stockCategoryList = [...cat.stock].sort(() => Math.random() - 0.5);
       currentMode = "otc";
       pagination[currentMode].currentPage = 0;
       otcBtn.classList.add("active");
@@ -159,9 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
     pairGrid.innerHTML = pageList.map((p, i) => `
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
         <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-          <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : p.label.split('/')[0]}</div>
+          <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : p.label.split('/')[0])) : p.label.split('/')[0]}</div>
           <div class="pair-label">${p.label}</div>
-          <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}</div>
+          <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : p.label.split('/')[1] || "")) : (p.label.split('/')[1] || "")}</div>
         </div>
         <span class="otc-badge">${mode.toUpperCase()}</span>
       </div>
@@ -245,8 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectedPairObj = selectedPair || { label: "USD/EUR", flag1: "us", flag2: "eu" };
     const isCurrency = selectedCategory === "currencies" || !selectedPair;
-    const flag1Html = isCurrency ? (selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : "")) : selectedPairObj.label.split('/')[0];
-    const flag2Html = isCurrency ? (selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : "")) : (selectedPairObj.label.split('/')[1] || "");
+    const flag1Html = isCurrency ? (selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : selectedPairObj.label.split('/')[0])) : selectedPairObj.label.split('/')[0];
+    const flag2Html = isCurrency ? (selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : selectedPairObj.label.split('/')[1] || "")) : (selectedPairObj.label.split('/')[1] || "");
     const time = selectedTime || "1m";
     const type = selectedType || "OTC";
 
