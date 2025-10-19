@@ -132,16 +132,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const end = start + itemsPerPage;
     const pageList = list.slice(start, end);
     const isCurrency = selectedCategory === "currencies";
-    pairGrid.innerHTML = pageList.map((p, i) => `
-      <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
-        <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-          <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : p.label.split('/')[0])) : p.label.split('/')[0]}</div>
-          <div class="pair-label">${p.label}</div>
-          <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : p.label.split('/')[1] || "")) : (p.label.split('/')[1] || "")}</div>
+    if (isCurrency) {
+      pairGrid.innerHTML = pageList.map((p, i) => `
+        <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+            <div class="pair-left">${p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : p.label.split('/')[0])}</div>
+            <div class="pair-label">${p.label}</div>
+            <div class="pair-right">${p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : p.label.split('/')[1] || "")}</div>
+          </div>
+          <span class="otc-badge">${mode.toUpperCase()}</span>
         </div>
-        <span class="otc-badge">${mode.toUpperCase()}</span>
-      </div>
-    `).join("");
+      `).join("");
+    } else {
+      pairGrid.innerHTML = pageList.map((p, i) => `
+        <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+            <div class="pair-label">${p.label}</div>
+          </div>
+          <span class="otc-badge">${mode.toUpperCase()}</span>
+        </div>
+      `).join("");
+    }
     pairGrid.querySelectorAll(".pair").forEach((c, i) => {
       c.addEventListener("click", () => {
         selectedPair = pageList[i];
@@ -221,12 +232,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectedPairObj = selectedPair || { label: "USD/EUR", flag1: "us", flag2: "eu" };
     const isCurrency = selectedCategory === "currencies" || !selectedPair;
-    const flag1Html = isCurrency ? (selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : selectedPairObj.label.split('/')[0])) : selectedPairObj.label.split('/')[0];
-    const flag2Html = isCurrency ? (selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : selectedPairObj.label.split('/')[1] || "")) : (selectedPairObj.label.split('/')[1] || "");
+    let flag1Html = '';
+    let flag2Html = '';
+    if (isCurrency) {
+      flag1Html = selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : selectedPairObj.label.split('/')[0]);
+      flag2Html = selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : selectedPairObj.label.split('/')[1] || "");
+    }
     const time = selectedTime || "1m";
     const type = selectedType || "OTC";
 
-    signalPair.innerHTML = `${flag1Html} ${selectedPairObj.label} ${flag2Html}`;
+    if (isCurrency) {
+      signalPair.innerHTML = `${flag1Html} ${selectedPairObj.label} ${flag2Html}`;
+    } else {
+      signalPair.innerHTML = `${selectedPairObj.label}`;
+    }
     signalType.textContent = type;
     signalTime.textContent = time;
 

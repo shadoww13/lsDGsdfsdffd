@@ -1,9 +1,7 @@
 const PAIRS_CONFIG = {
   menu: [
     { id: "btn1", title: "Currencies", sub: "Forex pairs" },
-    { id: "btn2", title: "Stocks", sub: "Company shares" },
-    { id: "btn3", title: "Crypto", sub: "Digital assets" },
-    { id: "btn4", title: "Commodities", sub: "More options" }
+    { id: "btn3", title: "Crypto", sub: "Digital assets" }
   ],
   popularPairs: [
     { flag1: "us", flag2: "eu", label: "USD/EUR" },
@@ -78,10 +76,27 @@ const PAIRS_CONFIG = {
         { flag1: "xx", flag2: "xx", label: "OTC Pair 12" }
       ],
       stock: [
-        { flag1: "xx", flag2: "xx", label: "STOCK Pair 1" },
-        { flag1: "xx", flag2: "xx", label: "STOCK Pair 2" },
-        { flag1: "xx", flag2: "xx", label: "STOCK Pair 3" },
-        { flag1: "xx", flag2: "xx", label: "STOCK Pair 4" }
+        { label: "Apple" },
+        { label: "American Express" },
+        { label: "Amazon" },
+        { label: "VISA" },
+        { label: "FACEBOOK INC" },
+        { label: "Netflix" },
+        { label: "Boeing Company" },
+        { label: "GameStop" },
+        { label: "Intel" },
+        { label: "Tesla" },
+        { label: "Cisco" },
+        { label: "Netflix" },
+        { label: "Tesla" },
+        { label: "Microsoft" },
+        { label: "Cisco" },
+        { label: "Intel" },
+        { label: "McDonald's" },
+        { label: "Apple" },
+        { label: "American Express" },
+        { label: "Alibaba" },
+        { label: "Boeing Company" }
       ]
     },
     crypto: {
@@ -107,31 +122,8 @@ const PAIRS_CONFIG = {
       ]
     },
     commodities: {
-      otc: [
-        { label: "Apple" },
-        { label: "American Express" },
-        { label: "Amazon" },
-        { label: "VISA" },
-        { label: "FACEBOOK INC" },
-        { label: "Netflix" },
-        { label: "Boeing Company" },
-        { label: "GameStop" },
-        { label: "Intel" },
-        { label: "Tesla" },
-        { label: "Cisco" }
-      ],
-      stock: [
-        { label: "Netflix" },
-        { label: "Tesla" },
-        { label: "Microsoft" },
-        { label: "Cisco" },
-        { label: "Intel" },
-        { label: "McDonald's" },
-        { label: "Apple" },
-        { label: "American Express" },
-        { label: "Alibaba" },
-        { label: "Boeing Company" }
-      ]
+      otc: [],
+      stock: []
     }
   },
   times: [
