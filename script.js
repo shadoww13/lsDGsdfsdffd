@@ -2,7 +2,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   try { Telegram?.WebApp?.ready?.(); } catch (e) {}
 
-  PAIRS_CONFIG.popularPairs = PAIRS_CONFIG.popularPairs.filter(p => p.flag1 !== "btc" && p.flag2 !== "btc").concat([{ label: "AUD/CAD", flag1: "au", flag2: "ca" }]);
   PAIRS_CONFIG.popularPairs.sort(() => Math.random() - 0.5);
   PAIRS_CONFIG.otcPairs.sort(() => Math.random() - 0.5);
   PAIRS_CONFIG.stockPairs.sort(() => Math.random() - 0.5);
@@ -115,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const categoryList = getCategoryList(selectedCategory);
       if (selectedCategory === "crypto") {
         otcCategoryList = categoryList.slice(0, 12).sort(() => Math.random() - 0.5); // First 12 are OTC
-        stockCategoryList = categoryList.slice(12, 16).sort(() => Math.random() - 0.5); // Last 4 are Stock
+        stockCategoryList = categoryList.slice(12, 16).sort(() => Math.random() - 0.5); // Next 4 are Stock
       } else {
         otcCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
         stockCategoryList = [...categoryList].sort(() => Math.random() - 0.5);
@@ -156,10 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const start = state.currentPage * itemsPerPage;
     const end = start + itemsPerPage;
     const pageList = list.slice(start, end);
+    const isCurrency = selectedCategory === "currencies";
     pairGrid.innerHTML = pageList.map((p, i) => `
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}; display: flex; flex-direction: column; align-items: center; gap: 4px;">
         <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+          <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : p.label.split('/')[0]}</div>
           <div class="pair-label">${p.label}</div>
+          <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}</div>
         </div>
         <span class="otc-badge">${mode.toUpperCase()}</span>
       </div>
@@ -242,10 +244,15 @@ document.addEventListener("DOMContentLoaded", () => {
     progressStep.textContent = PAIRS_CONFIG.loadingSteps[0];
 
     const selectedPairObj = selectedPair || { label: "USD/EUR", flag1: "us", flag2: "eu" };
-    const pairLabel = selectedCategory === "currencies" ? selectedPairObj.label : selectedPairObj.label;
-    signalPair.innerHTML = pairLabel;
-    signalType.textContent = selectedType || "OTC";
-    signalTime.textContent = selectedTime || "1m";
+    const isCurrency = selectedCategory === "currencies" || !selectedPair;
+    const flag1Html = isCurrency ? (selectedPairObj.flag1 === "btc" ? "₿" : (selectedPairObj.flag1 && selectedPairObj.flag1 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag1}"></span>` : "")) : selectedPairObj.label.split('/')[0];
+    const flag2Html = isCurrency ? (selectedPairObj.flag2 === "btc" ? "₿" : (selectedPairObj.flag2 && selectedPairObj.flag2 !== "xx" ? `<span class="fi fi-${selectedPairObj.flag2}"></span>` : "")) : (selectedPairObj.label.split('/')[1] || "");
+    const time = selectedTime || "1m";
+    const type = selectedType || "OTC";
+
+    signalPair.innerHTML = `${flag1Html} ${selectedPairObj.label} ${flag2Html}`;
+    signalType.textContent = type;
+    signalTime.textContent = time;
 
     PAIRS_CONFIG.loadingSteps.forEach((step, i) => {
       const timer = setTimeout(() => {
