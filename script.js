@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
   menuGrid.innerHTML = PAIRS_CONFIG.menu.map(m =>
     `<div class="menu-card" id="${m.id}">
        <div>
-         <div style="font-weight:700">${m.title}</div>
+         <div style="font-weight:700;font-size:16px">${m.title}</div>
          ${m.sub ? `<div style="font-size:12px;color:var(--muted);margin-top:6px">${m.sub}</div>` : ""}
        </div>
      </div>`).join("");
