@@ -93,7 +93,7 @@ body { display: flex; justify-content: center; }
 .menu-card {
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 16px;
   text-align: center;
   font-weight: 600;
   font-size: 14px;
@@ -102,7 +102,7 @@ body { display: flex; justify-content: center; }
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  min-height: 80px;
+  min-height: 110px;
   transition: 0.2s;
 }
 .menu-card:hover { background: var(--hover); transform: scale(1.02); }
