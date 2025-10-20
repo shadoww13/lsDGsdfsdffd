@@ -131,13 +131,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const end = start + pageSize;
     const pageList = list.slice(start, end);
     const isCurrency = selectedCategory === "currencies";
-    pairGrid.innerHTML = pageList.map((p, i) => `
+    pairGrid.innerHTML = pageList.map((p, i) => {
+      let labelContent = p.label.replace('/', '  → ');
+      const upperMode = mode.toUpperCase();
+      if (labelContent.endsWith(' ' + upperMode)) {
+        labelContent = labelContent.slice(0, - (upperMode.length + 1));
+      }
+      const leftContent = isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : '';
+      const rightContent = isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "");
+      return `
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
-        <div class="pair-left">${isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : p.label.split('/')[0]}</div>
-        <div class="pair-label">${p.label.replace('/', '  → ')}</div>
-        <div class="pair-right">${isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "")}<span class="otc-badge">${mode.toUpperCase()}</span></div>
+        <div class="pair-left">${leftContent}</div>
+        <div class="pair-label">${labelContent}</div>
+        <div class="pair-right">${rightContent}<span class="otc-badge">${mode.toUpperCase()}</span></div>
       </div>
-    `).join("");
+    `;
+    }).join("");
     pairGrid.querySelectorAll(".pair").forEach(c => {
       c.addEventListener("click", () => {
         selectedPair = c.querySelector(".pair-label").textContent.trim().replace('  → ', '/');
