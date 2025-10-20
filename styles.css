@@ -4,11 +4,11 @@
   --card-bg: #191e2c;
   --card-inner: #212633;
   --hover: #2a3040;
-  --accent: #2a9ef1;
-  --accent-grad: linear-gradient(90deg, #2a9ef1 0%, #1f7fd8 100%);
+  --accent: #08c8a0;
+  --accent-grad: linear-gradient(90deg, #08c8a0 0%, #069878 100%);
   --text: #e8ebf5;
   --muted: #9ba2b8;
-  --buy: #2ce074;
+  --buy: #08c8a0;
   --sell: #ff5666;
   --radius: 12px;
   --shadow: 0 4px 12px rgba(0,0,0,0.5);
@@ -142,13 +142,13 @@ body { display: flex; justify-content: center; }
 .pair-right { display: flex; align-items: center; gap: 6px; font-size: 12px; }
 
 .otc-badge {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: transparent;
+  border: none;
   border-radius: 8px;
-  padding: 2px 6px;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
+  padding: 0;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .top-buttons {
@@ -286,7 +286,7 @@ body { display: flex; justify-content: center; }
 .new-signal-btn {
   background: var(--accent-grad);
   color: #fff;
-  box-shadow: 0 0 12px rgba(42,158,241,0.4);
+  box-shadow: 0 0 12px rgba(8,200,160,0.4);
 }
 .new-signal-btn:active { transform: scale(0.98); }
 
@@ -394,7 +394,7 @@ body { display: flex; justify-content: center; }
 
 .signal-action.buy {
   color: var(--buy);
-  text-shadow: 0 0 14px rgba(44,224,116,0.6), 0 0 30px rgba(44,224,116,0.3);
+  text-shadow: 0 0 14px rgba(8,200,160,0.6), 0 0 30px rgba(8,200,160,0.3);
 }
 .signal-action.sell {
   color: var(--sell);
@@ -473,9 +473,9 @@ body { display: flex; justify-content: center; }
 }
 
 .indicators-block li.active {
-  background: rgba(0,255,136,0.1);
+  background: rgba(8,200,160,0.1);
   color: var(--buy);
-  box-shadow: 0 0 12px rgba(0,255,136,0.4);
+  box-shadow: 0 0 12px rgba(8,200,160,0.4);
   transform: scale(1.05);
 }
 

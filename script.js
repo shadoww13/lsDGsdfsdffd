@@ -48,17 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const getCategoryList = (category) => {
-    switch (category) {
-      case "currencies": return PAIRS_CONFIG.forexPairs;
-      case "stocks": return PAIRS_CONFIG.stockPairs;
-      case "crypto": return PAIRS_CONFIG.cryptoPairs;
-      case "commodities": return PAIRS_CONFIG.commoditiesPairs;
-      default: return [];
-    }
-  };
-
-  const getModeForCategory = (category) => {
-    return category === "crypto" ? "otc" : "stock";
+    return PAIRS_CONFIG.categories[category] || { otc: [], stock: [] };
   };
 
   const clearTimers = () => { timers.forEach(t => clearTimeout(t)); timers = []; };
@@ -70,9 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (history.at(-1) !== id) history.push(id);
     if (id === "signal") loadSignal();
     if (id === "pair") {
-      currentMode = selectedCategory === "crypto" ? "otc" : "otc"; // Default to OTC
-      otcBtn.classList.add("active");
-      stockBtn.classList.remove("active");
+      otcBtn.style.display = categoryList.otc.length > 0 ? "" : "none";
+      stockBtn.style.display = categoryList.stock.length > 0 ? "" : "none";
+      if (categoryList.otc.length > 0) {
+        currentMode = "otc";
+        otcBtn.classList.add("active");
+        stockBtn.classList.remove("active");
+      } else if (categoryList.stock.length > 0) {
+        currentMode = "stock";
+        stockBtn.classList.add("active");
+        otcBtn.classList.remove("active");
+      }
       renderPairs(currentMode);
     }
   };
@@ -101,10 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el) el.addEventListener("click", () => {
       selectedCategory = m.title.toLowerCase();
       categoryList = getCategoryList(selectedCategory);
-      currentMode = "otc"; // Default to OTC for all categories
-      pagination[currentMode].currentPage = 0;
-      otcBtn.classList.add("active");
-      stockBtn.classList.remove("active");
+      pagination.otc.currentPage = 0;
+      pagination.stock.currentPage = 0;
       show("pair");
     });
   });
@@ -125,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const renderPairs = (mode) => {
-    let list = categoryList || PAIRS_CONFIG.otcPairs; // Use categoryList if available, fallback to otcPairs
+    let list = categoryList[mode] || [];
     const pageSize = 10; // 2 columns x 5 rows
     let state = pagination[mode];
     if (state.currentPage < 0) state.currentPage = 0;
@@ -155,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   otcBtn.addEventListener("click", () => {
+    if (categoryList.otc.length === 0) return;
     otcBtn.classList.add("active");
     stockBtn.classList.remove("active");
     currentMode = "otc";
@@ -162,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   stockBtn.addEventListener("click", () => {
+    if (categoryList.stock.length === 0) return;
     stockBtn.classList.add("active");
     otcBtn.classList.remove("active");
     currentMode = "stock";
@@ -181,8 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
     state.currentPage++;
     renderPairs(currentMode);
   });
-
-  renderPairs("otc");
 
   timeGrid.innerHTML = PAIRS_CONFIG.times.map(t => `
     <div class="time-card" data-time="${t.time}">
