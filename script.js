@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
   try { Telegram?.WebApp?.ready?.(); } catch (e) {}
 
@@ -107,9 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
     <li class="pair">
-      <div class="pair-left">${p.flag1 === "btc" ? "₿" : `<span class="fi fi-${p.flag1}"></span>`}</div>
-      <div class="pair-label">${p.label.replace('/', '  → ')}</div>
-      <div class="pair-right">${p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`}<span class="otc-badge">OTC</span></div>
+      <div class="pair-left">${p.label === "Добавить акцию" ? "" : (p.flag1 === "btc" ? "₿" : `<span class="fi fi-${p.flag1}"></span>`)}</div>
+      <div class="pair-label">${p.label}</div>
+      <div class="pair-right">${p.label === "Добавить акцию" ? "" : (p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`)}<span class="otc-badge">OTC</span></div>
     </li>
   `).join("");
 
@@ -132,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageList = list.slice(start, end);
     const isCurrency = selectedCategory === "currencies";
     pairGrid.innerHTML = pageList.map((p, i) => {
-      let labelContent = p.label.replace('/', '  → ');
+      let labelContent = p.label;
       const upperMode = mode.toUpperCase();
       if (labelContent.endsWith(' ' + upperMode)) {
         labelContent = labelContent.slice(0, - (upperMode.length + 1));
@@ -149,14 +148,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }).join("");
     pairGrid.querySelectorAll(".pair").forEach(c => {
       c.addEventListener("click", () => {
-        selectedPair = c.querySelector(".pair-label").textContent.trim().replace('  → ', '/');
+        selectedPair = c.querySelector(".pair-label").textContent.trim();
         selectedType = mode.toUpperCase();
         show("time");
       });
     });
     prevPage.disabled = state.currentPage === 0;
-    nextPage.disabled = state.currentPage === totalPages - 1 || totalPages <= 1;
-    pageIndicator.textContent = `${state.currentPage + 1} / ${totalPages}`;
+    nextPage.disabled = state.currentPage >= totalPages - 1;
+    pageIndicator.textContent = `${state.currentPage + 1} / ${totalPages || 1}`;
   };
 
   otcBtn.addEventListener("click", () => {
@@ -164,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     otcBtn.classList.add("active");
     stockBtn.classList.remove("active");
     currentMode = "otc";
+    pagination[currentMode].currentPage = 0;
     renderPairs("otc");
   });
 
@@ -172,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stockBtn.classList.add("active");
     otcBtn.classList.remove("active");
     currentMode = "stock";
+    pagination[currentMode].currentPage = 0;
     renderPairs("stock");
   });
 
@@ -185,8 +186,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextPage.addEventListener("click", () => {
     const state = pagination[currentMode];
-    state.currentPage++;
-    renderPairs(currentMode);
+    const totalPages = Math.ceil((categoryList[currentMode] || []).length / 10);
+    if (state.currentPage < totalPages - 1) {
+      state.currentPage++;
+      renderPairs(currentMode);
+    }
   });
 
   timeGrid.innerHTML = PAIRS_CONFIG.times.map(t => `
@@ -241,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
     const percentage = Math.floor(Math.random() * 26) + 70;
 
-    signalPair.textContent = pair.replace('/', '  → ');
+    signalPair.textContent = pair;
     signalType.textContent = type;
     signalTime.textContent = time;
     signalAction.textContent = action;

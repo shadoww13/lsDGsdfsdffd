@@ -10,8 +10,8 @@ const PAIRS_CONFIG = {
     { flag1: "gb", flag2: "us", label: "GBP/USD" },
     { flag1: "jp", flag2: "us", label: "USD/JPY" },
     { flag1: "ca", flag2: "us", label: "CAD/USD" },
-    { flag1: "btc", flag2: "us", label: "BTC/USD" },
-    { flag1: "ch", flag2: "us", label: "CHF/USD" }
+    { flag1: "xx", flag2: "xx", label: "Добавить акцию" },
+    { flag1: "xx", flag2: "xx", label: "Добавить акцию" }
   ],
   categories: {
     currencies: {
@@ -94,9 +94,7 @@ const PAIRS_CONFIG = {
         { flag1: "us", flag2: "ca", label: "USD/CAD" },
         { flag1: "au", flag2: "ca", label: "AUD/CAD" },
         { flag1: "us", flag2: "jp", label: "USD/JPY" },
-        { flag1: "gb", flag2: "ch", label: "GBP/CHF" },
-        { flag1: "gb", flag2: "au", label: "GBP/AUD" },
-        { flag1: "gb", flag2: "jp", label: "GBP/JPY" }
+        { flag1: "gb", flag2: "ch", label: "GBP/CHF" }
       ]
     },
     stocks: {
@@ -210,7 +208,48 @@ const PAIRS_CONFIG = {
       ]
     },
     commodities: {
-      otc: [],
+      otc: [
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 1" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 2" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 3" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 4" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 5" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 6" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 7" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 8" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 9" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 10" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 11" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 12" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 13" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 14" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 15" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 16" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 17" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 18" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 19" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 20" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 21" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 22" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 23" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 24" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 25" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 26" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 27" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 28" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 29" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 30" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 31" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 32" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 33" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 34" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 35" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 36" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 37" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 38" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 39" },
+        { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 40" }
+      ],
       stock: [
         { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 1" },
         { flag1: "xx", flag2: "xx", label: "COMMODITY Pair 2" },
