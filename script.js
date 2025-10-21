@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
         <div class="pair-left">${leftContent}</div>
         <div class="pair-label">${labelContent}</div>
-        <div class="pair-right">${rightContent}<span class="otc-badge">${mode.toUpperCase()}</span></div>
+        <div class="pair-right">${rightContent}</div>
       </div>
     `;
     }).join("");
