@@ -309,10 +309,10 @@ body { display: flex; justify-content: center; }
 }
 
 .loader {
-  width: 120px;
-  height: 120px;
-  border: 6px solid rgba(255, 255, 255, 0.1);
-  border-top: 6px solid var(--accent);
+  width: 15vh;
+  height: 15vh;
+  border: 0.75vh solid rgba(255, 255, 255, 0.1);
+  border-top: 0.75vh solid var(--accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -321,14 +321,14 @@ body { display: flex; justify-content: center; }
 
 .signal-bg {
   background: var(--window-bg);
-  padding: 16px;
+  padding: 2vh;
   border-radius: var(--radius);
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-grow: 1;
-  gap: 16px;
+  gap: 2vh;
   animation: fadeIn 0.5s ease;
 }
 
@@ -341,30 +341,27 @@ body { display: flex; justify-content: center; }
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow), inset 0 1px 1px rgba(255,255,255,0.03);
-  padding: 20px;
+  padding: 2.5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 1.75vh;
   flex-grow: 0;
 }
 
-#signalDetails,
-#signalIndicators { margin-top: auto; }
-
 .signal-header-top { text-align: center; width: 100%; }
-.signal-header-bottom { display: flex; justify-content: center; align-items: center; gap: 12px; width: 100%; }
+.signal-header-bottom { display: flex; justify-content: center; align-items: center; gap: 1.5vh; width: 100%; }
 
-.signal-pair { font-size: 26px; font-weight: 800; color: var(--text); }
-.signal-type { font-size: 16px; font-weight: 600; color: var(--text); padding: 6px 12px; }
-.signal-time { font-size: 16px; color: var(--muted); }
-.separator { color: var(--muted); font-size: 16px; }
+.signal-pair { font-size: 3.25vh; font-weight: 800; color: var(--text); }
+.signal-type { font-size: 2vh; font-weight: 600; color: var(--text); padding: 0.75vh 1.5vh; }
+.signal-time { font-size: 2vh; color: var(--muted); }
+.separator { color: var(--muted); font-size: 2vh; }
 
 .signal-body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 2.5vh;
   transform: scale(1.1);
   animation: pulse 1.2s infinite alternate;
 }
@@ -375,7 +372,7 @@ body { display: flex; justify-content: center; }
 }
 
 .signal-arrow {
-  font-size: 64px;
+  font-size: 8vh;
   font-weight: 900;
   animation: arrowPulse 1.6s ease-in-out infinite;
 }
@@ -386,10 +383,10 @@ body { display: flex; justify-content: center; }
 }
 
 .signal-action {
-  font-size: 52px;
+  font-size: 6.5vh;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.25vh;
 }
 
 .signal-action.buy {
@@ -405,13 +402,13 @@ body { display: flex; justify-content: center; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 1.25vh;
 }
 
 .progress-circle {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 15vh;
+  height: 15vh;
   border-radius: 50%;
   background: conic-gradient(var(--accent) var(--progress, 73%), rgba(255,255,255,0.1) 0);
   display: flex;
@@ -422,29 +419,29 @@ body { display: flex; justify-content: center; }
 .progress-circle::after {
   content: '';
   position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 100px;
-  height: 100px;
+  top: 1.25vh;
+  left: 1.25vh;
+  width: 12.5vh;
+  height: 12.5vh;
   background: var(--card-bg);
   border-radius: 50%;
 }
 
 .progress-text {
-  font-size: 24px;
+  font-size: 3vh;
   font-weight: 700;
   color: var(--text);
   z-index: 1;
 }
 
 .progress-texts { text-align: center; color: var(--muted); }
-.progress-step { font-size: 12px; }
+.progress-step { font-size: 1.5vh; }
 
 .indicators-title {
   text-align: center;
-  font-size: 14px;
+  font-size: 1.75vh;
   color: var(--muted);
-  margin-bottom: 10px;
+  margin-bottom: 1.25vh;
 }
 
 .indicators-block {
@@ -457,16 +454,16 @@ body { display: flex; justify-content: center; }
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 1.5vh;
   justify-content: center;
 }
 
 .indicators-block li {
   background: var(--card-bg);
   border-radius: 10px;
-  padding: 10px 16px;
+  padding: 1.25vh 2vh;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 1.5vh;
   color: var(--text);
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: 0.3s;
@@ -505,8 +502,6 @@ body { display: flex; justify-content: center; }
   .logo { font-size: 20px; }
   .sub-btn, .back-btn, .new-signal-btn { padding: 8px; font-size: 13px; }
   .pair-card, .time-card { padding: 8px; font-size: 12px; }
-  .signal-arrow { font-size: 48px; }
-  .signal-action { font-size: 38px; }
 }
 
 @media (max-height: 480px) {
