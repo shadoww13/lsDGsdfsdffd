@@ -154,8 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
     prevPage.disabled = state.currentPage === 0;
-    nextPage.disabled = state.currentPage >= totalPages - 1;
-    pageIndicator.textContent = `${state.currentPage + 1} / ${totalPages || 1}`;
+    nextPage.disabled = state.currentPage === totalPages - 1 || totalPages <= 1;
+    pageIndicator.textContent = `${state.currentPage + 1} / ${totalPages}`;
   };
 
   otcBtn.addEventListener("click", () => {
@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
     otcBtn.classList.add("active");
     stockBtn.classList.remove("active");
     currentMode = "otc";
-    pagination[currentMode].currentPage = 0;
     renderPairs("otc");
   });
 
@@ -172,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
     stockBtn.classList.add("active");
     otcBtn.classList.remove("active");
     currentMode = "stock";
-    pagination[currentMode].currentPage = 0;
     renderPairs("stock");
   });
 
@@ -186,8 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextPage.addEventListener("click", () => {
     const state = pagination[currentMode];
-    const totalPages = Math.ceil((categoryList[currentMode] || []).length / 10);
-    if (state.currentPage < totalPages - 1) {
+    if (state.currentPage < Math.ceil((categoryList[currentMode] || []).length / 10) - 1) {
       state.currentPage++;
       renderPairs(currentMode);
     }
