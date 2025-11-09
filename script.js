@@ -61,17 +61,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (history.at(-1) !== id) history.push(id);
 
     if (id === "signal") {
-      // === ФЛАГИ И ПАРА СРАЗУ ===
       const pair = selectedPair || "USD/EUR";
       let leftFlag = "", rightFlag = "";
+
       if (selectedPairData) {
-        leftFlag = selectedPairData.flag1 && selectedPairData.flag1 !== "xx" 
-          ? (selectedPairData.flag1 === "btc" ? "Bitcoin" : `<span class="fi fi-${selectedPairData.flag1}"></span>`) 
-          : "";
-        rightFlag = selectedPairData.flag2 && selectedPairData.flag2 !== "xx" 
-          ? (selectedPairData.flag2 === "btc" ? "Bitcoin" : `<span class="fi fi-${selectedPairData.flag2}"></span>`) 
-          : "";
+        const isStock = selectedPairData.isStock || selectedPairData.label.includes("Apple") || selectedPairData.label.includes("Cisco");
+        if (!isStock) {
+          leftFlag = selectedPairData.flag1 && selectedPairData.flag1 !== "xx" 
+            ? (selectedPairData.flag1 === "btc" ? "Bitcoin" : `<span class="fi fi-${selectedPairData.flag1}"></span>`) 
+            : "";
+          rightFlag = selectedPairData.flag2 && selectedPairData.flag2 !== "xx" 
+            ? (selectedPairData.flag2 === "btc" ? "Bitcoin" : `<span class="fi fi-${selectedPairData.flag2}"></span>`) 
+            : "";
+        }
       }
+
       signalPair.innerHTML = `
         <div class="pair-left">${leftFlag}</div>
         <div class="pair-label">${pair}</div>
@@ -79,8 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       signalType.textContent = selectedType || "OTC";
       signalTime.textContent = selectedTime || "1m";
-
-      loadSignal(); // ← запускаем загрузку
+      loadSignal();
     }
 
     if (id === "pair") {
@@ -130,19 +133,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === ПОПУЛЯРНЫЕ ПАРЫ ===
-  pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
-    <li class="pair">
-      <div class="pair-left">${p.label === "Добавить акцию" ? "" : (p.flag1 === "btc" ? "Bitcoin" : `<span class="fi fi-${p.flag1}"></span>`)}</div>
-      <div class="pair-label">${p.label}</div>
-      <div class="pair-right">${p.label === "Добавить акцию" ? "" : (p.flag2 === "btc" ? "Bitcoin" : `<span class="fi fi-${p.flag2}"></span>`)}<span class="otc-badge">OTC</span></div>
-    </li>
-  `).join("");
+  // === ПОПУЛЯРНЫЕ ПАРЫ — Apple и Cisco БЕЗ /USD И БЕЗ ФЛАГОВ ===
+  const extraPairs = [
+    { label: "Apple", displayLabel: "Apple", flag1: "", flag2: "", isStock: true, type: "STOCK" },
+    { label: "Cisco", displayLabel: "Cisco", flag1: "", flag2: "", isStock: true, type: "STOCK" }
+  ];
+
+  const popularPairs = [...PAIRS_CONFIG.popularPairs.filter(p => p.label !== "Добавить акцию"), ...extraPairs];
+
+  pairsList.innerHTML = popularPairs.map(p => {
+    const isStock = p.isStock || false;
+    const displayLabel = p.displayLabel || p.label;
+    const leftFlag = isStock ? "" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "");
+    const rightFlag = isStock ? "" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "");
+    return `
+      <li class="pair">
+        <div class="pair-left">${leftFlag}</div>
+        <div class="pair-label">${displayLabel}</div>
+        <div class="pair-right">${rightFlag}<span class="otc-badge">OTC</span></div>
+      </li>
+    `;
+  }).join("");
 
   pairsList.querySelectorAll(".pair").forEach((el, i) => {
     el.addEventListener("click", () => {
-      const pairData = PAIRS_CONFIG.popularPairs[i];
-      selectedPair = pairData.label;
+      const pairData = popularPairs[i];
+      selectedPair = pairData.displayLabel || pairData.label;
       selectedPairData = pairData;
       show("time");
     });

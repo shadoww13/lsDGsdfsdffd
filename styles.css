@@ -90,25 +90,28 @@ body { display: flex; justify-content: center; }
   gap: 8px;
 }
 
+/* === КНОПКИ МЕНЮ — УВЕЛИЧЕН ШРИФТ И ВЫСОТА === */
 .menu-card {
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 16px 12px;
   text-align: center;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 16px; /* ↑ УВЕЛИЧЕНО */
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  min-height: 80px;
+  justify-content: center;
+  gap: 8px;
+  min-height: 96px; /* ↑ ВЫШЕ */
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .menu-card:hover { 
   background: var(--hover); 
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 230, 184, 0.25);
 }
 
 .section-title {
@@ -147,8 +150,17 @@ body { display: flex; justify-content: center; }
   transform: scale(1.01);
 }
 
-.pair-left, .pair-right { display: flex; align-items: center; gap: 6px; font-size: 14px; }
-.pair-label { text-align: center; font-weight: 600; color: var(--text); }
+.pair-left, .pair-right { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+  font-size: 14px; 
+}
+.pair-label { 
+  text-align: center; 
+  font-weight: 600; 
+  color: var(--text); 
+}
 
 .otc-badge {
   background: transparent;
@@ -375,7 +387,6 @@ body { display: flex; justify-content: center; }
   flex-grow: 0;
 }
 
-/* === ФЛАГИ НА СИГНАЛЕ === */
 .signal-pair {
   display: flex;
   align-items: center;
@@ -384,20 +395,17 @@ body { display: flex; justify-content: center; }
   font-size: 3.25vh;
   font-weight: 800;
   color: var(--text);
+  width: 100%;
 }
 
-.signal-flag-left,
-.signal-flag-right {
-  width: 3.6vh;
-  height: 3.6vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.8vh;
+.signal-pair .pair-left,
+.signal-pair .pair-right {
+  flex: 0 0 auto;
 }
 
-.signal-pair-text {
-  min-width: 0;
+.signal-pair .pair-label {
+  flex: 1;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -430,7 +438,6 @@ body { display: flex; justify-content: center; }
   transform: scale(1.08);
 }
 
-/* === СВЕЧЕНИЕ BUY/SELL + АНИМАЦИЯ === */
 .signal-action {
   font-size: 6.5vh;
   font-weight: 900;
@@ -471,7 +478,6 @@ body { display: flex; justify-content: center; }
   gap: 1.25vh;
 }
 
-/* === КРУГ БЕЗ СВЕЧЕНИЯ === */
 .progress-circle {
   position: relative;
   width: 15vh;
@@ -503,7 +509,11 @@ body { display: flex; justify-content: center; }
   z-index: 1;
 }
 
-.progress-step { font-size: 1.5vh; color: var(--muted); text-align: center; }
+.progress-step { 
+  font-size: 1.5vh; 
+  color: var(--muted); 
+  text-align: center; 
+}
 
 .indicators-title {
   text-align: center;
@@ -522,7 +532,6 @@ body { display: flex; justify-content: center; }
   justify-content: center;
 }
 
-/* === ИНДИКАТОРЫ В CAPS, БЕЗ СВЕЧЕНИЯ === */
 .indicators-block li {
   background: var(--card-bg);
   border-radius: 14px;
@@ -544,16 +553,24 @@ body { display: flex; justify-content: center; }
   transform: translateY(-2px);
 }
 
+/* === POWERED BY STOCKSLABS — ВЕРНУТ, НО КРАСИВО === */
 .footer {
   text-align: center;
   font-size: 11px;
-  color: var(--muted);
+  color: rgba(168, 180, 208, 0.5);
   margin-top: 8px;
-  font-weight: bold;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.footer:hover {
+  opacity: 1;
 }
 .footer span { 
-  color: var(--accent); 
-  font-weight: 800;
+  color: #00e6b8; 
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
 }
 
 @media (max-height: 600px) {
@@ -563,6 +580,6 @@ body { display: flex; justify-content: center; }
 }
 
 @media (max-height: 480px) {
-  .subtitle, .footer { display: none; }
+  .subtitle { display: none; }
   .recommend-card { font-size: 11px; padding: 8px; }
 }
