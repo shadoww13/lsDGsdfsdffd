@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentMode = "otc";
   let selectedCategory = null;
   let categoryList = null;
+  let selectedPairData = null;
+
   const pagination = {
     otc: { currentPage: 0 },
     stock: { currentPage: 0 }
@@ -57,7 +59,30 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.values(pages).forEach(p => p.classList.add("hidden"));
     pages[id].classList.remove("hidden");
     if (history.at(-1) !== id) history.push(id);
-    if (id === "signal") loadSignal();
+
+    if (id === "signal") {
+      // === ФЛАГИ И ПАРА СРАЗУ ===
+      const pair = selectedPair || "USD/EUR";
+      let leftFlag = "", rightFlag = "";
+      if (selectedPairData) {
+        leftFlag = selectedPairData.flag1 && selectedPairData.flag1 !== "xx" 
+          ? (selectedPairData.flag1 === "btc" ? "Bitcoin" : `<span class="fi fi-${selectedPairData.flag1}"></span>`) 
+          : "";
+        rightFlag = selectedPairData.flag2 && selectedPairData.flag2 !== "xx" 
+          ? (selectedPairData.flag2 === "btc" ? "Bitcoin" : `<span class="fi fi-${selectedPairData.flag2}"></span>`) 
+          : "";
+      }
+      signalPair.innerHTML = `
+        <div class="pair-left">${leftFlag}</div>
+        <div class="pair-label">${pair}</div>
+        <div class="pair-right">${rightFlag}</div>
+      `;
+      signalType.textContent = selectedType || "OTC";
+      signalTime.textContent = selectedTime || "1m";
+
+      loadSignal(); // ← запускаем загрузку
+    }
+
     if (id === "pair") {
       otcBtn.style.display = categoryList.otc.length > 0 ? "" : "none";
       stockBtn.style.display = categoryList.stock.length > 0 ? "" : "none";
@@ -85,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".back-btn").forEach(b => b.addEventListener("click", back));
 
+  // === МЕНЮ ===
   menuGrid.innerHTML = PAIRS_CONFIG.menu.map(m =>
     `<div class="menu-card" id="${m.id}">
        <div>
@@ -104,24 +130,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // === ПОПУЛЯРНЫЕ ПАРЫ ===
   pairsList.innerHTML = PAIRS_CONFIG.popularPairs.map(p => `
     <li class="pair">
-      <div class="pair-left">${p.label === "Добавить акцию" ? "" : (p.flag1 === "btc" ? "₿" : `<span class="fi fi-${p.flag1}"></span>`)}</div>
+      <div class="pair-left">${p.label === "Добавить акцию" ? "" : (p.flag1 === "btc" ? "Bitcoin" : `<span class="fi fi-${p.flag1}"></span>`)}</div>
       <div class="pair-label">${p.label}</div>
-      <div class="pair-right">${p.label === "Добавить акцию" ? "" : (p.flag2 === "btc" ? "₿" : `<span class="fi fi-${p.flag2}"></span>`)}<span class="otc-badge">OTC</span></div>
+      <div class="pair-right">${p.label === "Добавить акцию" ? "" : (p.flag2 === "btc" ? "Bitcoin" : `<span class="fi fi-${p.flag2}"></span>`)}<span class="otc-badge">OTC</span></div>
     </li>
   `).join("");
 
   pairsList.querySelectorAll(".pair").forEach((el, i) => {
     el.addEventListener("click", () => {
-      selectedPair = PAIRS_CONFIG.popularPairs[i].label;
+      const pairData = PAIRS_CONFIG.popularPairs[i];
+      selectedPair = pairData.label;
+      selectedPairData = pairData;
       show("time");
     });
   });
 
+  // === РЕНДЕР ПАР В КАТЕГОРИЯХ ===
   const renderPairs = (mode) => {
     let list = categoryList[mode] || [];
-    const pageSize = 10; // 2 columns x 5 rows
+    const pageSize = 10;
     let state = pagination[mode];
     if (state.currentPage < 0) state.currentPage = 0;
     const totalPages = Math.ceil(list.length / pageSize);
@@ -136,8 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (labelContent.endsWith(' ' + upperMode)) {
         labelContent = labelContent.slice(0, - (upperMode.length + 1));
       }
-      const leftContent = isCurrency ? (p.flag1 === "btc" ? "₿" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : '';
-      const rightContent = isCurrency ? (p.flag2 === "btc" ? "₿" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "");
+      const leftContent = isCurrency ? (p.flag1 === "btc" ? "Bitcoin" : (p.flag1 && p.flag1 !== "xx" ? `<span class="fi fi-${p.flag1}"></span>` : "")) : '';
+      const rightContent = isCurrency ? (p.flag2 === "btc" ? "Bitcoin" : (p.flag2 && p.flag2 !== "xx" ? `<span class="fi fi-${p.flag2}"></span>` : "")) : (p.label.split('/')[1] || "");
       return `
       <div class="pair" style="${i % 2 === 0 ? 'grid-column: 1' : 'grid-column: 2'}">
         <div class="pair-left">${leftContent}</div>
@@ -148,7 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }).join("");
     pairGrid.querySelectorAll(".pair").forEach(c => {
       c.addEventListener("click", () => {
-        selectedPair = c.querySelector(".pair-label").textContent.trim();
+        const label = c.querySelector(".pair-label").textContent.trim();
+        selectedPair = label + (label.includes('/') ? '' : ` ${mode.toUpperCase()}`);
+        const fullList = categoryList[mode];
+        const pairObj = fullList.find(p => p.label.includes(label));
+        selectedPairData = pairObj || { flag1: "xx", flag2: "xx" };
         selectedType = mode.toUpperCase();
         show("time");
       });
@@ -236,24 +270,19 @@ document.addEventListener("DOMContentLoaded", () => {
     indicatorsPlaceholder.classList.add("hidden");
     signalIndicators.classList.remove("hidden");
 
-    const pair = selectedPair || "USD/EUR";
-    const time = selectedTime || "1m";
-    const type = selectedType || "OTC";
     const action = Math.random() > 0.5 ? "BUY" : "SELL";
     const percentage = Math.floor(Math.random() * 26) + 70;
 
-    signalPair.textContent = pair;
-    signalType.textContent = type;
-    signalTime.textContent = time;
     signalAction.textContent = action;
     signalAction.className = `signal-action ${action.toLowerCase()}`;
 
     progressStep.textContent = "Probability of successful development:";
     document.querySelector('.progress-text').textContent = `${percentage}%`;
     document.querySelector('.progress-circle').style.setProperty('--progress', `${percentage}%`);
+
     const indicators = action === "BUY" ? PAIRS_CONFIG.buyIndicators : PAIRS_CONFIG.sellIndicators;
     const chosen = indicators.slice().sort(() => 0.5 - Math.random()).slice(0, 3);
-    signalInfo.innerHTML = `<ul>${chosen.map(i => `<li>${i}</li>`).join("")}</ul>`;
+    signalInfo.innerHTML = `<ul>${chosen.map(i => `<li>${i.toUpperCase()}</li>`).join("")}</ul>`;
   };
 
   show("home");
