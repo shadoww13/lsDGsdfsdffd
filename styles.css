@@ -90,21 +90,20 @@ body { display: flex; justify-content: center; }
   gap: 8px;
 }
 
-/* === КНОПКИ МЕНЮ — УВЕЛИЧЕН ШРИФТ И ВЫСОТА === */
 .menu-card {
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 16px 12px;
   text-align: center;
   font-weight: 700;
-  font-size: 16px; /* ↑ УВЕЛИЧЕНО */
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 96px; /* ↑ ВЫШЕ */
+  min-height: 96px;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
@@ -162,14 +161,13 @@ body { display: flex; justify-content: center; }
   color: var(--text); 
 }
 
+/* === OTC / STOCK — БЕЗ КРУГА, ПРОСТО ТЕКСТ === */
 .otc-badge {
-  background: transparent;
-  border: 1px solid var(--accent);
-  border-radius: 8px;
-  padding: 2px 6px;
   color: var(--accent);
   font-size: 11px;
   font-weight: 700;
+  margin-left: 6px;
+  /* УБРАНО: background, border, padding, border-radius */
 }
 
 .top-buttons {
@@ -553,7 +551,6 @@ body { display: flex; justify-content: center; }
   transform: translateY(-2px);
 }
 
-/* === POWERED BY STOCKSLABS — ВЕРНУТ, НО КРАСИВО === */
 .footer {
   text-align: center;
   font-size: 11px;
