@@ -1,15 +1,14 @@
 const PAIRS_CONFIG = {
   menu: [
-    { id: "btn1", title: "Currencies", sub: "Forex pairs" },
-    { id: "btn2", title: "Stocks", sub: "Company shares" }
+    { id: "btn1", title: "Pair Selection", sub: "Forex pairs" }
   ],
   popularPairs: [
     { flag1: "us", flag2: "eu", label: "USD/EUR" },
     { flag1: "gb", flag2: "us", label: "GBP/USD" },
     { flag1: "jp", flag2: "us", label: "USD/JPY" },
     { flag1: "ca", flag2: "us", label: "CAD/USD" },
-    { flag1: "xx", flag2: "xx", label: "Добавить акцию" },
-    { flag1: "xx", flag2: "xx", label: "Добавить акцию" }
+    { flag1: "au", flag2: "us", label: "AUD/USD" },
+    { flag1: "eu", flag2: "ch", label: "EUR/CHF" }
   ],
   categories: {
     currencies: {
@@ -95,50 +94,6 @@ const PAIRS_CONFIG = {
         { flag1: "gb", flag2: "ch", label: "GBP/CHF" },
         { flag1: "gb", flag2: "au", label: "GBP/AUD" },
         { flag1: "gb", flag2: "jp", label: "GBP/JPY" }
-      ]
-    },
-    stocks: {
-      otc: [
-        { flag1: "xx", flag2: "xx", label: "Apple OTC" },
-        { flag1: "xx", flag2: "xx", label: "American Express OTC" },
-        { flag1: "xx", flag2: "xx", label: "Boeing Company OTC" },
-        { flag1: "xx", flag2: "xx", label: "Advanced Micro Devices OTC" },
-        { flag1: "xx", flag2: "xx", label: "Netflix OTC" },
-        { flag1: "xx", flag2: "xx", label: "ExxonMobil OTC" },
-        { flag1: "xx", flag2: "xx", label: "VISA OTC" },
-        { flag1: "xx", flag2: "xx", label: "Tesla OTC" },
-        { flag1: "xx", flag2: "xx", label: "Intel OTC" },
-        { flag1: "xx", flag2: "xx", label: "Amazon OTC" },
-        { flag1: "xx", flag2: "xx", label: "Coinbase Global OTC" },
-        { flag1: "xx", flag2: "xx", label: "Citigroup Inc OTC" },
-        { flag1: "xx", flag2: "xx", label: "Alibaba OTC" },
-        { flag1: "xx", flag2: "xx", label: "Johnson & Johnson OTC" },
-        { flag1: "xx", flag2: "xx", label: "McDonald's OTC" },
-        { flag1: "xx", flag2: "xx", label: "FedEx OTC" },
-        { flag1: "xx", flag2: "xx", label: "Marathon Digital Holdings OTC" },
-        { flag1: "xx", flag2: "xx", label: "FACEBOOK INC OTC" },
-        { flag1: "xx", flag2: "xx", label: "GameStop Corp OTC" },
-        { flag1: "xx", flag2: "xx", label: "Cisco OTC" },
-        { flag1: "xx", flag2: "xx", label: "Microsoft OTC" },
-        { flag1: "xx", flag2: "xx", label: "Pfizer Inc OTC" },
-        { flag1: "xx", flag2: "xx", label: "Palantir Technologies OTC" },
-        { flag1: "xx", flag2: "xx", label: "VIX OTC" }
-      ],
-      stock: [
-        { flag1: "xx", flag2: "xx", label: "Apple" },
-        { flag1: "xx", flag2: "xx", label: "American Express" },
-        { flag1: "xx", flag2: "xx", label: "Boeing Company" },
-        { flag1: "xx", flag2: "xx", label: "FACEBOOK INC" },
-        { flag1: "xx", flag2: "xx", label: "Johnson & Johnson" },
-        { flag1: "xx", flag2: "xx", label: "JPMorgan Chase & Co" },
-        { flag1: "xx", flag2: "xx", label: "McDonald's" },
-        { flag1: "xx", flag2: "xx", label: "Microsoft" },
-        { flag1: "xx", flag2: "xx", label: "Pfizer Inc" },
-        { flag1: "xx", flag2: "xx", label: "Tesla" },
-        { flag1: "xx", flag2: "xx", label: "Alibaba" },
-        { flag1: "xx", flag2: "xx", label: "Citigroup Inc" },
-        { flag1: "xx", flag2: "xx", label: "Netflix" },
-        { flag1: "xx", flag2: "xx", label: "Cisco" }
       ]
     }
   },

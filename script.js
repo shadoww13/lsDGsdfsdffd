@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   PAIRS_CONFIG.menu.forEach(m => {
     const el = document.getElementById(m.id);
     if (el) el.addEventListener("click", () => {
-      selectedCategory = m.title.toLowerCase();
+      selectedCategory = "currencies";
       categoryList = getCategoryList(selectedCategory);
       pagination.otc.currentPage = 0;
       pagination.stock.currentPage = 0;
@@ -133,13 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === ПОПУЛЯРНЫЕ ПАРЫ — Apple и Cisco БЕЗ /USD И БЕЗ ФЛАГОВ ===
-  const extraPairs = [
-    { label: "Apple", displayLabel: "Apple", flag1: "", flag2: "", isStock: true, type: "STOCK" },
-    { label: "Cisco", displayLabel: "Cisco", flag1: "", flag2: "", isStock: true, type: "STOCK" }
-  ];
-
-  const popularPairs = [...PAIRS_CONFIG.popularPairs.filter(p => p.label !== "Добавить акцию"), ...extraPairs];
+  // === ПОПУЛЯРНЫЕ ПАРЫ ===
+  const popularPairs = PAIRS_CONFIG.popularPairs;
 
   pairsList.innerHTML = popularPairs.map(p => {
     const isStock = p.isStock || false;

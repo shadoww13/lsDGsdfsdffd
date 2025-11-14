@@ -1,18 +1,19 @@
 :root {
-  --bg-main: linear-gradient(180deg, #05080f 0%, #0c111c 100%);
-  --window-bg: #121822;
-  --card-bg: #1e2538;
-  --card-inner: #252c42;
-  --hover: #2d354d;
-  --accent: #00e6b8;
-  --accent-grad: linear-gradient(90deg, #00e6b8 0%, #00b894 100%);
-  --text: #f0f4ff;
-  --muted: #a8b4d0;
-  --buy: #00e6b8;
-  --sell: #ff6b7a;
-  --radius: 14px;
-  --shadow: 0 6px 16px rgba(0,0,0,0.6);
-  --danger: #ff6b7a;
+  --bg-main: linear-gradient(180deg, #0A0E1A 0%, #131826 100%);
+  --window-bg: #1A1F2E;
+  --card-bg: #20253A;
+  --card-inner: #20253A;
+  --hover: #2A2F42;
+  --accent: #00A3FF;
+  --accent-grad: linear-gradient(90deg, #00A3FF 0%, #007BFF 100%);
+  --text: #FFFFFF;
+  --muted: #A0A8B8;
+  --buy: #00E676;
+  --sell: #FF1744;
+  --radius: 8px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  --danger: #FF1744;
+  --border-color: #2E3346;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -37,6 +38,7 @@ body { display: flex; justify-content: center; }
   flex-direction: column;
   padding: 12px 16px;
   box-sizing: border-box;
+  background: var(--bg-main);
 }
 
 .page { display: flex; flex-direction: column; flex-grow: 1; min-height: 0; }
@@ -82,11 +84,12 @@ body { display: flex; justify-content: center; }
   flex-direction: column;
   gap: 8px;
   flex-grow: 1;
+  border: 1px solid var(--border-color);
 }
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 8px;
 }
 
@@ -105,12 +108,13 @@ body { display: flex; justify-content: center; }
   gap: 8px;
   min-height: 96px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
 }
 .menu-card:hover { 
   background: var(--hover); 
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 230, 184, 0.25);
+  box-shadow: var(--shadow);
 }
 
 .section-title {
@@ -143,6 +147,7 @@ body { display: flex; justify-content: center; }
   min-height: 50px;
   flex: 1;
   transition: 0.2s;
+  border: 1px solid var(--border-color);
 }
 .pair:hover {
   background: var(--hover);
@@ -161,13 +166,11 @@ body { display: flex; justify-content: center; }
   color: var(--text); 
 }
 
-/* === OTC / STOCK — БЕЗ КРУГА, ПРОСТО ТЕКСТ === */
 .otc-badge {
   color: var(--accent);
   font-size: 11px;
   font-weight: 700;
   margin-left: 6px;
-  /* УБРАНО: background, border, padding, border-radius */
 }
 
 .top-buttons {
@@ -181,7 +184,7 @@ body { display: flex; justify-content: center; }
   flex: 1;
   max-width: 160px;
   min-height: 40px;
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--card-bg);
   color: var(--text);
@@ -200,6 +203,7 @@ body { display: flex; justify-content: center; }
   box-shadow: 0 0 0 1px var(--accent);
   transform: scale(1.02);
   font-weight: 700;
+  border: none;
 }
 
 .pairs-grid {
@@ -223,6 +227,7 @@ body { display: flex; justify-content: center; }
   padding: 10px;
   font-size: 13px;
   transition: 0.2s;
+  border: 1px solid var(--border-color);
 }
 .pair-card:hover {
   background: var(--hover);
@@ -240,7 +245,7 @@ body { display: flex; justify-content: center; }
 .nav-btn {
   flex: 1;
   min-height: 40px;
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--card-bg);
   color: var(--text);
@@ -291,6 +296,7 @@ body { display: flex; justify-content: center; }
   align-items: center;
   min-height: 70px;
   transition: 0.2s;
+  border: 1px solid var(--border-color);
 }
 .time-card:hover {
   background: var(--hover);
@@ -302,13 +308,13 @@ body { display: flex; justify-content: center; }
 .time-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
 .recommend-card {
-  background: rgba(0, 230, 184, 0.08);
+  background: rgba(0, 163, 255, 0.08);
   border-radius: var(--radius);
   padding: 16px;
   text-align: center;
   color: var(--accent);
   font-size: 12px;
-  border: 1px solid rgba(0, 230, 184, 0.3);
+  border: 1px solid rgba(0, 163, 255, 0.3);
   font-weight: 600;
 }
 
@@ -326,14 +332,14 @@ body { display: flex; justify-content: center; }
 .back-btn { 
   background: #0f1724; 
   color: #fff; 
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-color);
 }
 .back-btn:hover { background: #1a2233; }
 
 .new-signal-btn {
   background: var(--accent-grad);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(0, 163, 255, 0.5);
   font-weight: 700;
 }
 .new-signal-btn:active { 
@@ -371,6 +377,7 @@ body { display: flex; justify-content: center; }
   justify-content: space-between;
   flex-grow: 1;
   gap: 2vh;
+  border: 1px solid var(--border-color);
 }
 
 .signal-card {
@@ -383,6 +390,7 @@ body { display: flex; justify-content: center; }
   align-items: center;
   gap: 1.75vh;
   flex-grow: 0;
+  border: 1px solid var(--border-color);
 }
 
 .signal-pair {
@@ -446,27 +454,15 @@ body { display: flex; justify-content: center; }
 .signal-action.buy {
   color: var(--buy);
   text-shadow: 
-    0 0 16px rgba(0, 230, 184, 0.8),
-    0 0 32px rgba(0, 230, 184, 0.5);
-  animation: glowBuy 1.8s ease-in-out infinite alternate;
+    0 0 16px rgba(0, 230, 118, 0.8),
+    0 0 32px rgba(0, 230, 118, 0.5);
 }
 
 .signal-action.sell {
   color: var(--sell);
   text-shadow: 
-    0 0 16px rgba(255, 107, 122, 0.8),
-    0 0 32px rgba(255, 107, 122, 0.5);
-  animation: glowSell 1.8s ease-in-out infinite alternate;
-}
-
-@keyframes glowBuy {
-  from { text-shadow: 0 0 16px rgba(0, 230, 184, 0.8), 0 0 32px rgba(0, 230, 184, 0.5); }
-  to { text-shadow: 0 0 24px rgba(0, 230, 184, 1), 0 0 48px rgba(0, 230, 184, 0.7); }
-}
-
-@keyframes glowSell {
-  from { text-shadow: 0 0 16px rgba(255, 107, 122, 0.8), 0 0 32px rgba(255, 107, 122, 0.5); }
-  to { text-shadow: 0 0 24px rgba(255, 107, 122, 1), 0 0 48px rgba(255, 107, 122, 0.7); }
+    0 0 16px rgba(255, 23, 68, 0.8),
+    0 0 32px rgba(255, 23, 68, 0.5);
 }
 
 .signal-progress {
@@ -542,12 +538,13 @@ body { display: flex; justify-content: center; }
   transition: all 0.3s ease;
   min-width: 90px;
   text-align: center;
+  border: 1px solid var(--border-color);
 }
 
 .indicators-block li.active {
-  background: rgba(0, 230, 184, 0.2);
-  color: var(--buy);
-  border: 1px solid rgba(0, 230, 184, 0.4);
+  background: rgba(0, 163, 255, 0.2);
+  color: var(--accent);
+  border: 1px solid rgba(0, 163, 255, 0.4);
   transform: translateY(-2px);
 }
 
@@ -565,7 +562,7 @@ body { display: flex; justify-content: center; }
   opacity: 1;
 }
 .footer span { 
-  color: #00e6b8; 
+  color: var(--accent); 
   font-weight: 700;
   font-family: "Inter", sans-serif;
 }
